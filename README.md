@@ -1,5 +1,7 @@
 # MMO Mouse Control
 
+<img src="source/assets/icon.png" width="72" height="72" alt="MMO Mouse Control app icon">
+
 Configure button assignments, DPI, lighting, and onboard profiles for supported MMO mice on Windows. The app detects connected mice and lets you switch between them in one window.
 
 Supported mice are the wired Redragon M908 Impact, Monster Pusat V8 MMO, and Logitech G600 / G600r.

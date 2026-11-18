@@ -28,10 +28,13 @@ fn main() -> eframe::Result {
             None => return Ok(()),
         }
     };
+    let icon = eframe::icon_data::from_png_bytes(include_bytes!("../assets/icon.png"))
+        .expect("the bundled application icon is a valid PNG");
     eframe::run_native(
         gui::single::WINDOW_TITLE,
         eframe::NativeOptions {
             viewport: eframe::egui::ViewportBuilder::default()
+                .with_icon(icon)
                 .with_inner_size(args.size)
                 .with_min_inner_size([600.0, 300.0])
                 .with_visible(!preview),

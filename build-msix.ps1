@@ -32,26 +32,23 @@ try {
     New-Item -ItemType Directory -Path $assets -Force | Out-Null
     Copy-Item -LiteralPath $exe,(Join-Path $PSScriptRoot 'LICENSE'),(Join-Path $PSScriptRoot 'THIRD_PARTY.md') -Destination $stage
     Add-Type -AssemblyName System.Drawing
-    foreach ($logo in @(@('StoreLogo',50), @('Square44x44Logo',44), @('Square150x150Logo',150))) {
-        $size = $logo[1]
-        $bitmap = [Drawing.Bitmap]::new($size, $size)
-        $graphics = [Drawing.Graphics]::FromImage($bitmap)
-        $outline = [Drawing.Pen]::new([Drawing.Color]::White, 5)
-        try {
-            $graphics.SmoothingMode = [Drawing.Drawing2D.SmoothingMode]::AntiAlias
-            $graphics.Clear([Drawing.Color]::FromArgb(17, 24, 39))
-            $graphics.ScaleTransform($size / 100.0, $size / 100.0)
-            $graphics.DrawEllipse($outline, 26, 13, 48, 74)
-            $graphics.DrawLine($outline, 50, 14, 50, 38)
-            $graphics.FillRectangle([Drawing.Brushes]::DeepSkyBlue, 35, 44, 10, 10)
-            $graphics.FillRectangle([Drawing.Brushes]::DeepSkyBlue, 35, 59, 10, 10)
-            $bitmap.Save((Join-Path $assets ($logo[0] + '.png')), [Drawing.Imaging.ImageFormat]::Png)
-        } finally {
-            $outline.Dispose()
-            $graphics.Dispose()
-            $bitmap.Dispose()
+    $icon = [Drawing.Image]::FromFile((Join-Path $PSScriptRoot 'source/assets/icon.png'))
+    try {
+        foreach ($logo in @(@('StoreLogo',50), @('Square44x44Logo',44), @('Square150x150Logo',150))) {
+            $size = $logo[1]
+            $bitmap = [Drawing.Bitmap]::new($size, $size, [Drawing.Imaging.PixelFormat]::Format32bppArgb)
+            $graphics = [Drawing.Graphics]::FromImage($bitmap)
+            try {
+                $graphics.CompositingMode = [Drawing.Drawing2D.CompositingMode]::SourceCopy
+                $graphics.InterpolationMode = [Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+                $graphics.DrawImage($icon, 0, 0, $size, $size)
+                $bitmap.Save((Join-Path $assets ($logo[0] + '.png')), [Drawing.Imaging.ImageFormat]::Png)
+            } finally {
+                $graphics.Dispose()
+                $bitmap.Dispose()
+            }
         }
-    }
+    } finally { $icon.Dispose() }
     @"
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
