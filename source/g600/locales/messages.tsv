@@ -1,0 +1,299 @@
+# Japanese	English	简体中文	繁體中文	한국어	Español	Français	Deutsch	Português
+設定	Settings	设置	設定	설정	Configuración	Paramètres	Einstellungen	Configurações
+言語	Language	语言	語言	언어	Idioma	Langue	Sprache	Idioma
+自動 / Windows	Automatic / Windows	自动 / Windows	自動 / Windows	자동 / Windows	Automático / Windows	Automatique / Windows	Automatisch / Windows	Automático / Windows
+保存先	Data folder	数据文件夹	資料夾	데이터 폴더	Carpeta de datos	Dossier des données	Datenordner	Pasta de dados
+フォルダを開く	Open folder	打开文件夹	開啟資料夾	폴더 열기	Abrir carpeta	Ouvrir le dossier	Ordner öffnen	Abrir pasta
+非公式のG600/G600r設定ツールです。	Unofficial settings tool for G600/G600r.	G600/G600r 非官方设置工具。	G600/G600r 非官方設定工具。	G600/G600r 비공식 설정 도구입니다.	Herramienta no oficial para G600/G600r.	Outil non officiel pour G600/G600r.	Inoffizielles Tool für G600/G600r.	Ferramenta não oficial para G600/G600r.
+● 接続済み	● Connected	● 已连接	● 已連線	● 연결됨	● Conectado	● Connecté	● Verbunden	● Conectado
+● 未接続	● Disconnected	● 未连接	● 未連線	● 연결 안 됨	● Desconectado	● Déconnecté	● Nicht verbunden	● Desconectado
+再読み込み	Reload	重新加载	重新載入	새로 고침	Recargar	Recharger	Neu laden	Recarregar
+再接続	Reconnect	重新连接	重新連線	다시 연결	Reconectar	Reconnecter	Erneut verbinden	Reconectar
+接続中の実機を読み込む	Read connected mouse	读取已连接的鼠标	讀取已連線的滑鼠	연결된 마우스 읽기	Leer ratón conectado	Lire la souris connectée	Angeschlossene Maus lesen	Ler mouse conectado
+表示元: {}	Source: {}	来源：{}	來源：{}	표시 원본: {}	Origen: {}	Source : {}	Quelle: {}	Origem: {}
+使用中: プロファイル{} / DPIスロット{}	Active: profile {} / DPI slot {}	当前：配置 {} / DPI 档位 {}	使用中：設定檔 {} / DPI 檔位 {}	사용 중: 프로필 {} / DPI 슬롯 {}	Activo: perfil {} / nivel DPI {}	Actif : profil {} / palier DPI {}	Aktiv: Profil {} / DPI-Stufe {}	Ativo: perfil {} / nível DPI {}
+実機	Mouse	鼠标	滑鼠	마우스	Ratón	Souris	Maus	Mouse
+バックアップ: {}	Backup: {}	备份：{}	備份：{}	백업: {}	Copia: {}	Sauvegarde : {}	Sicherung: {}	Backup: {}
+カーソル・ホイール	Pointer & wheel	指针与滚轮	指標與滾輪	포인터 및 휠	Puntero y rueda	Pointeur et molette	Zeiger und Mausrad	Ponteiro e roda
+Windows の設定（このPCのすべてのマウス共通）	Windows settings (all mice on this PC)	Windows 设置（此电脑的所有鼠标）	Windows 設定（此電腦的所有滑鼠）	Windows 설정 (이 PC의 모든 마우스에 적용)	Ajustes de Windows (todos los ratones)	Réglages Windows (toutes les souris)	Windows-Einstellungen (alle Mäuse)	Configurações do Windows (todos os mouses)
+カーソルの速さ	Pointer speed	指针速度	指標速度	포인터 속도	Velocidad del puntero	Vitesse du pointeur	Zeigergeschwindigkeit	Velocidade do ponteiro
+1〜20（標準 {}）	1–20 (default {})	1–20（默认 {}）	1–20（預設 {}）	1–20 (기본값 {})	1–20 (predeterminado {})	1–20 (défaut {})	1–20 (Standard {})	1–20 (padrão {})
+加速	Acceleration	加速	加速	가속	Aceleración	Accélération	Beschleunigung	Aceleração
+速く動かすとカーソルが加速する（ポインターの精度を高める）	Enhance pointer precision (mouse acceleration)	提高指针精确度（鼠标加速）	增強指標的準確性（滑鼠加速）	포인터 정확도 향상 (마우스 가속)	Mejorar la precisión del puntero	Améliorer la précision du pointeur	Zeigerbeschleunigung aktivieren	Aprimorar a precisão do ponteiro
+スクロール行数	Scroll lines	滚动行数	捲動行數	스크롤 줄 수	Líneas de desplazamiento	Lignes de défilement	Bildlaufzeilen	Linhas de rolagem
+1画面ずつ	One screen at a time	一次一屏	一次一個畫面	한 번에 한 화면씩	Una pantalla cada vez	Un écran à la fois	Bildschirmweise	Uma tela por vez
+横スクロール（チルト）	Horizontal scroll (tilt)	水平滚动（倾斜）	水平捲動（傾斜）	가로 스크롤 (틸트)	Desplazamiento horizontal	Défilement horizontal	Horizontaler Bildlauf	Rolagem horizontal
+1〜100 文字（標準 {}）	1–100 characters (default {})	1–100 个字符（默认 {}）	1–100 個字元（預設 {}）	1–100자 (기본값 {})	1–100 caracteres (predeterminado {})	1–100 caractères (défaut {})	1–100 Zeichen (Standard {})	1–100 caracteres (padrão {})
+文字	characters	字符	字元	자	caracteres	caractères	Zeichen	caracteres
+プロファイル{}	Profile {}	配置 {}	設定檔 {}	프로필 {}	Perfil {}	Profil {}	Profil {}	Perfil {}
+プロファイル{}・使用中	Profile {} · active	配置 {} · 当前	設定檔 {} · 使用中	프로필 {} · 사용 중	Perfil {} · activo	Profil {} · actif	Profil {} · aktiv	Perfil {} · ativo
+表示する設定がありません。	No settings to display. Connect a G600/G600r and reload.	没有可显示的设置。请连接 G600/G600r 并重新加载。	沒有可顯示的設定。請連接 G600/G600r 並重新載入。	표시할 설정이 없습니다. G600/G600r를 연결하고 새로 고치세요.	Conecte un G600/G600r y recargue.	Connectez un G600/G600r puis rechargez.	G600/G600r anschließen und neu laden.	Conecte um G600/G600r e recarregue.
+LED・ポーリング	LED & polling rate	LED 与回报率	LED 與回報率	LED 및 폴링 레이트	LED y frecuencia de sondeo	LED et fréquence d’interrogation	LED und Abfragerate	LED e taxa de polling
+マウス本体に保存	Saved to the mouse	保存到鼠标	儲存至滑鼠	마우스에 저장	Guardado en el ratón	Enregistré dans la souris	In der Maus gespeichert	Salvo no mouse
+点灯	Solid	常亮	恆亮	켜짐	Fijo	Fixe	Dauerlicht	Fixo
+呼吸	Breathe	呼吸	呼吸	호흡	Respiración	Respiration	Atmen	Respiração
+色循環	Color cycle	颜色循环	色彩循環	색상 순환	Ciclo de colores	Cycle de couleurs	Farbwechsel	Ciclo de cores
+消灯	Off	关闭	關閉	꺼짐	Apagado	Éteint	Aus	Desligado
+不明 (0x{})	Unknown (0x{})	未知 (0x{})	未知 (0x{})	알 수 없음 (0x{})	Desconocido (0x{})	Inconnu (0x{})	Unbekannt (0x{})	Desconhecido (0x{})
+秒	seconds	秒	秒	초	segundos	secondes	Sekunden	segundos
+GシフトLED	G-Shift LED	G-Shift LED	G-Shift LED	G-Shift LED	LED G-Shift	LED G-Shift	G-Shift-LED	LED G-Shift
+ポーリング	Polling rate	回报率	回報率	폴링 레이트	Frecuencia de sondeo	Fréquence d’interrogation	Abfragerate	Taxa de polling
+有効	Enabled	启用	啟用	사용	Activado	Activé	Aktiviert	Ativado
+常に有効	Always enabled	始终启用	一律啟用	항상 사용	Siempre activado	Toujours activé	Immer aktiviert	Sempre ativado
+既定	Default	默认	預設	기본	Predeterminado	Par défaut	Standard	Padrão
+無効	Disabled	禁用	停用	사용 안 함	Desactivado	Désactivé	Deaktiviert	Desativado
+DPIシフト	DPI shift	DPI 切换	DPI 切換	DPI 시프트	Cambio de DPI	Décalage DPI	DPI-Umschaltung	Alternância de DPI
+押している間だけ	While held	按住时	按住時	누르고 있는 동안	Mientras se mantiene pulsado	Pendant l’appui	Solange gedrückt	Enquanto pressionado
+キーコンフィグ（ボタンの割り当て）を開く ▶	Open button assignments ▶	打开按键配置 ▶	開啟按鍵設定 ▶	버튼 할당 열기 ▶	Abrir asignaciones de botones ▶	Ouvrir les affectations ▶	Tastenbelegung öffnen ▶	Abrir atribuições de botões ▶
+バックアップ	Backup	备份	備份	백업	Copia de seguridad	Sauvegarde	Sicherung	Backup
+保存	Save	保存	儲存	저장	Guardar	Enregistrer	Speichern	Salvar
+開く	Open	打开	開啟	열기	Abrir	Ouvrir	Öffnen	Abrir
+パス	Path	路径	路徑	경로	Ruta	Chemin	Pfad	Caminho
+バックアップファイルのパス	Backup file path	备份文件路径	備份檔案路徑	백업 파일 경로	Ruta de la copia	Chemin de sauvegarde	Sicherungspfad	Caminho do backup
+今のマウスの設定を backups フォルダに保存します	Save current mouse settings to the backups folder	将当前鼠标设置保存到备份文件夹	將目前滑鼠設定儲存至備份資料夾	현재 마우스 설정을 백업 폴더에 저장합니다	Guardar los ajustes actuales en la carpeta de copias	Enregistrer les réglages actuels dans le dossier de sauvegarde	Aktuelle Mauseinstellungen im Sicherungsordner speichern	Salvar as configurações atuais na pasta de backups
+パス欄のバックアップファイルを開いて表示します	Open the backup file entered in the path field	打开路径栏中的备份文件	開啟路徑欄中的備份檔案	경로에 입력한 백업 파일을 엽니다	Abrir la copia indicada en la ruta	Ouvrir la sauvegarde indiquée	Sicherung vom angegebenen Pfad öffnen	Abrir o backup indicado no caminho
+このプロファイルを使用	Use this profile	使用此配置	使用此設定檔	이 프로필 사용	Usar este perfil	Utiliser ce profil	Dieses Profil verwenden	Usar este perfil
+このプロファイルをマウスへ書き込む	Write this profile to mouse	将此配置写入鼠标	將此設定檔寫入滑鼠	이 프로필을 마우스에 쓰기	Escribir este perfil	Écrire ce profil	Dieses Profil übertragen	Gravar este perfil
+3つともマウスへ書き込む	Write all 3 profiles	写入全部 3 个配置	寫入全部 3 個設定檔	프로필 3개 모두 쓰기	Escribir los 3 perfiles	Écrire les 3 profils	Alle 3 Profile übertragen	Gravar os 3 perfis
+実機の表示に戻る	Return to mouse settings	返回鼠标设置	返回滑鼠設定	마우스 설정으로 돌아가기	Volver a los ajustes del ratón	Revenir aux réglages de la souris	Zurück zu den Mauseinstellungen	Voltar às configurações do mouse
+起動時の状態に戻す	Restore startup settings	恢复启动时的设置	還原啟動時的設定	시작 시 설정 복원	Restaurar ajustes iniciales	Restaurer les réglages initiaux	Startzustand wiederherstellen	Restaurar configurações iniciais
+自動反映を再開	Resume auto-apply	恢复自动应用	恢復自動套用	자동 적용 재개	Reanudar aplicación automática	Reprendre l’application automatique	Automatische Übertragung fortsetzen	Retomar aplicação automática
+このソフトでマウスに書き込むと使えるようになります	Available after the first write to the mouse	首次写入鼠标后可用	首次寫入滑鼠後可用	마우스에 처음 쓴 후 사용할 수 있습니다	Disponible tras la primera escritura	Disponible après la première écriture	Nach der ersten Übertragung verfügbar	Disponível após a primeira gravação
+◀ 戻る	◀ Back	◀ 返回	◀ 返回	◀ 뒤로	◀ Volver	◀ Retour	◀ Zurück	◀ Voltar
+キーコンフィグ	Button assignments	按键配置	按鍵設定	버튼 할당	Asignaciones de botones	Affectations des boutons	Tastenbelegung	Atribuições de botões
+押したボタン:	Pressed button:	按下的按键：	按下的按鍵：	누른 버튼:	Botón pulsado:	Bouton pressé :	Gedrückte Taste:	Botão pressionado:
+PC に届いた入力: {}	Input sent to PC: {}	发送到电脑的输入：{}	傳送至電腦的輸入：{}	PC에 전달된 입력: {}	Entrada enviada al PC: {}	Entrée reçue par le PC : {}	Eingabe am PC: {}	Entrada enviada ao PC: {}
+DPI切替・Gシフトなど PC に入力が届かないボタンも光ります	DPI and G-Shift buttons are detected even without PC input	也可检测不向电脑发送输入的 DPI 和 G-Shift 按键	也可偵測不向電腦傳送輸入的 DPI 和 G-Shift 按鍵	PC 입력이 없는 DPI 및 G-Shift 버튼도 감지합니다	También detecta botones DPI y G-Shift	Détecte aussi les boutons DPI et G-Shift	Auch DPI- und G-Shift-Tasten werden erkannt	Também detecta botões DPI e G-Shift
+上面のボタン	Top buttons	顶部按键	上方按鍵	상단 버튼	Botones superiores	Boutons supérieurs	Obere Tasten	Botões superiores
+サイドボタン（親指側）	Side buttons (thumb)	侧键（拇指侧）	側鍵（拇指側）	측면 버튼 (엄지)	Botones laterales	Boutons latéraux	Seitentasten	Botões laterais
+1〜8・2列×4段	1–8 · 2 columns × 4 rows	1–8 · 2列×4行	1–8 · 2欄×4列	1–8 · 2열×4행	1–8 · 2 columnas × 4 filas	1–8 · 2 colonnes × 4 lignes	1–8 · 2 Spalten × 4 Zeilen	1–8 · 2 colunas × 4 linhas
+9〜20・3列×4段	9–20 · 3 columns × 4 rows	9–20 · 3列×4行	9–20 · 3欄×4列	9–20 · 3열×4행	9–20 · 3 columnas × 4 filas	9–20 · 3 colonnes × 4 lignes	9–20 · 3 Spalten × 4 Zeilen	9–20 · 3 colunas × 4 linhas
+割り当てのセルを押すと編集できます	Click an assignment to edit	点击分配项进行编辑	按一下指派項目以編輯	할당을 클릭하여 편집하세요	Pulse una asignación para editar	Cliquez sur une affectation pour la modifier	Zum Bearbeiten auf eine Belegung klicken	Clique em uma atribuição para editar
+割り当て編集: {} {} / {}	Edit assignment: {} {} / {}	编辑分配：{} {} / {}	編輯指派：{} {} / {}	할당 편집: {} {} / {}	Editar asignación: {} {} / {}	Modifier : {} {} / {}	Belegung bearbeiten: {} {} / {}	Editar atribuição: {} {} / {}
+現在:	Current:	当前：	目前：	현재:	Actual:	Actuel :	Aktuell:	Atual:
+選択中:	Selected:	已选：	已選：	선택:	Seleccionado:	Sélection :	Ausgewählt:	Selecionado:
+マウス	Mouse	鼠标	滑鼠	마우스	Ratón	Souris	Maus	Mouse
+左	Left	左	左	왼쪽	Izquierdo	Gauche	Links	Esquerdo
+右	Right	右	右	오른쪽	Derecho	Droite	Rechts	Direito
+中	Middle	中	中	가운데	Central	Milieu	Mitte	Central
+戻る	Back	后退	上一頁	뒤로	Atrás	Précédent	Zurück	Voltar
+進む	Forward	前进	下一頁	앞으로	Adelante	Suivant	Vorwärts	Avançar
+なし	None	无	無	없음	Ninguno	Aucun	Keine	Nenhum
+(なし)	(None)	（无）	（無）	(없음)	(Ninguno)	(Aucun)	(Keine)	(Nenhum)
+DPI・プロファイル	DPI & profile	DPI 与配置	DPI 與設定檔	DPI 및 프로필	DPI y perfil	DPI et profil	DPI und Profil	DPI e perfil
+DPI循環	Cycle DPI	循环 DPI	循環 DPI	DPI 순환	Alternar DPI	Parcourir les DPI	DPI durchschalten	Alternar DPI
+プロファイル循環	Cycle profiles	循环配置	循環設定檔	프로필 순환	Alternar perfiles	Parcourir les profils	Profile durchschalten	Alternar perfis
+Gシフト	G-Shift	G-Shift	G-Shift	G-Shift	G-Shift	G-Shift	G-Shift	G-Shift
+通常	Normal	普通	一般	일반	Normal	Normal	Normal	Normal
+ショートカットキー	Keyboard shortcuts	键盘快捷键	鍵盤快捷鍵	키보드 단축키	Atajos de teclado	Raccourcis clavier	Tastenkombinationen	Atalhos de teclado
+G600 に保存できるのは「キー1つ＋修飾キー」まで	G600 stores one key plus modifiers per button	G600 每个按键可保存一个键及修饰键	G600 每個按鍵可儲存一個鍵及修飾鍵	G600은 버튼마다 키 하나와 보조 키를 저장합니다	G600 guarda una tecla más modificadores por botón	G600 mémorise une touche et ses modificateurs	G600 speichert eine Taste plus Zusatztasten	G600 armazena uma tecla mais modificadores por botão
+Windows ショートカット	Windows shortcuts	Windows 快捷键	Windows 快速鍵	Windows 단축키	Atajos de Windows	Raccourcis Windows	Windows-Tastenkombinationen	Atalhos do Windows
+Chrome ショートカット	Chrome shortcuts	Chrome 快捷键	Chrome 快速鍵	Chrome 단축키	Atajos de Chrome	Raccourcis Chrome	Chrome-Tastenkombinationen	Atalhos do Chrome
+自分で登録	Custom shortcuts	自定义快捷键	自訂快速鍵	사용자 단축키	Atajos personalizados	Raccourcis personnalisés	Eigene Tastenkombinationen	Atalhos personalizados
+変更	Apply	应用	套用	적용	Aplicar	Appliquer	Übernehmen	Aplicar
+上書き	Overwrite	覆盖	覆寫	덮어쓰기	Sobrescribir	Écraser	Überschreiben	Sobrescrever
+このボタンの割り当てが変更されました。上書きする前に現在の割り当てを確認してください。	This button assignment has changed. Check the current assignment before overwriting it.	此按钮的分配已更改。覆盖前请检查当前分配。	此按鈕的指派已變更。覆寫前請檢查目前的指派。	이 버튼의 할당이 변경되었습니다. 덮어쓰기 전에 현재 할당을 확인하세요.	La asignación de este botón cambió. Comprueba la asignación actual antes de sobrescribirla.	L’affectation de ce bouton a changé. Vérifiez l’affectation actuelle avant de l’écraser.	Die Belegung dieser Taste wurde geändert. Prüfen Sie vor dem Überschreiben die aktuelle Belegung.	A atribuição deste botão mudou. Verifique a atribuição atual antes de sobrescrevê-la.
+キャンセル	Cancel	取消	取消	취소	Cancelar	Annuler	Abbrechen	Cancelar
+確認	Confirm	确认	確認	확인	Confirmar	Confirmer	Bestätigen	Confirmar
+1. 組み合わせを作る	1. Create a combination	1. 创建组合	1. 建立組合	1. 조합 만들기	1. Crear combinación	1. Créer une combinaison	1. Kombination erstellen	1. Criar combinação
+キーを押してください（もう一度押すと中止）	Press a key (click again to cancel)	请按键（再次点击取消）	請按鍵（再次點擊取消）	키를 누르세요 (다시 클릭하여 취소)	Pulse una tecla (clic para cancelar)	Appuyez sur une touche (clic pour annuler)	Taste drücken (erneut klicken zum Abbrechen)	Pressione uma tecla (clique para cancelar)
+キーを押して登録	Capture a key	捕获按键	擷取按鍵	키 입력 받기	Capturar tecla	Capturer une touche	Taste erfassen	Capturar tecla
+押したキーと修飾キーをそのまま取り込みます	Capture the pressed key and modifiers	捕获按下的键及修饰键	擷取按下的鍵及修飾鍵	누른 키와 보조 키를 가져옵니다	Captura la tecla y sus modificadores	Capture la touche et ses modificateurs	Erfasst Taste und Zusatztasten	Captura a tecla e os modificadores
+左Ctrl	Left Ctrl	左 Ctrl	左 Ctrl	왼쪽 Ctrl	Ctrl izquierdo	Ctrl gauche	Strg links	Ctrl esquerdo
+左Shift	Left Shift	左 Shift	左 Shift	왼쪽 Shift	Mayús izquierdo	Maj gauche	Umschalt links	Shift esquerdo
+左Alt	Left Alt	左 Alt	左 Alt	왼쪽 Alt	Alt izquierdo	Alt gauche	Alt links	Alt esquerdo
+左Win	Left Win	左 Win	左 Win	왼쪽 Win	Win izquierdo	Win gauche	Win links	Win esquerdo
+右Ctrl	Right Ctrl	右 Ctrl	右 Ctrl	오른쪽 Ctrl	Ctrl derecho	Ctrl droit	Strg rechts	Ctrl direito
+右Shift	Right Shift	右 Shift	右 Shift	오른쪽 Shift	Mayús derecho	Maj droite	Umschalt rechts	Shift direito
+右Alt	Right Alt	右 Alt	右 Alt	오른쪽 Alt	Alt derecho	Alt droit	Alt rechts	Alt direito
+右Win	Right Win	右 Win	右 Win	오른쪽 Win	Win derecho	Win droit	Win rechts	Win direito
+キーを検索	Search keys	搜索按键	搜尋按鍵	키 검색	Buscar teclas	Rechercher une touche	Tasten suchen	Buscar teclas
+例: F1、Enter、テンキー	e.g. F1, Enter, Num	例如：F1、Enter、Num	例如：F1、Enter、Num	예: F1, Enter, Num	Ej.: F1, Enter, Num	Ex. : F1, Enter, Num	Z. B. F1, Enter, Num	Ex.: F1, Enter, Num
+キーなし（修飾キーだけ）	No key (modifiers only)	无按键（仅修饰键）	無按鍵（僅修飾鍵）	키 없음 (보조 키만)	Sin tecla (solo modificadores)	Sans touche (modificateurs seuls)	Keine Taste (nur Zusatztasten)	Sem tecla (somente modificadores)
+候補:	Results:	候选：	候選：	결과:	Resultados:	Résultats :	Ergebnisse:	Resultados:
+見つかりません	No results	无结果	沒有結果	결과 없음	Sin resultados	Aucun résultat	Keine Ergebnisse	Nenhum resultado
+2. 名前を付けて登録	2. Name and save	2. 命名并保存	2. 命名並儲存	2. 이름을 지정하고 저장	2. Nombrar y guardar	2. Nommer et enregistrer	2. Benennen und speichern	2. Nomear e salvar
+名前	Name	名称	名稱	이름	Nombre	Nom	Name	Nome
+登録	Save shortcut	保存快捷键	儲存快速鍵	단축키 저장	Guardar atajo	Enregistrer le raccourci	Kombination speichern	Salvar atalho
+登録される内容: {}	Shortcut to save: {}	将保存：{}	將儲存：{}	저장할 단축키: {}	Atajo a guardar: {}	Raccourci à enregistrer : {}	Zu speichern: {}	Atalho a salvar: {}
+（未選択）	(not selected)	（未选择）	（未選擇）	(선택 안 됨)	(sin seleccionar)	(non sélectionné)	(nicht ausgewählt)	(não selecionado)
+3. 登録済みから選ぶ	3. Select a saved shortcut	3. 选择已保存的快捷键	3. 選擇已儲存的快速鍵	3. 저장한 단축키 선택	3. Seleccionar un atajo guardado	3. Choisir un raccourci enregistré	3. Gespeicherte Kombination wählen	3. Selecionar atalho salvo
+まだ登録はありません	No saved shortcuts yet	尚未保存快捷键	尚未儲存快速鍵	저장된 단축키 없음	Aún no hay atajos	Aucun raccourci enregistré	Noch keine Kombinationen gespeichert	Nenhum atalho salvo
+削除	Delete	删除	刪除	삭제	Eliminar	Supprimer	Löschen	Excluir
+番号・名称	No. / name	编号／名称	編號／名稱	번호 / 이름	N.º / nombre	Nº / nom	Nr. / Name	Nº / nome
+前へ	Previous	上一页	上一頁	이전	Anterior	Précédent	Zurück	Anterior
+次へ	Next	下一页	下一頁	다음	Siguiente	Suivant	Weiter	Próximo
+左クリック	Left click	左键单击	左鍵點擊	왼쪽 클릭	Clic izquierdo	Clic gauche	Linksklick	Clique esquerdo
+右クリック	Right click	右键单击	右鍵點擊	오른쪽 클릭	Clic derecho	Clic droit	Rechtsklick	Clique direito
+中クリック	Middle click	中键单击	中鍵點擊	가운데 클릭	Clic central	Clic du milieu	Mittelklick	Clique central
+マウスボタン{}	Mouse button {}	鼠标按键 {}	滑鼠按鍵 {}	마우스 버튼 {}	Botón del ratón {}	Bouton de souris {}	Maustaste {}	Botão do mouse {}
+DPIアップ	DPI up	提高 DPI	提高 DPI	DPI 증가	Subir DPI	Augmenter les DPI	DPI erhöhen	Aumentar DPI
+DPIダウン	DPI down	降低 DPI	降低 DPI	DPI 감소	Bajar DPI	Réduire les DPI	DPI verringern	Diminuir DPI
+DPI切り替え（循環）	Cycle DPI	循环切换 DPI	循環切換 DPI	DPI 순환	Alternar DPI	Parcourir les DPI	DPI durchschalten	Alternar DPI
+プロファイル切り替え	Cycle profiles	切换配置	切換設定檔	프로필 전환	Alternar perfiles	Parcourir les profils	Profile wechseln	Alternar perfis
+DPIシフト（押している間）	DPI shift (while held)	DPI 切换（按住时）	DPI 切換（按住時）	DPI 시프트 (누르는 동안)	Cambio de DPI (al mantener pulsado)	Décalage DPI (pendant l’appui)	DPI-Umschaltung (solange gedrückt)	Alternância de DPI (enquanto pressionado)
+キー {}	Key {}	按键 {}	按鍵 {}	키 {}	Tecla {}	Touche {}	Taste {}	Tecla {}
+左ボタン	Left button	左键	左鍵	왼쪽 버튼	Botón izquierdo	Bouton gauche	Linke Taste	Botão esquerdo
+右ボタン	Right button	右键	右鍵	오른쪽 버튼	Botón derecho	Bouton droit	Rechte Taste	Botão direito
+ホイールクリック	Wheel click	滚轮单击	滾輪點擊	휠 클릭	Clic de rueda	Clic molette	Mausradklick	Clique da roda
+G4 ホイール左チルト	G4 Wheel tilt left	G4 滚轮左倾	G4 滾輪左傾	G4 휠 왼쪽 틸트	G4 Rueda a la izquierda	G4 Molette vers la gauche	G4 Mausrad nach links	G4 Roda para esquerda
+G5 ホイール右チルト	G5 Wheel tilt right	G5 滚轮右倾	G5 滾輪右傾	G5 휠 오른쪽 틸트	G5 Rueda a la derecha	G5 Molette vers la droite	G5 Mausrad nach rechts	G5 Roda para direita
+G6 薬指ボタン	G6 Ring-finger button	G6 无名指按键	G6 無名指按鍵	G6 약지 버튼	G6 Botón anular	G6 Bouton annulaire	G6 Ringfingertaste	G6 Botão do anelar
+G{} サイド	G{} Side	G{} 侧键	G{} 側鍵	G{} 측면	G{} Lateral	G{} Latéral	G{} Seite	G{} Lateral
+（まだありません）	(none yet)	（暂无）	（尚無）	(아직 없음)	(ninguno aún)	(aucun pour l’instant)	(noch keine)	(nenhum ainda)
+コピー	Copy	复制	複製	복사	Copiar	Copier	Kopieren	Copiar
+貼り付け	Paste	粘贴	貼上	붙여넣기	Pegar	Coller	Einfügen	Colar
+切り取り	Cut	剪切	剪下	잘라내기	Cortar	Couper	Ausschneiden	Recortar
+元に戻す	Undo	撤销	復原	실행 취소	Deshacer	Annuler l’action	Rückgängig	Desfazer
+やり直し	Redo	重做	重做	다시 실행	Rehacer	Rétablir	Wiederholen	Refazer
+すべて選択	Select all	全选	全選	모두 선택	Seleccionar todo	Tout sélectionner	Alles auswählen	Selecionar tudo
+検索	Find	查找	尋找	찾기	Buscar	Rechercher	Suchen	Localizar
+印刷	Print	打印	列印	인쇄	Imprimir	Imprimer	Drucken	Imprimir
+新規作成	New	新建	新增	새로 만들기	Nuevo	Nouveau	Neu	Novo
+名前の変更	Rename	重命名	重新命名	이름 바꾸기	Cambiar nombre	Renommer	Umbenennen	Renomear
+最新の情報に更新	Refresh	刷新	重新整理	새로 고침	Actualizar	Actualiser	Aktualisieren	Atualizar
+完全に削除	Delete permanently	永久删除	永久刪除	영구 삭제	Eliminar permanentemente	Supprimer définitivement	Endgültig löschen	Excluir permanentemente
+プロパティ	Properties	属性	內容	속성	Propiedades	Propriétés	Eigenschaften	Propriedades
+デスクトップ表示	Show desktop	显示桌面	顯示桌面	바탕 화면 표시	Mostrar escritorio	Afficher le bureau	Desktop anzeigen	Mostrar área de trabalho
+すべて最小化	Minimize all	全部最小化	全部最小化	모두 최소화	Minimizar todo	Tout réduire	Alles minimieren	Minimizar tudo
+エクスプローラー	File Explorer	文件资源管理器	檔案總管	파일 탐색기	Explorador de archivos	Explorateur de fichiers	Datei-Explorer	Explorador de Arquivos
+ロック	Lock	锁定	鎖定	잠금	Bloquear	Verrouiller	Sperren	Bloquear
+ファイル名を指定して実行	Run	运行	執行	실행	Ejecutar	Exécuter	Ausführen	Executar
+Windows 検索	Windows Search	Windows 搜索	Windows 搜尋	Windows 검색	Búsqueda de Windows	Recherche Windows	Windows-Suche	Pesquisa do Windows
+クイックリンク	Quick Link menu	快捷链接菜单	快速連結功能表	빠른 링크 메뉴	Menú de acceso rápido	Menu Liens rapides	Schnellzugriffsmenü	Menu de acesso rápido
+通知	Notifications	通知	通知	알림	Notificaciones	Notifications	Benachrichtigungen	Notificações
+クリップボード履歴	Clipboard history	剪贴板历史记录	剪貼簿歷程記錄	클립보드 기록	Historial del portapapeles	Historique du presse-papiers	Zwischenablageverlauf	Histórico da área de transferência
+絵文字	Emoji	表情符号	表情符號	이모지	Emojis	Émojis	Emoji	Emoji
+音声入力	Voice typing	语音输入	語音輸入	음성 입력	Dictado por voz	Saisie vocale	Spracheingabe	Digitação por voz
+ゲームバー	Game Bar	游戏栏	遊戲列	게임 바	Barra de juegos	Barre de jeux	Spielleiste	Barra de jogos
+タスクビュー	Task View	任务视图	工作檢視	작업 보기	Vista de tareas	Affichage des tâches	Taskansicht	Visão de tarefas
+ウィンドウ切替	Switch windows	切换窗口	切換視窗	창 전환	Cambiar ventana	Changer de fenêtre	Fenster wechseln	Alternar janelas
+ウィンドウを閉じる	Close window	关闭窗口	關閉視窗	창 닫기	Cerrar ventana	Fermer la fenêtre	Fenster schließen	Fechar janela
+最大化	Maximize	最大化	最大化	최대화	Maximizar	Agrandir	Maximieren	Maximizar
+最小化・元に戻す	Minimize / restore	最小化／还原	最小化／還原	최소화 / 복원	Minimizar / restaurar	Réduire / restaurer	Minimieren / wiederherstellen	Minimizar / restaurar
+左にスナップ	Snap left	贴靠左侧	靠齊左側	왼쪽에 맞춤	Acoplar a la izquierda	Ancrer à gauche	Links andocken	Ajustar à esquerda
+右にスナップ	Snap right	贴靠右侧	靠齊右側	오른쪽에 맞춤	Acoplar a la derecha	Ancrer à droite	Rechts andocken	Ajustar à direita
+左のモニターへ移動	Move to left monitor	移至左侧显示器	移至左側螢幕	왼쪽 모니터로 이동	Mover al monitor izquierdo	Déplacer vers l’écran gauche	Zum linken Monitor verschieben	Mover para monitor esquerdo
+右のモニターへ移動	Move to right monitor	移至右侧显示器	移至右側螢幕	오른쪽 모니터로 이동	Mover al monitor derecho	Déplacer vers l’écran droit	Zum rechten Monitor verschieben	Mover para monitor direito
+仮想デスクトップを追加	Add virtual desktop	添加虚拟桌面	新增虛擬桌面	가상 데스크톱 추가	Añadir escritorio virtual	Ajouter un bureau virtuel	Virtuellen Desktop hinzufügen	Adicionar área de trabalho virtual
+左の仮想デスクトップ	Previous virtual desktop	上一个虚拟桌面	上一個虛擬桌面	이전 가상 데스크톱	Escritorio virtual anterior	Bureau virtuel précédent	Vorheriger virtueller Desktop	Área de trabalho virtual anterior
+右の仮想デスクトップ	Next virtual desktop	下一个虚拟桌面	下一個虛擬桌面	다음 가상 데스크톱	Escritorio virtual siguiente	Bureau virtuel suivant	Nächster virtueller Desktop	Próxima área de trabalho virtual
+仮想デスクトップを閉じる	Close virtual desktop	关闭虚拟桌面	關閉虛擬桌面	가상 데스크톱 닫기	Cerrar escritorio virtual	Fermer le bureau virtuel	Virtuellen Desktop schließen	Fechar área de trabalho virtual
+スクリーンショット（範囲）	Screenshot (region)	截图（区域）	螢幕擷取（區域）	스크린샷 (영역)	Captura de una región	Capture d’une zone	Bereich aufnehmen	Captura de região
+画面全体を保存	Save screenshot	保存屏幕截图	儲存螢幕擷取	전체 화면 저장	Guardar captura	Enregistrer une capture	Bildschirmfoto speichern	Salvar captura de tela
+タスクマネージャー	Task Manager	任务管理器	工作管理員	작업 관리자	Administrador de tareas	Gestionnaire des tâches	Task-Manager	Gerenciador de Tarefas
+新しいタブ	New tab	新标签页	新增分頁	새 탭	Nueva pestaña	Nouvel onglet	Neuer Tab	Nova guia
+タブを閉じる	Close tab	关闭标签页	關閉分頁	탭 닫기	Cerrar pestaña	Fermer l’onglet	Tab schließen	Fechar guia
+閉じたタブを開く	Reopen closed tab	重新打开关闭的标签页	重新開啟關閉的分頁	닫은 탭 다시 열기	Reabrir pestaña cerrada	Rouvrir l’onglet fermé	Geschlossenen Tab öffnen	Reabrir guia fechada
+新しいウィンドウ	New window	新窗口	新增視窗	새 창	Nueva ventana	Nouvelle fenêtre	Neues Fenster	Nova janela
+シークレットウィンドウ	Incognito window	无痕窗口	無痕視窗	시크릿 창	Ventana de incógnito	Fenêtre privée	Inkognitofenster	Janela anônima
+次のタブ	Next tab	下一个标签页	下一個分頁	다음 탭	Siguiente pestaña	Onglet suivant	Nächster Tab	Próxima guia
+前のタブ	Previous tab	上一个标签页	上一個分頁	이전 탭	Pestaña anterior	Onglet précédent	Vorheriger Tab	Guia anterior
+タブ1	Tab 1	标签页 1	分頁 1	탭 1	Pestaña 1	Onglet 1	Tab 1	Guia 1
+タブ2	Tab 2	标签页 2	分頁 2	탭 2	Pestaña 2	Onglet 2	Tab 2	Guia 2
+タブ3	Tab 3	标签页 3	分頁 3	탭 3	Pestaña 3	Onglet 3	Tab 3	Guia 3
+タブ4	Tab 4	标签页 4	分頁 4	탭 4	Pestaña 4	Onglet 4	Tab 4	Guia 4
+タブ5	Tab 5	标签页 5	分頁 5	탭 5	Pestaña 5	Onglet 5	Tab 5	Guia 5
+タブ6	Tab 6	标签页 6	分頁 6	탭 6	Pestaña 6	Onglet 6	Tab 6	Guia 6
+タブ7	Tab 7	标签页 7	分頁 7	탭 7	Pestaña 7	Onglet 7	Tab 7	Guia 7
+タブ8	Tab 8	标签页 8	分頁 8	탭 8	Pestaña 8	Onglet 8	Tab 8	Guia 8
+最後のタブ	Last tab	最后一个标签页	最後一個分頁	마지막 탭	Última pestaña	Dernier onglet	Letzter Tab	Última guia
+強制再読み込み	Hard reload	强制重新加载	強制重新載入	강력 새로 고침	Recarga forzada	Rechargement forcé	Vollständig neu laden	Recarregar sem cache
+ホーム	Home	主页	首頁	홈	Inicio	Accueil	Startseite	Página inicial
+アドレスバー	Address bar	地址栏	網址列	주소 표시줄	Barra de direcciones	Barre d’adresse	Adressleiste	Barra de endereços
+ページ内検索	Find in page	在页面中查找	在頁面中尋找	페이지에서 찾기	Buscar en la página	Rechercher dans la page	Auf Seite suchen	Localizar na página
+ブックマークに追加	Add bookmark	添加书签	加入書籤	북마크 추가	Añadir marcador	Ajouter un favori	Lesezeichen hinzufügen	Adicionar favorito
+ブックマークバー表示	Show bookmarks bar	显示书签栏	顯示書籤列	북마크바 표시	Mostrar barra de marcadores	Afficher la barre des favoris	Lesezeichenleiste anzeigen	Mostrar barra de favoritos
+ブックマークマネージャー	Bookmark manager	书签管理器	書籤管理員	북마크 관리자	Gestor de marcadores	Gestionnaire de favoris	Lesezeichenmanager	Gerenciador de favoritos
+履歴	History	历史记录	歷史記錄	방문 기록	Historial	Historique	Verlauf	Histórico
+ダウンロード	Downloads	下载	下載	다운로드	Descargas	Téléchargements	Downloads	Downloads
+閲覧履歴を削除	Clear browsing data	清除浏览数据	清除瀏覽資料	인터넷 사용 기록 삭제	Borrar datos de navegación	Effacer les données de navigation	Browserdaten löschen	Limpar dados de navegação
+開発者ツール	Developer tools	开发者工具	開發人員工具	개발자 도구	Herramientas de desarrollo	Outils de développement	Entwicklertools	Ferramentas do desenvolvedor
+ページのソース	Page source	页面源代码	網頁原始碼	페이지 소스	Código fuente	Code source de la page	Seitenquelltext	Código-fonte da página
+拡大	Zoom in	放大	放大	확대	Acercar	Zoom avant	Vergrößern	Aumentar zoom
+縮小	Zoom out	缩小	縮小	축소	Alejar	Zoom arrière	Verkleinern	Diminuir zoom
+等倍に戻す	Reset zoom	重置缩放	重設縮放	확대/축소 재설정	Restablecer zoom	Réinitialiser le zoom	Zoom zurücksetzen	Redefinir zoom
+全画面	Fullscreen	全屏	全螢幕	전체 화면	Pantalla completa	Plein écran	Vollbild	Tela cheia
+ページを保存	Save page	保存页面	儲存網頁	페이지 저장	Guardar página	Enregistrer la page	Seite speichern	Salvar página
+Chrome のタスクマネージャー	Chrome Task Manager	Chrome 任务管理器	Chrome 工作管理員	Chrome 작업 관리자	Administrador de tareas de Chrome	Gestionnaire de tâches Chrome	Chrome-Task-Manager	Gerenciador de tarefas do Chrome
+プロフィール切替	Switch browser profile	切换浏览器个人资料	切換瀏覽器設定檔	브라우저 프로필 전환	Cambiar perfil del navegador	Changer de profil du navigateur	Browserprofil wechseln	Alternar perfil do navegador
+バックアップファイルを表示中です。変更してもマウスには書き込みません（「マウスへ書き込む」を押したときだけ書き込みます）。	Viewing a backup. Changes are not sent to the mouse until you choose Write.	正在查看备份。仅点击写入后才会应用到鼠标。	正在檢視備份。僅點擊寫入後才會套用至滑鼠。	백업을 보고 있습니다. 쓰기를 선택해야 마우스에 적용됩니다.	Viendo una copia. Solo se aplica al elegir Escribir.	Sauvegarde affichée. Choisissez Écrire pour l’appliquer.	Sicherungsansicht. Erst mit Übertragen wird die Maus geändert.	Visualizando backup. Escolha Gravar para aplicar ao mouse.
+このプロファイルはマウスで使われていません（使用中はプロファイル{}）。変更はマウスに保存されますが、試すには「このプロファイルを使用」を押してください。	Inactive profile (profile {} is active). Changes are saved; choose Use this profile to try them.	此配置未启用（当前为配置 {}）。更改会保存，选择使用此配置即可试用。	此設定檔未啟用（目前為設定檔 {}）。變更會儲存，選擇使用此設定檔即可試用。	비활성 프로필입니다 (현재 프로필 {}). 변경은 저장되며 이 프로필 사용을 선택하면 시험할 수 있습니다.	Perfil inactivo (activo: {}). Los cambios se guardan; elija Usar este perfil.	Profil inactif (actif : {}). Les changements sont enregistrés ; choisissez Utiliser ce profil.	Inaktives Profil (aktiv: {}). Änderungen werden gespeichert; zum Testen Dieses Profil verwenden wählen.	Perfil inativo (ativo: {}). As alterações são salvas; escolha Usar este perfil.
+プロファイル{}に切り替えますか？	Switch to profile {}?	切换至配置 {}？	切換至設定檔 {}？	프로필 {}로 전환할까요?	¿Cambiar al perfil {}?	Passer au profil {} ?	Zu Profil {} wechseln?	Alternar para o perfil {}?
+プロファイル{}をマウスへ書き込みますか？	Write profile {} to the mouse?	将配置 {} 写入鼠标？	將設定檔 {} 寫入滑鼠？	프로필 {}을 마우스에 쓸까요?	¿Escribir el perfil {} en el ratón?	Écrire le profil {} dans la souris ?	Profil {} auf die Maus übertragen?	Gravar perfil {} no mouse?
+バックアップ「{}」のプロファイル{}（画面で変えた内容を含む）をマウスへ書き込みます。	Write profile from backup {} (profile {}, including edits).	写入备份 {} 的配置 {}（包含编辑）。	寫入備份 {} 的設定檔 {}（包含編輯）。	백업 {}의 프로필 {}을 씁니다 (편집 포함).	Escribir la copia {} del perfil {} (incluye cambios).	Écrire la sauvegarde {} du profil {} (modifications incluses).	Sicherung {} von Profil {} übertragen (mit Änderungen).	Gravar backup {} do perfil {} (inclui alterações).
+バックアップの3つのプロファイルをマウスへ書き込みますか？	Write all 3 backup profiles to the mouse?	将备份的全部 3 个配置写入鼠标？	將備份的全部 3 個設定檔寫入滑鼠？	백업의 프로필 3개를 모두 마우스에 쓸까요?	¿Escribir los 3 perfiles de la copia?	Écrire les 3 profils de la sauvegarde ?	Alle 3 gesicherten Profile übertragen?	Gravar os 3 perfis do backup?
+バックアップファイルの内容をそのまま書き込みます（画面で変えた内容は含みません）。	Write the backup file as saved, without on-screen edits.	按原样写入备份，不包含屏幕上的编辑。	依原樣寫入備份，不包含畫面上的編輯。	화면의 편집 없이 저장된 백업을 그대로 씁니다.	Se escribe la copia sin los cambios de pantalla.	Écrit la sauvegarde sans les modifications à l’écran.	Sicherung unverändert übertragen, ohne Änderungen im Fenster.	Grava o backup sem as alterações da tela.
+起動時の状態に戻しますか？	Restore startup settings?	恢复启动时的设置？	還原啟動時的設定？	시작 시 설정을 복원할까요?	¿Restaurar ajustes iniciales?	Restaurer les réglages initiaux ?	Startzustand wiederherstellen?	Restaurar configurações iniciais?
+このソフトで最初に書き込む前に取ったバックアップ（{}）から、3つのプロファイルを書き戻します。	Restore all 3 profiles from the backup before the first write ({}).	从首次写入前的备份（{}）恢复全部 3 个配置。	從首次寫入前的備份（{}）還原全部 3 個設定檔。	첫 쓰기 전 백업 ({})에서 프로필 3개를 복원합니다.	Restaurar los 3 perfiles desde la copia inicial ({}).	Restaurer les 3 profils depuis la sauvegarde initiale ({}).	Alle 3 Profile aus der Sicherung vor dem ersten Schreiben ({}) wiederherstellen.	Restaurar os 3 perfis do backup anterior à primeira gravação ({}).
+処理中...	Working...	处理中…	處理中…	처리 중…	Procesando…	Traitement…	Verarbeitung…	Processando…
+書き込み中…（約2秒）	Writing… (about 2 seconds)	正在写入…（约2秒）	正在寫入…（約2秒）	쓰는 중… (약 2초)	Escribiendo… (unos 2 segundos)	Écriture… (environ 2 secondes)	Übertragung… (ca. 2 Sekunden)	Gravando… (cerca de 2 segundos)
+反映中…（プロファイル{}）	Applying… (profile {})	正在应用…（配置 {}）	正在套用…（設定檔 {}）	적용 중… (프로필 {})	Aplicando… (perfil {})	Application… (profil {})	Übertragung… (Profil {})	Aplicando… (perfil {})
+反映しました（プロファイル{}・読み戻し一致）	Applied (profile {}, readback verified)	已应用（配置 {}，回读一致）	已套用（設定檔 {}，讀回一致）	적용됨 (프로필 {}, 읽기 확인)	Aplicado (perfil {}, verificado)	Appliqué (profil {}, vérifié)	Übertragen (Profil {}, überprüft)	Aplicado (perfil {}, verificado)
+失敗: {}（自動反映を止めました。「起動時の状態に戻す」で元に戻せます）	Failed: {}. Auto-apply stopped. Restore startup settings to revert.	失败：{}。自动应用已停止，可恢复启动时的设置。	失敗：{}。自動套用已停止，可還原啟動時的設定。	실패: {}. 자동 적용이 중지되었습니다. 시작 시 설정으로 복원할 수 있습니다.	Error: {}. Aplicación automática detenida. Puede restaurar los ajustes iniciales.	Échec : {}. Application automatique arrêtée. Vous pouvez restaurer les réglages initiaux.	Fehler: {}. Automatische Übertragung angehalten. Startzustand kann wiederhergestellt werden.	Falha: {}. Aplicação automática interrompida. Restaure as configurações iniciais.
+読み込みました。	Loaded.	已加载。	已載入。	불러왔습니다.	Cargado.	Chargé.	Geladen.	Carregado.
+読み込み失敗: {}	Load failed: {}	加载失败：{}	載入失敗：{}	불러오기 실패: {}	Error al cargar: {}	Échec du chargement : {}	Laden fehlgeschlagen: {}	Falha ao carregar: {}
+バックアップを保存しました: {}	Backup saved: {}	备份已保存：{}	備份已儲存：{}	백업 저장됨: {}	Copia guardada: {}	Sauvegarde enregistrée : {}	Sicherung gespeichert: {}	Backup salvo: {}
+バックアップの保存に失敗: {}	Backup failed: {}	备份失败：{}	備份失敗：{}	백업 실패: {}	Error al guardar copia: {}	Échec de la sauvegarde : {}	Sicherung fehlgeschlagen: {}	Falha no backup: {}
+バックアップを読み込みました（表示だけ。自動では書き込みません）。	Backup loaded for viewing. Automatic writing is disabled.	备份已加载，仅供查看，不会自动写入。	備份已載入，僅供檢視，不會自動寫入。	백업을 불러왔습니다. 보기 전용이며 자동 쓰기는 꺼져 있습니다.	Copia cargada para consultar. Sin escritura automática.	Sauvegarde chargée pour consultation, sans écriture automatique.	Sicherung zur Ansicht geladen. Keine automatische Übertragung.	Backup carregado para visualização. Sem gravação automática.
+バックアップの読み込みに失敗: {}	Could not open backup: {}	无法打开备份：{}	無法開啟備份：{}	백업 열기 실패: {}	No se pudo abrir la copia: {}	Impossible d’ouvrir la sauvegarde : {}	Sicherung konnte nicht geöffnet werden: {}	Não foi possível abrir o backup: {}
+書き込みました（読み戻し一致）。書き込み前のバックアップ: {}	Written and verified. Backup before writing: {}	写入并验证成功。写入前备份：{}	寫入並驗證成功。寫入前備份：{}	쓰기 및 확인 완료. 쓰기 전 백업: {}	Escrito y verificado. Copia previa: {}	Écriture vérifiée. Sauvegarde préalable : {}	Übertragen und geprüft. Vorherige Sicherung: {}	Gravado e verificado. Backup anterior: {}
+書き込み失敗: {}\n書き込み前のバックアップ: {}	Write failed: {}\nBackup before writing: {}	写入失败：{}\n写入前备份：{}	寫入失敗：{}\n寫入前備份：{}	쓰기 실패: {}\n쓰기 전 백업: {}	Error al escribir: {}\nCopia previa: {}	Échec de l’écriture : {}\nSauvegarde préalable : {}	Übertragung fehlgeschlagen: {}\nVorherige Sicherung: {}	Falha ao gravar: {}\nBackup anterior: {}
+プロファイルを切り替え、読み戻しを確認しました。	Profile switched and verified.	配置已切换并验证。	設定檔已切換並驗證。	프로필 전환 및 확인 완료.	Perfil cambiado y verificado.	Profil changé et vérifié.	Profil gewechselt und geprüft.	Perfil alterado e verificado.
+プロファイル切替に失敗: {}	Profile switch failed: {}	配置切换失败：{}	設定檔切換失敗：{}	프로필 전환 실패: {}	Error al cambiar perfil: {}	Échec du changement de profil : {}	Profilwechsel fehlgeschlagen: {}	Falha ao trocar perfil: {}
+作成されていません	Not created	未创建	未建立	생성되지 않음	No creada	Non créée	Nicht erstellt	Não criado
+作業スレッドに送信できません: {}	Cannot contact worker: {}	无法联系工作线程：{}	無法聯繫工作執行緒：{}	작업 스레드 통신 실패: {}	No se puede contactar al proceso: {}	Impossible de contacter le processus : {}	Arbeitsthread nicht erreichbar: {}	Falha ao contatar processo: {}
+失敗: 作業スレッドに送信できません: {}	Failed: cannot contact worker: {}	失败：无法联系工作线程：{}	失敗：無法聯繫工作執行緒：{}	실패: 작업 스레드 통신 실패: {}	Error de comunicación: {}	Échec de communication : {}	Kommunikationsfehler: {}	Falha de comunicação: {}
+自分で登録した組み合わせ: {} 件読み込み（読めない行 {} 件は無視しました）	Loaded {} shortcuts ({} invalid lines skipped)	已加载 {} 个快捷键（跳过 {} 个无效行）	已載入 {} 個快速鍵（略過 {} 個無效行）	단축키 {}개 불러옴 (잘못된 줄 {}개 건너뜀)	{} atajos cargados ({} líneas omitidas)	{} raccourcis chargés ({} lignes ignorées)	{} Kombinationen geladen ({} Zeilen übersprungen)	{} atalhos carregados ({} linhas ignoradas)
+自分で登録した組み合わせを読み込めません: {}	Cannot load custom shortcuts: {}	无法加载自定义快捷键：{}	無法載入自訂快速鍵：{}	사용자 단축키 불러오기 실패: {}	No se pueden cargar los atajos: {}	Impossible de charger les raccourcis : {}	Eigene Kombinationen konnten nicht geladen werden: {}	Falha ao carregar atalhos: {}
+自分で登録した組み合わせの保存先が見つかりません	Custom shortcuts folder not found	找不到自定义快捷键文件夹	找不到自訂快速鍵資料夾	사용자 단축키 폴더를 찾을 수 없습니다	No se encuentra la carpeta de atajos	Dossier des raccourcis introuvable	Ordner für eigene Kombinationen nicht gefunden	Pasta de atalhos não encontrada
+自分で登録した組み合わせを保存しました（{}）	Custom shortcuts saved ({})	自定义快捷键已保存（{}）	自訂快速鍵已儲存（{}）	사용자 단축키 저장됨 ({})	Atajos guardados ({})	Raccourcis enregistrés ({})	Kombinationen gespeichert ({})	Atalhos salvos ({})
+押したキーを取り込みました。名前を確認して「登録」を押してください。	Key captured. Check the name and choose Save shortcut.	已捕获按键。请确认名称并保存快捷键。	已擷取按鍵。請確認名稱並儲存快速鍵。	키를 가져왔습니다. 이름을 확인하고 단축키를 저장하세요.	Tecla capturada. Revise el nombre y guarde el atajo.	Touche capturée. Vérifiez le nom et enregistrez le raccourci.	Taste erfasst. Namen prüfen und Kombination speichern.	Tecla capturada. Verifique o nome e salve o atalho.
+登録して選択しました。下の「変更」でこのボタンに割り当てます。	Saved and selected. Choose Apply to assign it to this button.	已保存并选中。选择应用以分配至此按键。	已儲存並選取。選擇套用以指派至此按鍵。	저장하고 선택했습니다. 적용을 눌러 버튼에 할당하세요.	Guardado y seleccionado. Elija Aplicar para asignarlo.	Enregistré et sélectionné. Choisissez Appliquer pour l’affecter.	Gespeichert und ausgewählt. Mit Übernehmen zuweisen.	Salvo e selecionado. Escolha Aplicar para atribuir.
+同じ組み合わせが登録済みなので、それを選びました。	This combination already exists and has been selected.	此组合已存在，已选中。	此組合已存在，已選取。	동일한 조합이 이미 있어 선택했습니다.	La combinación ya existe y se ha seleccionado.	La combinaison existe déjà et a été sélectionnée.	Diese Kombination ist bereits vorhanden und wurde ausgewählt.	A combinação já existe e foi selecionada.
+名前にタブ・改行は使えません。	Names cannot contain tabs or line breaks.	名称不能包含制表符或换行。	名稱不能包含定位字元或換行。	이름에 탭이나 줄바꿈을 사용할 수 없습니다.	El nombre no puede contener tabulaciones ni saltos.	Le nom ne peut contenir ni tabulations ni retours à la ligne.	Namen dürfen keine Tabulatoren oder Zeilenumbrüche enthalten.	O nome não pode conter tabulações ou quebras de linha.
+保存できません: {}	Cannot save: {}	无法保存：{}	無法儲存：{}	저장 실패: {}	No se puede guardar: {}	Impossible d’enregistrer : {}	Speichern nicht möglich: {}	Não é possível salvar: {}
+保存先が見つかりません	Data folder not found	找不到数据文件夹	找不到資料夾	데이터 폴더를 찾을 수 없습니다	Carpeta de datos no encontrada	Dossier de données introuvable	Datenordner nicht gefunden	Pasta de dados não encontrada
+ユーザーデータの保存先が見つかりません	User data folder not found	找不到用户数据文件夹	找不到使用者資料夾	사용자 데이터 폴더를 찾을 수 없습니다	Carpeta de usuario no encontrada	Dossier utilisateur introuvable	Benutzerdatenordner nicht gefunden	Pasta de usuário não encontrada
+ユーザーデータの保存先を作れません: {}	Cannot create user data folder: {}	无法创建用户数据文件夹：{}	無法建立使用者資料夾：{}	사용자 데이터 폴더 생성 실패: {}	No se puede crear la carpeta de usuario: {}	Impossible de créer le dossier utilisateur : {}	Benutzerdatenordner kann nicht erstellt werden: {}	Não é possível criar a pasta de usuário: {}
+バックアップフォルダを作れません: {}	Cannot create backup folder: {}	无法创建备份文件夹：{}	無法建立備份資料夾：{}	백업 폴더 생성 실패: {}	No se puede crear la carpeta de copias: {}	Impossible de créer le dossier de sauvegarde : {}	Sicherungsordner kann nicht erstellt werden: {}	Não é possível criar a pasta de backup: {}
+以前の設定を引き継げません: {}	Cannot migrate previous settings: {}	无法迁移以前的设置：{}	無法移轉先前的設定：{}	이전 설정 가져오기 실패: {}	No se pueden migrar los ajustes anteriores: {}	Impossible de migrer les anciens réglages : {}	Vorherige Einstellungen können nicht übernommen werden: {}	Não é possível migrar as configurações anteriores: {}
+HIDの初期化に失敗: {}	HID initialization failed: {}	HID 初始化失败：{}	HID 初始化失敗：{}	HID 초기화 실패: {}	Error al iniciar HID: {}	Échec d’initialisation HID : {}	HID-Initialisierung fehlgeschlagen: {}	Falha ao iniciar HID: {}
+書き込み後の再読み込みに失敗: {}	Reload after writing failed: {}	写入后重新加载失败：{}	寫入後重新載入失敗：{}	쓰기 후 불러오기 실패: {}	Error al recargar tras escribir: {}	Échec de relecture après écriture : {}	Erneutes Lesen nach Übertragung fehlgeschlagen: {}	Falha ao recarregar após gravação: {}
+復元後の再読み込みに失敗: {}	Reload after restoring failed: {}	恢复后重新加载失败：{}	還原後重新載入失敗：{}	복원 후 불러오기 실패: {}	Error al recargar tras restaurar: {}	Échec de relecture après restauration : {}	Erneutes Lesen nach Wiederherstellung fehlgeschlagen: {}	Falha ao recarregar após restauração: {}
+レポート 0x{} の読み取りに失敗: {}	Cannot read report 0x{}: {}	无法读取报告 0x{}：{}	無法讀取報告 0x{}：{}	보고서 0x{} 읽기 실패: {}	No se puede leer informe 0x{}: {}	Impossible de lire le rapport 0x{} : {}	Bericht 0x{} kann nicht gelesen werden: {}	Não é possível ler relatório 0x{}: {}
+レポート 0x{} の書き込みに失敗: {}	Cannot write report 0x{}: {}	无法写入报告 0x{}：{}	無法寫入報告 0x{}：{}	보고서 0x{} 쓰기 실패: {}	No se puede escribir informe 0x{}: {}	Impossible d’écrire le rapport 0x{} : {}	Bericht 0x{} kann nicht geschrieben werden: {}	Não é possível gravar relatório 0x{}: {}
+レポート 0x{} が短すぎます（{} バイト）	Report 0x{} is too short ({} bytes)	报告 0x{} 太短（{} 字节）	報告 0x{} 太短（{} 位元組）	보고서 0x{}이 너무 짧습니다 ({}바이트)	Informe 0x{} demasiado corto ({} bytes)	Rapport 0x{} trop court ({} octets)	Bericht 0x{} zu kurz ({} Bytes)	Relatório 0x{} muito curto ({} bytes)
+切替後の読み戻しが一致しません（使用中: プロファイル{}）	Verification failed after switching (active profile {})	切换后验证失败（当前配置 {}）	切換後驗證失敗（目前設定檔 {}）	전환 후 확인 실패 (현재 프로필 {})	Verificación fallida tras cambiar (perfil activo {})	Échec de vérification après changement (profil actif {})	Prüfung nach Wechsel fehlgeschlagen (aktives Profil {})	Falha na verificação após troca (perfil ativo {})
+プロファイル{}の読み戻しが一致しません（{}か所）。\n  違い(位置:書込->読戻): {}\n  書込: {}\n  読戻: {}	Profile {} verification failed ({} differences).\n  Differences (offset:sent->read): {}\n  Sent: {}\n  Read: {}	配置 {} 验证失败（{} 处差异）。\n  差异（位置:写入->读回）：{}\n  写入：{}\n  读回：{}	設定檔 {} 驗證失敗（{} 處差異）。\n  差異（位置:寫入->讀回）：{}\n  寫入：{}\n  讀回：{}	프로필 {} 확인 실패 (차이 {}개).\n  차이 (위치:쓰기->읽기): {}\n  쓰기: {}\n  읽기: {}	Perfil {} no verificado ({} diferencias).\n  Diferencias: {}\n  Enviado: {}\n  Leído: {}	Échec de vérification du profil {} ({} différences).\n  Différences : {}\n  Envoyé : {}\n  Lu : {}	Prüfung von Profil {} fehlgeschlagen ({} Unterschiede).\n  Unterschiede: {}\n  Gesendet: {}\n  Gelesen: {}	Verificação do perfil {} falhou ({} diferenças).\n  Diferenças: {}\n  Enviado: {}\n  Lido: {}
+{} に保存できません: {}	Cannot save to {}: {}	无法保存至 {}：{}	無法儲存至 {}：{}	{}에 저장 실패: {}	No se puede guardar en {}: {}	Impossible d’enregistrer dans {} : {}	Speichern unter {} nicht möglich: {}	Não é possível salvar em {}: {}
+{} を読めません: {}	Cannot read {}: {}	无法读取 {}：{}	無法讀取 {}：{}	{} 읽기 실패: {}	No se puede leer {}: {}	Impossible de lire {} : {}	{} kann nicht gelesen werden: {}	Não é possível ler {}: {}
+バックアップが空です	Backup is empty	备份为空	備份為空	백업이 비어 있습니다	La copia está vacía	La sauvegarde est vide	Sicherung ist leer	Backup vazio
+プロファイルのデータが足りません	Missing profile data	缺少配置数据	缺少設定檔資料	프로필 데이터 부족	Faltan datos de perfil	Données de profil manquantes	Profildaten fehlen	Dados de perfil ausentes
+プロファイル 0x{} のデータが不正です	Invalid data for profile 0x{}	配置 0x{} 的数据无效	設定檔 0x{} 的資料無效	프로필 0x{} 데이터 오류	Datos no válidos para perfil 0x{}	Données invalides pour le profil 0x{}	Ungültige Daten für Profil 0x{}	Dados inválidos para perfil 0x{}
+16進データが不正です: {}	Invalid hexadecimal data: {}	十六进制数据无效：{}	十六進位資料無效：{}	잘못된 16진수 데이터: {}	Datos hexadecimales no válidos: {}	Données hexadécimales invalides : {}	Ungültige Hexadezimaldaten: {}	Dados hexadecimais inválidos: {}
+この OS では未対応です	This OS is not supported	不支持此操作系统	不支援此作業系統	지원되지 않는 운영체제입니다	Sistema operativo no compatible	Système non pris en charge	Dieses Betriebssystem wird nicht unterstützt	Sistema operacional não suportado
+カーソルの速さを読めません	Cannot read pointer speed	无法读取指针速度	無法讀取指標速度	포인터 속도 읽기 실패	No se puede leer la velocidad	Impossible de lire la vitesse	Zeigergeschwindigkeit nicht lesbar	Não é possível ler a velocidade
+カーソルの速さを設定できません	Cannot set pointer speed	无法设置指针速度	無法設定指標速度	포인터 속도 설정 실패	No se puede cambiar la velocidad	Impossible de régler la vitesse	Zeigergeschwindigkeit nicht einstellbar	Não é possível definir a velocidade
+加速の設定を読めません	Cannot read acceleration settings	无法读取加速设置	無法讀取加速設定	가속 설정 읽기 실패	No se puede leer la aceleración	Impossible de lire l’accélération	Beschleunigung nicht lesbar	Não é possível ler a aceleração
+加速の設定を変更できません	Cannot change acceleration settings	无法更改加速设置	無法變更加速設定	가속 설정 변경 실패	No se puede cambiar la aceleración	Impossible de régler l’accélération	Beschleunigung nicht einstellbar	Não é possível alterar a aceleração
+スクロール行数を読めません	Cannot read scroll lines	无法读取滚动行数	無法讀取捲動行數	스크롤 줄 수 읽기 실패	No se pueden leer las líneas de desplazamiento	Impossible de lire les lignes de défilement	Bildlaufzeilen nicht lesbar	Não é possível ler linhas de rolagem
+スクロール行数を設定できません	Cannot set scroll lines	无法设置滚动行数	無法設定捲動行數	스크롤 줄 수 설정 실패	No se pueden cambiar las líneas de desplazamiento	Impossible de régler les lignes de défilement	Bildlaufzeilen nicht einstellbar	Não é possível definir linhas de rolagem
+横スクロールの文字数を読めません	Cannot read horizontal scroll amount	无法读取水平滚动量	無法讀取水平捲動量	가로 스크롤 값 읽기 실패	No se puede leer el desplazamiento horizontal	Impossible de lire le défilement horizontal	Horizontaler Bildlauf nicht lesbar	Não é possível ler rolagem horizontal
+横スクロールの文字数を設定できません	Cannot set horizontal scroll amount	无法设置水平滚动量	無法設定水平捲動量	가로 스크롤 값 설정 실패	No se puede cambiar el desplazamiento horizontal	Impossible de régler le défilement horizontal	Horizontaler Bildlauf nicht einstellbar	Não é possível definir rolagem horizontal
+不明 (code=0x{} mod=0x{} key=0x{})	Unknown (code=0x{} mod=0x{} key=0x{})	未知 (code=0x{} mod=0x{} key=0x{})	未知 (code=0x{} mod=0x{} key=0x{})	알 수 없음 (code=0x{} mod=0x{} key=0x{})	Desconocido (code=0x{} mod=0x{} key=0x{})	Inconnu (code=0x{} mod=0x{} key=0x{})	Unbekannt (code=0x{} mod=0x{} key=0x{})	Desconhecido (code=0x{} mod=0x{} key=0x{})
+LED色	LED color	LED 颜色	LED 色彩	LED 색상	Color LED	Couleur LED	LED-Farbe	Cor LED
+LED効果	LED effect	LED 效果	LED 效果	LED 효과	Efecto LED	Effet LED	LED-Effekt	Efeito LED
+LED秒数	LED duration	LED 时长	LED 時間	LED 시간	Duración LED	Durée LED	LED-Dauer	Duração LED
+GシフトLED色	G-Shift LED color	G-Shift LED 颜色	G-Shift LED 色彩	G-Shift LED 색상	Color LED G-Shift	Couleur LED G-Shift	G-Shift-LED-Farbe	Cor LED G-Shift
+ポーリングレート	Polling rate	回报率	回報率	폴링 레이트	Frecuencia de sondeo	Fréquence d’interrogation	Abfragerate	Taxa de polling
+既定DPIスロット	Default DPI slot	默认 DPI 档位	預設 DPI 檔位	기본 DPI 슬롯	Nivel DPI predeterminado	Palier DPI par défaut	Standard-DPI-Stufe	Nível DPI padrão
+{} 通常	{} normal	{} 普通	{} 一般	{} 일반	{} normal	{} normal	{} normal	{} normal
+{} Gシフト	{} G-Shift	{} G-Shift	{} G-Shift	{} G-Shift	{} G-Shift	{} G-Shift	{} G-Shift	{} G-Shift
+使用中	active	当前	使用中	사용 중	activo	actif	aktiv	ativo
+プライバシー	Privacy	隐私	隱私	개인정보	Privacidad	Confidentialité	Datenschutz	Privacidade
+設定・バックアップ・診断ログはこのPCだけに保存し、外部へ送信しません。キー入力の検出は割り当て表示とキー登録に使用します。	Settings, backups and diagnostic logs stay on this PC and are not transmitted. Key detection is used to display assignments and capture shortcuts.	设置、备份及诊断日志仅保存在此电脑，不会向外发送。按键检测用于显示分配及捕获快捷键。	設定、備份及診斷記錄僅儲存在此電腦，不會向外傳送。按鍵偵測用於顯示指派及擷取快速鍵。	설정, 백업 및 진단 로그는 이 PC에만 저장되며 외부로 전송되지 않습니다. 키 감지는 할당 표시 및 단축키 등록에 사용됩니다.	Los ajustes, copias y registros se guardan solo en este PC, sin transmisión. La detección de teclas permite mostrar asignaciones y capturar atajos.	Réglages, sauvegardes et journaux restent sur ce PC sans transmission. La détection des touches sert à afficher les affectations et capturer les raccourcis.	Einstellungen, Sicherungen und Diagnoseprotokolle bleiben ohne Übertragung auf diesem PC. Tastenerkennung dient der Belegungsanzeige und Erfassung von Kombinationen.	Configurações, backups e logs ficam apenas neste PC, sem transmissão. A detecção de teclas serve para exibir atribuições e capturar atalhos.
+製品ID {} のマウスが見つかりません。`g600ctl list` で接続中のデバイスを確認し、違うIDなら `--pid` で指定してください。	Mouse with product ID {} not found. Connect a G600/G600r. Use g600ctl list to check devices and --pid for another ID.	找不到产品 ID 为 {} 的鼠标。请连接 G600/G600r，使用 g600ctl list 检查设备，或使用 --pid 指定 ID。	找不到產品 ID 為 {} 的滑鼠。請連接 G600/G600r，使用 g600ctl list 檢查裝置，或使用 --pid 指定 ID。	제품 ID {}의 마우스를 찾을 수 없습니다. G600/G600r를 연결하세요. g600ctl list로 장치를 확인하고 --pid로 ID를 지정하세요.	No se encuentra el ratón con ID {}. Conecte un G600/G600r. Compruebe con g600ctl list y --pid.	Souris d’ID {} introuvable. Connectez un G600/G600r. Vérifiez avec g600ctl list et --pid.	Maus mit Produkt-ID {} nicht gefunden. G600/G600r anschließen. Geräte mit g600ctl list und --pid prüfen.	Mouse com ID {} não encontrado. Conecte um G600/G600r. Confira com g600ctl list e --pid.
+マウスは見つかりましたが、設定用インターフェースを開けませんでした（{}）。G HUB を終了してから再度お試しください。	Mouse found, but its configuration interface could not be opened ({}). Close G HUB and try again.	已找到鼠标，但无法打开设置接口（{}）。请关闭 G HUB 后重试。	已找到滑鼠，但無法開啟設定介面（{}）。請關閉 G HUB 後重試。	마우스는 찾았지만 설정 인터페이스를 열 수 없습니다 ({}). G HUB를 종료하고 다시 시도하세요.	Ratón encontrado, pero no se puede abrir la configuración ({}). Cierre G HUB e inténtelo de nuevo.	Souris détectée, mais interface inaccessible ({}). Fermez G HUB et réessayez.	Maus gefunden, aber Konfigurationsschnittstelle nicht verfügbar ({}). G HUB schließen und erneut versuchen.	Mouse encontrado, mas interface de configuração indisponível ({}). Feche o G HUB e tente novamente.
+{}: {} → {}	{}: {} → {}	{}：{} → {}	{}：{} → {}	{}: {} → {}	{}: {} → {}	{} : {} → {}	{}: {} → {}	{}: {} → {}
+{}: {}	{}: {}	{}：{}	{}：{}	{}: {}	{}: {}	{} : {}	{}: {}	{}: {}
