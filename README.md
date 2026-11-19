@@ -2,6 +2,8 @@
 
 **日本語** · [English](docs/readme/README.en.md) · [简体中文](docs/readme/README.zh-Hans.md) · [繁體中文](docs/readme/README.zh-Hant.md) · [한국어](docs/readme/README.ko.md) · [Español](docs/readme/README.es.md) · [Français](docs/readme/README.fr.md) · [Deutsch](docs/readme/README.de.md) · [Português](docs/readme/README.pt.md)
 
+上のリンクからREADMEの言語を選べます。 / Choose a README language above.
+
 Windows 10 / 11（x64）向けの多ボタンマウス設定ツールです。
 
 - ボタン割り当て、DPI、LED、マウス本体のプロファイルを設定

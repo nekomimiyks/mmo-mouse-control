@@ -21,9 +21,11 @@ Ouvrez **G600 / G600r → Paramètres → Langue**. **Automatique / Windows** ut
 
 ## Captures d’écran
 
+Les captures illustrent des réglages d’exemple.
+
 | Réglages de la G600r | Affectation des boutons de la G600r |
 | --- | --- |
-| ![Réglages de la G600r](../../screenshots/device-settings.jpg) | ![Affectation des boutons de la G600r](../../screenshots/button-mapping.jpg) |
+| ![Réglages de la G600r](../../screenshots/localized/fr/settings.png) | ![Affectation des boutons de la G600r](../../screenshots/localized/fr/buttons.png) |
 
 ## Compiler depuis les sources
 

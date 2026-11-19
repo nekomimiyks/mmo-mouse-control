@@ -21,9 +21,11 @@
 
 ## 屏幕截图
 
+截图使用示例设置。
+
 | G600r 设置界面 | G600r 按键分配 |
 | --- | --- |
-| ![G600r 设置界面](../../screenshots/device-settings.jpg) | ![G600r 按键分配](../../screenshots/button-mapping.jpg) |
+| ![G600r 设置界面](../../screenshots/localized/zh-Hans/settings.png) | ![G600r 按键分配](../../screenshots/localized/zh-Hans/buttons.png) |
 
 ## 从源代码构建
 

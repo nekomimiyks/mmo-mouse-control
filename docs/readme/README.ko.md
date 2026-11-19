@@ -21,9 +21,11 @@ Windows 10/11(x64)용 다중 버튼 마우스 설정 도구입니다. 버튼 할
 
 ## 스크린샷
 
+스크린샷은 예시 설정을 보여 줍니다.
+
 | G600r 설정 화면 | G600r 버튼 할당 |
 | --- | --- |
-| ![G600r 설정 화면](../../screenshots/device-settings.jpg) | ![G600r 버튼 할당](../../screenshots/button-mapping.jpg) |
+| ![G600r 설정 화면](../../screenshots/localized/ko/settings.png) | ![G600r 버튼 할당](../../screenshots/localized/ko/buttons.png) |
 
 ## 소스에서 빌드
 

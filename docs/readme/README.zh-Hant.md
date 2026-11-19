@@ -21,9 +21,11 @@
 
 ## 螢幕擷取畫面
 
+螢幕擷取畫面使用範例設定。
+
 | G600r 設定畫面 | G600r 按鍵指派 |
 | --- | --- |
-| ![G600r 設定畫面](../../screenshots/device-settings.jpg) | ![G600r 按鍵指派](../../screenshots/button-mapping.jpg) |
+| ![G600r 設定畫面](../../screenshots/localized/zh-Hant/settings.png) | ![G600r 按鍵指派](../../screenshots/localized/zh-Hant/buttons.png) |
 
 ## 從原始碼建置
 

@@ -21,9 +21,11 @@ Open **G600 / G600r → Settings → Language** to choose a language. **Automati
 
 ## Screenshots
 
+Screenshots show sample settings.
+
 | G600r device settings | G600r button assignments |
 | --- | --- |
-| ![G600r device settings](../../screenshots/device-settings.jpg) | ![G600r button assignments](../../screenshots/button-mapping.jpg) |
+| ![G600r device settings](../../screenshots/localized/en/settings.png) | ![G600r button assignments](../../screenshots/localized/en/buttons.png) |
 
 ## Build from source
 

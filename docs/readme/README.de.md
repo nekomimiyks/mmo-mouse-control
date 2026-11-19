@@ -21,9 +21,11 @@ Japanisch, Englisch, vereinfachtes Chinesisch, traditionelles Chinesisch, Korean
 
 ## Screenshots
 
+Die Screenshots zeigen Beispieleinstellungen.
+
 | G600r-Geräteeinstellungen | G600r-Tastenbelegung |
 | --- | --- |
-| ![G600r-Geräteeinstellungen](../../screenshots/device-settings.jpg) | ![G600r-Tastenbelegung](../../screenshots/button-mapping.jpg) |
+| ![G600r-Geräteeinstellungen](../../screenshots/localized/de/settings.png) | ![G600r-Tastenbelegung](../../screenshots/localized/de/buttons.png) |
 
 ## Aus dem Quellcode bauen
 

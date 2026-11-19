@@ -21,9 +21,11 @@ Abra **G600 / G600r → Configurações → Idioma**. **Automático / Windows** 
 
 ## Capturas de tela
 
+As capturas mostram configurações de exemplo.
+
 | Configurações do G600r | Atribuição de botões do G600r |
 | --- | --- |
-| ![Configurações do G600r](../../screenshots/device-settings.jpg) | ![Atribuição de botões do G600r](../../screenshots/button-mapping.jpg) |
+| ![Configurações do G600r](../../screenshots/localized/pt/settings.png) | ![Atribuição de botões do G600r](../../screenshots/localized/pt/buttons.png) |
 
 ## Compilar a partir do código-fonte
 
