@@ -1,5 +1,7 @@
 # MMO Mouse Control
 
+**日本語** · [English](docs/readme/README.en.md) · [简体中文](docs/readme/README.zh-Hans.md) · [繁體中文](docs/readme/README.zh-Hant.md) · [한국어](docs/readme/README.ko.md) · [Español](docs/readme/README.es.md) · [Français](docs/readme/README.fr.md) · [Deutsch](docs/readme/README.de.md) · [Português](docs/readme/README.pt.md)
+
 Windows 10 / 11（x64）向けの多ボタンマウス設定ツールです。
 
 - ボタン割り当て、DPI、LED、マウス本体のプロファイルを設定
@@ -9,6 +11,12 @@ Windows 10 / 11（x64）向けの多ボタンマウス設定ツールです。
 ## ダウンロード
 
 対応マウスをUSBで接続し、[GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest)から **MMOMouseControl.exe** をダウンロードして起動してください。
+
+## 表示言語
+
+G600 / G600rの設定画面は、日本語、英語、中国語（簡体字・繁体字）、韓国語、スペイン語、フランス語、ドイツ語、ポルトガル語の9言語に対応しています。
+
+**G600 / G600r → 設定 → 言語**で切り替えます。**自動 / Windows**を選ぶとWindowsの表示言語に合わせ、対応外の言語では英語を表示します。M908 / Pusat V8の設定画面は日本語です。
 
 ## スクリーンショット
 
