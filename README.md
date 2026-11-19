@@ -1,27 +1,12 @@
 # MMO Mouse Control
 
-<img src="source/assets/icon.png" width="72" height="72" alt="MMO Mouse Control app icon">
+WindowsでMMOマウスのボタン割り当て、DPI、LEDを設定するツールです。マウスをUSB接続し、[MMOMouseControl.exe](https://github.com/nekomimiyks/mmo-mouse-control/releases/download/v0.12.1/MMOMouseControl.exe) を起動してください。
 
-Configure button assignments, DPI, lighting, and onboard profiles for supported MMO mice on Windows. The app detects connected mice and lets you switch between them in one window.
+| 確認状況 | 機種 |
+|---|---|
+| 実機で起動・認識・設定読み込みを確認 | Redragon M908 Impact（有線）、Logitech<sup>®</sup> G600r MMOゲーミングマウス（国内名：Logicool G600r） |
+| 公開資料とUSB IDに基づく互換候補 | Monster Pusat V8 MMO（有線、[04D9:FC4D](https://github.com/dokutan/mouse_m908/blob/965d71f957023ebdfe9bc3ea8d2affbfb21c10ff/README.md#supported-mice)）、Logitech G600 MMO Gaming Mouse（[046D:C24A](https://github.com/libratbag/piper/blob/master/data/svgs/svg-lookup.ini)）。このアプリでの実機確認は未実施。 |
 
-Supported mice are the wired Redragon M908 Impact, Monster Pusat V8 MMO, and Logitech G600 / G600r.
+独立開発のツールです。製品名は機種の識別に使用しています。商標の帰属は[第三者表記](THIRD_PARTY.md)を参照してください。
 
-## Download
-
-Download `MMOMouseControl.exe` from [Releases](../../releases/latest), connect a supported mouse, and run it. The app can also back up and restore mouse settings.
-
-## Screenshots
-
-![Device settings for a connected MMO mouse](screenshots/device-settings.jpg)
-
-![Normal and G-Shift button assignments for a G600r](screenshots/button-mapping.jpg)
-
-## Build
-
-Run `./build.ps1` on Windows with the Rust GNU toolchain and Cargo dependencies available offline. The script runs the tests and produces `実行ファイル/MMOMouseControl.exe`. Use `./build.ps1 -TestOnly` to run only the tests.
-
-To build the Microsoft Store package, run `./build-msix.ps1` after the app build. It requires Windows SDK MakeAppx.
-
-## License
-
-GPL-3.0-or-later. See [LICENSE](LICENSE) and [third-party notices](THIRD_PARTY.md).
+[対応ソースとビルド設定（v0.12.1）](https://github.com/nekomimiyks/mmo-mouse-control/archive/refs/tags/v0.12.1.zip) · [開発用ブランチ](https://github.com/nekomimiyks/mmo-mouse-control/tree/source) · [ライセンス](LICENSE) · [プライバシーポリシー](PRIVACY.md)
