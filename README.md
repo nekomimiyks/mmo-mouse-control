@@ -9,4 +9,8 @@ WindowsでMMOマウスのボタン割り当て、DPI、LEDを設定するツー�
 
 独立開発のツールです。製品名は機種の識別に使用しています。商標の帰属は[第三者表記](THIRD_PARTY.md)を参照してください。
 
-[対応ソースとビルド設定（v0.12.1）](https://github.com/nekomimiyks/mmo-mouse-control/archive/refs/tags/v0.12.1.zip) · [開発用ブランチ](https://github.com/nekomimiyks/mmo-mouse-control/tree/source) · [ライセンス](LICENSE) · [プライバシーポリシー](PRIVACY.md)
+## ソースからビルド
+
+WindowsでRust GNUツールチェーン、MinGWのリソースコンパイラ、Cargo依存関係を準備します。PowerShellで **./build.ps1** を実行すると、テストとビルドが走り、**実行ファイル/MMOMouseControl.exe** が生成されます。
+
+[配布版に対応するソース v0.12.1](https://github.com/nekomimiyks/mmo-mouse-control/archive/refs/tags/v0.12.1.zip) · [ライセンス](LICENSE) · [プライバシーポリシー](PRIVACY.md)

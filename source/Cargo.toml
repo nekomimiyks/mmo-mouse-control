@@ -1,0 +1,32 @@
+[package]
+name = "m908ctl"
+version = "0.12.1"
+edition = "2021"
+license = "GPL-3.0-or-later"
+default-run = "mmo-mouse-control"
+
+[workspace]
+members = ["g600"]
+resolver = "2"
+
+[dependencies]
+g600ctl = { path = "g600", features = ["gui"] }
+crc32fast = "1.5"
+eframe = { version = "0.31", default-features = false, features = ["default_fonts", "glow"] }
+hidapi = { version = "2", default-features = false, features = ["windows-native"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+windows-sys = { version = "0.59", features = ["Win32_Foundation", "Win32_Graphics_Gdi", "Win32_Storage_Packaging_Appx", "Win32_System_LibraryLoader", "Win32_UI_Input", "Win32_UI_WindowsAndMessaging", "Win32_UI_Accessibility"] }
+
+[[bin]]
+name = "mmo-mouse-control"
+path = "src/main.rs"
+
+[[bin]]
+name = "m908diag"
+path = "src/bin/diag.rs"
+
+[profile.release]
+opt-level = "s"
+lto = true
+strip = true
+

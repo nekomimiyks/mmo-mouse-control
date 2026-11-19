@@ -1,0 +1,23 @@
+[package]
+autobins = false
+name = "g600ctl"
+version = "0.10.0"
+edition = "2021"
+default-run = "g600ctl"
+description = "Open-source control tool for the Logicool/Logitech G600 / G600r MMO mouse"
+license = "MIT"
+
+[dependencies]
+hidapi = { version = "2", default-features = false, features = ["windows-native", "linux-static-hidraw"] }
+eframe = { version = "0.31", optional = true, default-features = false, features = ["default_fonts", "glow"] }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", optional = true, features = ["Win32_Devices_DeviceAndDriverInstallation", "Win32_Devices_Properties"] }
+
+[features]
+default = []
+gui = ["dep:eframe", "dep:windows-sys"]
+
+[[bin]]
+name = "g600ctl"
+path = "src/main.rs"
