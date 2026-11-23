@@ -6,13 +6,13 @@ A Windows 10/11 (x64) utility for configuring multi-button mice. Set button assi
 
 ## Installation
 
-Download **MMOMouseControl-Setup-0.12.3-x64.exe** from [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) and run it. If you used the portable version, select its folder during setup. At the end, choose **Yes** to start now or **No** to close setup.
+Download **MMOMouseControl-Setup-0.12.4-x64.exe** from [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) and run it. If you used the portable version, select its folder during setup. At the end, choose **Yes** to start now or **No** to close setup.
 
 When updating, setup closes the running installed copy before replacing it. If the app is waiting for your response, finish the prompt and run setup again.
 
-## What’s new in 0.12.3
+## What’s new in 0.12.4
 
-G600 is selected at startup when both mice are connected. Each mouse has one backup file for its profiles and app preferences.
+Setup creates a desktop shortcut. In the GitHub edition, use **Update settings** to enable startup update checks. They are off by default. Microsoft Store manages updates for the Store edition. When a new version is found, choose **Update** to download and start the verified installer.
 
 ## Back up and restore settings
 

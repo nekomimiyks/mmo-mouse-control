@@ -6,13 +6,13 @@ Ein Tool für Windows 10/11 (x64) zur Konfiguration von Mäusen mit mehreren Tas
 
 ## Installation
 
-Lade **MMOMouseControl-Setup-0.12.3-x64.exe** über [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) herunter und führe die Datei aus. Falls du die portable Version genutzt hast, wähle ihren Ordner im Setup. Wähle am Ende **Ja** zum Starten oder **Nein** zum Beenden.
+Lade **MMOMouseControl-Setup-0.12.4-x64.exe** über [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) herunter und führe die Datei aus. Falls du die portable Version genutzt hast, wähle ihren Ordner im Setup. Wähle am Ende **Ja** zum Starten oder **Nein** zum Beenden.
 
 Beim Aktualisieren beendet das Setup die laufende installierte App vor dem Austausch. Wenn die App auf eine Bestätigung wartet, bestätige sie und starte das Setup erneut.
 
-## Neu in 0.12.3
+## Neu in 0.12.4
 
-Sind beide Mäuse angeschlossen, wird beim Start die G600 ausgewählt. Profile und App-Einstellungen werden pro Maus in einer Datei gesichert.
+Die Installation erstellt eine Desktopverknüpfung. In der GitHub-Ausgabe kannst du unter **Update-Einstellungen** die Prüfung beim Start aktivieren. Sie ist standardmäßig aus. Microsoft Store verwaltet die Updates der Store-Ausgabe. Wähle bei einer neuen Version **Aktualisieren**, um das geprüfte Installationsprogramm herunterzuladen und zu starten.
 
 ## Einstellungen sichern und wiederherstellen
 

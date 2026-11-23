@@ -65,6 +65,7 @@ Type: files; Name: "{app}\.mmo-installed"
 
 [Icons]
 Name: "{autoprograms}\MMO Mouse Control"; Filename: "{app}\MMOMouseControl.exe"
+Name: "{autodesktop}\MMO Mouse Control"; Filename: "{app}\MMOMouseControl.exe"
 
 [Code]
 const
@@ -135,11 +136,16 @@ begin
 end;
 
 procedure InitializeWizard;
+var
+  PreviousFolder: String;
 begin
   LegacyPage := CreateInputDirPage(wpSelectDir, CustomMessage('LegacyTitle'),
     CustomMessage('LegacyDescription'), CustomMessage('LegacyHelp'), False, '');
   LegacyPage.Add('');
-  LegacyPage.Values[0] := ExpandConstant('{src}');
+  PreviousFolder := ExpandConstant('{param:LEGACYDIR|}');
+  if not DirExists(PreviousFolder) then
+    PreviousFolder := ExpandConstant('{src}');
+  LegacyPage.Values[0] := PreviousFolder;
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;

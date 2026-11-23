@@ -1,6 +1,6 @@
 # Third-party notices
 
-The M908 backend incorporates code and protocol tables from [dokutan/mouse_m908](https://github.com/dokutan/mouse_m908/tree/965d71f957023ebdfe9bc3ea8d2affbfb21c10ff), licensed under GPL-3.0-or-later. See [LICENSE](LICENSE) and the [corresponding source and build files](https://github.com/nekomimiyks/mmo-mouse-control/tree/v0.12.3).
+The M908 backend incorporates code and protocol tables from [dokutan/mouse_m908](https://github.com/dokutan/mouse_m908/tree/965d71f957023ebdfe9bc3ea8d2affbfb21c10ff), licensed under GPL-3.0-or-later. See [LICENSE](LICENSE) and the [corresponding source and build files](https://github.com/nekomimiyks/mmo-mouse-control/tree/v0.12.4).
 
 Logitech, Logi, and their logos are trademarks or registered trademarks of Logitech Europe S.A. and/or its affiliates in the United States and/or other countries. Other product names are the property of their respective owners.
 

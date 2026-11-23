@@ -32,6 +32,7 @@ impl eframe::App for Capture {
                 ui.label(tr("マウス"));
                 ui.add(egui::Button::new("G600 / G600r").selected(true));
                 let _ = ui.button(m908ctl::device::DISPLAY_NAME);
+                let _ = ui.button(tr("更新設定"));
             });
         }).response.rect.height();
         self.app.draw(ctx, header);

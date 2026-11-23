@@ -1,16 +1,17 @@
 use std::{fs, io::{self, Read}, path::{Path, PathBuf}};
 
 const HEADER: &[u8] = b"MMOMOUSE-SETTINGS\x01";
-const FILES: [&str; 4] = ["m908.draft", "m908-custom.txt", "g600-custom.txt", "language.txt"];
+pub const UPDATE_CHECK_FILE: &str = "update-check.txt";
+const FILES: [&str; 5] = ["m908.draft", "m908-custom.txt", "g600-custom.txt", "language.txt", UPDATE_CHECK_FILE];
 const MAX_FILE: usize = 4 * 1024 * 1024;
 const MAX_ARCHIVE: usize = HEADER.len() + 4 + FILES.len() * (5 + MAX_FILE);
 const MOUSE_HEADER: &[u8] = b"MMOMOUSE-BACKUP\x01";
 const MAX_MOUSE_BACKUP: usize = MOUSE_HEADER.len() + 9 + MAX_FILE + MAX_ARCHIVE;
 use crate::storage;
 
-fn paths(m908: &Path) -> Result<[PathBuf; 4], String> {
+fn paths(m908: &Path) -> Result<[PathBuf; FILES.len()], String> {
     let g600 = storage::data_dir()?;
-    Ok([m908.join(FILES[0]), m908.join(FILES[1]), g600.join(FILES[2]), g600.join(FILES[3])])
+    Ok([m908.join(FILES[0]), m908.join(FILES[1]), g600.join(FILES[2]), g600.join(FILES[3]), g600.join(FILES[4])])
 }
 
 fn read_limited(path: &Path, max: usize) -> io::Result<Vec<u8>> {
@@ -26,7 +27,7 @@ fn read_limited(path: &Path, max: usize) -> io::Result<Vec<u8>> {
     Ok(bytes)
 }
 
-fn archive(entries: [Option<&[u8]>; 4]) -> Vec<u8> {
+fn archive(entries: [Option<&[u8]>; FILES.len()]) -> Vec<u8> {
     let mut result = HEADER.to_vec();
     for (index, bytes) in entries.into_iter().enumerate() {
         if let Some(bytes) = bytes {
@@ -39,11 +40,11 @@ fn archive(entries: [Option<&[u8]>; 4]) -> Vec<u8> {
     result
 }
 
-fn unpack(bytes: &[u8]) -> Option<[Option<&[u8]>; 4]> {
+fn unpack(bytes: &[u8]) -> Option<[Option<&[u8]>; FILES.len()]> {
     let (body, checksum) = bytes.split_at_checked(bytes.len().checked_sub(4)?)?;
     if crc32fast::hash(body).to_le_bytes() != checksum { return None; }
     let mut remaining = body.strip_prefix(HEADER)?;
-    let mut entries = [None; 4];
+    let mut entries = [const { None }; FILES.len()];
     while !remaining.is_empty() {
         let (meta, content) = remaining.split_at_checked(5)?;
         let index = usize::from(meta[0]);
@@ -61,7 +62,7 @@ fn stage_path() -> Result<PathBuf, String> {
     Ok(storage::data_dir()?.join("settings-restore.pending"))
 }
 
-fn restore(path: &Path, paths: &[PathBuf; 4]) -> Result<bool, String> {
+fn restore(path: &Path, paths: &[PathBuf; FILES.len()]) -> Result<bool, String> {
     let bytes = match read_limited(path, MAX_ARCHIVE) {
         Ok(bytes) => bytes,
         Err(error) if error.kind() == io::ErrorKind::NotFound => return Ok(false),
@@ -96,7 +97,7 @@ pub enum Mouse {
 
 impl Mouse {
     fn includes(self, index: usize) -> bool {
-        index == 3 || match self {
+        index >= 3 || match self {
             Self::M908 => index < 2,
             Self::G600 => index == 2,
         }
@@ -107,7 +108,7 @@ impl Mouse {
         if payload.len() > MAX_FILE {
             return Err("Mouse settings exceed the backup size limit.".into());
         }
-        let mut entries = [None, None, None, None];
+        let mut entries = [const { None }; FILES.len()];
         for (index, path) in paths.iter().enumerate().filter(|(index, _)| self.includes(*index)) {
             entries[index] = read_optional(path, MAX_FILE)?;
         }
@@ -136,7 +137,7 @@ fn read_optional(path: &Path, limit: usize) -> Result<Option<Vec<u8>>, String> {
     }
 }
 
-fn pack(mouse: Mouse, payload: &str, entries: [Option<&[u8]>; 4]) -> Vec<u8> {
+fn pack(mouse: Mouse, payload: &str, entries: [Option<&[u8]>; FILES.len()]) -> Vec<u8> {
     let mut bytes = MOUSE_HEADER.to_vec();
     bytes.push(mouse as u8);
     bytes.extend((payload.len() as u32).to_le_bytes());
@@ -188,7 +189,7 @@ fn stage(target: &Path, settings: &[u8]) -> Result<(), String> {
     let pending = read_optional(target, MAX_ARCHIVE)?;
     let previous = match pending.as_deref() {
         Some(bytes) => unpack(bytes).ok_or("Invalid pending app settings backup.")?,
-        None => [None; 4],
+        None => [None; FILES.len()],
     };
     let merged = archive(std::array::from_fn(|index| incoming[index].or(previous[index])));
     storage::write_atomic(target, &merged).map_err(|error| error.to_string())
@@ -200,11 +201,11 @@ mod tests {
 
     #[test]
     fn checks_model_scope_and_checksum() {
-        let bytes = pack(Mouse::M908, "mouse data", [Some(b"draft"), None, None, Some(b"ja")]);
+        let bytes = pack(Mouse::M908, "mouse data", [Some(b"draft"), None, None, Some(b"ja"), None]);
         assert_eq!(decode(Mouse::M908, &bytes).unwrap().payload.as_deref(), Some("mouse data"));
         assert!(decode(Mouse::G600, &bytes).is_none());
         assert!(decode(Mouse::M908, &bytes[..bytes.len() - 1]).is_none());
-        let wrong_scope = pack(Mouse::M908, "mouse data", [None, None, Some(b"shortcut"), None]);
+        let wrong_scope = pack(Mouse::M908, "mouse data", [None, None, Some(b"shortcut"), None, None]);
         assert!(decode(Mouse::M908, &wrong_scope).is_none());
     }
 
@@ -214,11 +215,11 @@ mod tests {
         fs::create_dir_all(&dir).unwrap();
         let paths = FILES.map(|name| dir.join(name));
         let pending = dir.join("pending");
-        stage(&pending, &archive([None, Some(b"first"), None, Some(b"ja")])).unwrap();
-        stage(&pending, &archive([None, None, Some(b"second"), Some(b"en")])).unwrap();
+        stage(&pending, &archive([None, Some(b"first"), None, Some(b"ja"), None])).unwrap();
+        stage(&pending, &archive([None, None, Some(b"second"), Some(b"en"), Some(b"on")])).unwrap();
         fs::write(&paths[0], b"keep").unwrap();
         assert!(restore(&pending, &paths).unwrap());
-        for (path, value) in paths.iter().zip([b"keep".as_slice(), b"first", b"second", b"en"]) {
+        for (path, value) in paths.iter().zip([b"keep".as_slice(), b"first", b"second", b"en", b"on"]) {
             assert_eq!(fs::read(path).unwrap(), value);
         }
         assert!(!pending.exists());

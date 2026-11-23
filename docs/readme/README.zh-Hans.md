@@ -6,13 +6,13 @@
 
 ## 安装
 
-从 [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) 下载并运行 **MMOMouseControl-Setup-0.12.3-x64.exe**。如果使用过便携版，请在安装时选择其文件夹。安装结束后选择 **是** 立即启动，选择 **否** 退出安装。
+从 [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) 下载并运行 **MMOMouseControl-Setup-0.12.4-x64.exe**。如果使用过便携版，请在安装时选择其文件夹。安装结束后选择 **是** 立即启动，选择 **否** 退出安装。
 
 更新时，安装程序会先关闭正在运行的已安装版本。如果应用正在等待确认，请完成确认后重新运行安装程序。
 
-## 0.12.3 更新内容
+## 0.12.4 更新内容
 
-同时连接两款鼠标时，启动后优先选择 G600。每款鼠标的配置文件和应用偏好设置可保存到同一个文件。
+安装时创建桌面快捷方式。GitHub 版可在 **更新设置** 中开启启动时检查更新，默认关闭。商店版由 Microsoft Store 管理更新。 发现新版本时，选择 **更新** 即可下载并启动经过验证的安装程序。
 
 ## 备份和恢复设置
 

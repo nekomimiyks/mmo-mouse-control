@@ -133,6 +133,7 @@ pub struct App {
     m908: ui::App,
     g600: gui::App,
     active: Mouse,
+    updates: crate::update::Updates,
     last_availability: (bool, bool),
     watcher: mpsc::Receiver<Connections>,
     m908_detection: Detection,
@@ -151,6 +152,7 @@ impl App {
             m908,
             g600,
             active: Mouse::default(),
+            updates: crate::update::Updates::new(ctx),
             last_availability: (false, false),
             watcher: watch_connections(ctx.clone()),
             m908_detection: Detection::default(),
@@ -256,6 +258,7 @@ impl eframe::App for App {
                         }
                     }
                 });
+                self.updates.header(ui);
                 let mut detection_failed = false;
                 for (name, detection) in [
                     (device::DISPLAY_NAME, &self.m908_detection),
@@ -307,6 +310,9 @@ impl eframe::App for App {
                         }
                     });
                 });
+        }
+        if !closing && !self.confirm_g600_close {
+            self.updates.show(ctx);
         }
         if pending || self.close_after_g600 || self.m908.communication_pending() {
             ctx.request_repaint_after(Duration::from_millis(30));

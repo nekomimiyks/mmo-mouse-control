@@ -6,13 +6,13 @@ Ferramenta para Windows 10/11 (x64) para configurar mouses com vários botões. 
 
 ## Instalação
 
-Baixe **MMOMouseControl-Setup-0.12.3-x64.exe** em [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) e execute o arquivo. Se usava a versão portátil, selecione a pasta dela durante a instalação. No final, escolha **Sim** para abrir o aplicativo ou **Não** para sair.
+Baixe **MMOMouseControl-Setup-0.12.4-x64.exe** em [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) e execute o arquivo. Se usava a versão portátil, selecione a pasta dela durante a instalação. No final, escolha **Sim** para abrir o aplicativo ou **Não** para sair.
 
 Durante a atualização, o instalador fecha a cópia instalada antes de substituí-la. Se o aplicativo aguardar uma confirmação, responda e execute o instalador novamente.
 
-## Novidades da versão 0.12.3
+## Novidades da versão 0.12.4
 
-Se os dois mouses estiverem conectados, o G600 será selecionado ao iniciar. Os perfis e as preferências são salvos em um arquivo por mouse.
+A instalação cria um atalho na área de trabalho. Na edição do GitHub, use **Configurações de atualização** para ativar a verificação ao iniciar. Ela vem desativada. A Microsoft Store gerencia as atualizações da sua edição. Quando houver uma nova versão, escolha **Atualizar** para baixar e iniciar o instalador verificado.
 
 ## Fazer backup e restaurar configurações
 

@@ -374,11 +374,7 @@ pub(crate) fn settings_directory() -> std::path::PathBuf {
         .unwrap_or_else(|| std::path::PathBuf::from("."));
     #[cfg(windows)]
     {
-        use windows_sys::Win32::{Foundation::ERROR_INSUFFICIENT_BUFFER, Storage::Packaging::Appx::GetCurrentPackageFullName};
-        let mut length = 0;
-        // Query the length only. An unpackaged process has no package identity.
-        let result = unsafe { GetCurrentPackageFullName(&mut length, std::ptr::null_mut()) };
-        if result == ERROR_INSUFFICIENT_BUFFER || exe_dir.join(".mmo-installed").is_file() {
+        if crate::update::is_packaged() || exe_dir.join(".mmo-installed").is_file() {
             if let Some(local) = std::env::var_os("LOCALAPPDATA") {
                 let path = std::path::PathBuf::from(local).join("MMOMouseControl");
                 let _ = std::fs::create_dir_all(&path);

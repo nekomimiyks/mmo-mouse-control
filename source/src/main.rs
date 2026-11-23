@@ -6,6 +6,7 @@ mod pointer;
 mod settings_backup;
 mod theme;
 mod ui;
+mod update;
 
 use g600ctl::gui;
 use m908ctl::{device, identification};

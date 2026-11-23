@@ -6,13 +6,13 @@ Utilitaire pour Windows 10/11 (x64) permettant de configurer les souris à plusi
 
 ## Installation
 
-Téléchargez **MMOMouseControl-Setup-0.12.3-x64.exe** depuis [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) et exécutez-le. Si vous utilisiez la version portable, sélectionnez son dossier pendant l’installation. À la fin, choisissez **Oui** pour ouvrir l’application ou **Non** pour quitter.
+Téléchargez **MMOMouseControl-Setup-0.12.4-x64.exe** depuis [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) et exécutez-le. Si vous utilisiez la version portable, sélectionnez son dossier pendant l’installation. À la fin, choisissez **Oui** pour ouvrir l’application ou **Non** pour quitter.
 
 Lors d’une mise à jour, le programme ferme l’application installée avant de la remplacer. Si l’application attend une confirmation, répondez puis relancez l’installation.
 
-## Nouveautés de la version 0.12.3
+## Nouveautés de la version 0.12.4
 
-Lorsque les deux souris sont connectées, la G600 est sélectionnée au démarrage. Les profils et les préférences sont réunis dans un fichier par souris.
+L’installation crée un raccourci sur le bureau. Dans l’édition GitHub, activez la vérification au démarrage dans **Paramètres de mise à jour**. Elle est désactivée par défaut. Microsoft Store gère les mises à jour de son édition. Lorsqu’une nouvelle version est disponible, choisissez **Mettre à jour** pour télécharger et lancer le programme d’installation vérifié.
 
 ## Sauvegarder et restaurer les réglages
 
