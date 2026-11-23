@@ -43,12 +43,14 @@ en.LegacyHelp=The installer copies saved drafts and shortcuts if they are found 
 en.LaunchQuestion=Start MMO Mouse Control now?
 en.LaunchFailed=The app could not be started. Open it from the Start menu.
 en.CopyFailed=An old setting could not be copied. The original files are still in the previous app folder.
+en.CloseFailed=MMO Mouse Control could not finish closing. Save your changes or respond to any prompt in the app, then close it and try again.
 ja.LegacyTitle=ポータブル版から設定を引き継ぐ
 ja.LegacyDescription=旧版のEXEを使っていた場合は、そのフォルダーを選べます。
 ja.LegacyHelp=選んだフォルダーに保存済みの下書きやショートカットがあり、移行先に同じファイルがなければコピーします。新規インストールの場合は初期値のまま進んでください。
 ja.LaunchQuestion=今すぐアプリを起動しますか？
 ja.LaunchFailed=アプリを起動できませんでした。スタートメニューから開いてください。
 ja.CopyFailed=一部の設定をコピーできませんでした。元のファイルは旧アプリのフォルダーにあります。
+ja.CloseFailed=MMO Mouse Controlを終了できませんでした。アプリの確認画面に応答するか、設定を保存して終了してから、もう一度更新してください。
 
 [Files]
 Source: "{#AppExe}"; DestDir: "{app}"; DestName: "MMOMouseControl.exe"; Flags: ignoreversion
@@ -65,8 +67,72 @@ Type: files; Name: "{app}\.mmo-installed"
 Name: "{autoprograms}\MMO Mouse Control"; Filename: "{app}\MMOMouseControl.exe"
 
 [Code]
+const
+  ProcessQueryLimitedInformation = $1000;
+  ProcessSynchronize = $100000;
+  CloseWindowMessage = $0010;
+  WaitSignaled = 0;
+  CloseTimeoutMs = 20000;
+
 var
   LegacyPage: TInputDirWizardPage;
+
+function GetWindowThreadProcessId(Window: HWND; var ProcessId: Cardinal): Cardinal;
+  external 'GetWindowThreadProcessId@user32.dll stdcall';
+function OpenProcess(Access: Cardinal; InheritHandle: Integer; ProcessId: Cardinal): THandle;
+  external 'OpenProcess@kernel32.dll stdcall';
+function QueryFullProcessImageName(Process: THandle; Flags: Cardinal; ImageName: String; var Size: Cardinal): Integer;
+  external 'QueryFullProcessImageNameW@kernel32.dll stdcall';
+function PostWindowMessage(Window: HWND; Message: Cardinal; WParam, LParam: NativeUInt): Integer;
+  external 'PostMessageW@user32.dll stdcall';
+function WaitForSingleObject(Handle: THandle; Milliseconds: Cardinal): Cardinal;
+  external 'WaitForSingleObject@kernel32.dll stdcall';
+function CloseHandle(Handle: THandle): Integer;
+  external 'CloseHandle@kernel32.dll stdcall';
+
+function PrepareToInstall(var NeedsRestart: Boolean): String;
+var
+  TargetPath, ImageName: String;
+  Window: HWND;
+  ProcessId, CurrentProcessId, Size: Cardinal;
+  Process: THandle;
+begin
+  Result := '';
+  TargetPath := ExpandConstant('{app}\MMOMouseControl.exe');
+  if not FileExists(TargetPath) then
+    Exit;
+  Window := FindWindowByWindowName('MMO Mouse Control');
+  if Window = 0 then
+    Exit;
+  if GetWindowThreadProcessId(Window, ProcessId) = 0 then
+    Exit;
+  Process := OpenProcess(ProcessQueryLimitedInformation or ProcessSynchronize, 0, ProcessId);
+  if Process = 0 then
+    Exit; { Restart Manager handles any file that is still in use. }
+  try
+    Size := 32768;
+    SetLength(ImageName, Size);
+    if QueryFullProcessImageName(Process, 0, ImageName, Size) = 0 then
+      Exit;
+    SetLength(ImageName, Size);
+    if CompareText(ImageName, TargetPath) <> 0 then
+      Exit; { Leave the Store and portable copies running. }
+    if WaitForSingleObject(Process, 0) = WaitSignaled then
+      Exit;
+    if (GetWindowThreadProcessId(Window, CurrentProcessId) <> 0) and
+       (CurrentProcessId = ProcessId) and
+       (PostWindowMessage(Window, CloseWindowMessage, 0, 0) <> 0) then begin
+      Log('Requested a normal shutdown of the installed MMO Mouse Control.');
+      if WaitForSingleObject(Process, CloseTimeoutMs) = WaitSignaled then begin
+        Log('The installed MMO Mouse Control exited before the update.');
+        Exit;
+      end;
+    end;
+    Result := CustomMessage('CloseFailed');
+  finally
+    CloseHandle(Process);
+  end;
+end;
 
 procedure InitializeWizard;
 begin
