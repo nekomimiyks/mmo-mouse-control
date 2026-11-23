@@ -79,4 +79,4 @@ WindowsでRust GNUツールチェーン、MinGWのリソースコンパイラ、
 
 インストーラーを作るには、Inno Setupを用意し、ビルド後に **./build-installer.ps1** を実行します。
 
-[配布版に対応するソース v0.12.2](https://github.com/nekomimiyks/mmo-mouse-control/archive/refs/tags/v0.12.2.zip) · [ライセンス](LICENSE) · [プライバシーポリシー](PRIVACY.md)
+[配布版に対応するソース v0.12.2](https://github.com/nekomimiyks/mmo-mouse-control/archive/refs/tags/v0.12.2-setup.1.zip) · [ライセンス](LICENSE) · [プライバシーポリシー](PRIVACY.md)

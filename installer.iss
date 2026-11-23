@@ -39,13 +39,13 @@ Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
 [CustomMessages]
 en.LegacyTitle=Keep settings from the portable version
 en.LegacyDescription=Choose the previous app folder, if you used the standalone EXE.
-en.LegacyHelp=The installer copies saved drafts and shortcuts from that folder when no copy is already saved. Leave the field empty for a new installation or to keep the current settings.
+en.LegacyHelp=The installer copies saved drafts and shortcuts if they are found in the selected folder and no copy is already saved. For a new installation, keep the suggested folder.
 en.LaunchQuestion=Start MMO Mouse Control now?
 en.LaunchFailed=The app could not be started. Open it from the Start menu.
 en.CopyFailed=An old setting could not be copied. The original files are still in the previous app folder.
 ja.LegacyTitle=ポータブル版から設定を引き継ぐ
 ja.LegacyDescription=旧版のEXEを使っていた場合は、そのフォルダーを選べます。
-ja.LegacyHelp=移行先に同じファイルがなければ、保存済みの下書きとショートカットをコピーします。新規インストールや現在の設定を使う場合は空欄のまま進んでください。
+ja.LegacyHelp=選んだフォルダーに保存済みの下書きやショートカットがあり、移行先に同じファイルがなければコピーします。新規インストールの場合は初期値のまま進んでください。
 ja.LaunchQuestion=今すぐアプリを起動しますか？
 ja.LaunchFailed=アプリを起動できませんでした。スタートメニューから開いてください。
 ja.CopyFailed=一部の設定をコピーできませんでした。元のファイルは旧アプリのフォルダーにあります。
@@ -69,17 +69,11 @@ var
   LegacyPage: TInputDirWizardPage;
 
 procedure InitializeWizard;
-var
-  SourceDir: String;
 begin
   LegacyPage := CreateInputDirPage(wpSelectDir, CustomMessage('LegacyTitle'),
     CustomMessage('LegacyDescription'), CustomMessage('LegacyHelp'), False, '');
   LegacyPage.Add('');
-  SourceDir := ExpandConstant('{src}');
-  if FileExists(AddBackslash(SourceDir) + 'm908.draft') or
-     FileExists(AddBackslash(SourceDir) + 'm908-custom.txt') or
-     FileExists(AddBackslash(SourceDir) + 'g600-custom.txt') then
-    LegacyPage.Values[0] := SourceDir;
+  LegacyPage.Values[0] := ExpandConstant('{src}');
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
