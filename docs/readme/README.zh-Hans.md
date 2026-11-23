@@ -8,6 +8,8 @@
 
 从 [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) 下载并运行 **MMOMouseControl-Setup-0.12.2-x64.exe**。如果使用过便携版，请在安装时选择其文件夹。安装结束后选择 **是** 立即启动，选择 **否** 退出安装。
 
+更新时，安装程序会先关闭正在运行的已安装版本。如果应用正在等待确认，请完成确认后重新运行安装程序。
+
 ## 0.12.2 更新内容
 
 新增 Windows 安装程序、便携版设置迁移和应用设置备份。

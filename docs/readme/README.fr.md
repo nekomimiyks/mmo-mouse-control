@@ -8,6 +8,8 @@ Utilitaire pour Windows 10/11 (x64) permettant de configurer les souris à plusi
 
 Téléchargez **MMOMouseControl-Setup-0.12.2-x64.exe** depuis [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) et exécutez-le. Si vous utilisiez la version portable, sélectionnez son dossier pendant l’installation. À la fin, choisissez **Oui** pour ouvrir l’application ou **Non** pour quitter.
 
+Lors d’une mise à jour, le programme ferme l’application installée avant de la remplacer. Si l’application attend une confirmation, répondez puis relancez l’installation.
+
 ## Nouveautés de la version 0.12.2
 
 Programme d’installation Windows, migration des réglages de la version portable et sauvegarde des réglages dans un seul fichier.

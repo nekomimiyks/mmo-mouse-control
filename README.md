@@ -16,6 +16,8 @@ Windows 10 / 11（x64）向けの多ボタンマウス設定ツールです。
 2. 旧ポータブル版から移行する場合は、インストーラーで以前の `MMOMouseControl.exe` があるフォルダーを指定します。
 3. 完了画面の後に表示される確認で、今すぐ起動する場合は「はい」、後で起動する場合は「いいえ」を選びます。後からはスタートメニューで開けます。
 
+更新時は、インストーラーが起動中のインストール版を終了してから更新します。アプリが設定の確認を待っている場合は、確認を済ませて終了し、インストーラーを実行し直してください。
+
 ## 0.12.2の変更
 
 - Windows用インストーラーと旧ポータブル版からの設定移行に対応しました。
@@ -79,4 +81,4 @@ WindowsでRust GNUツールチェーン、MinGWのリソースコンパイラ、
 
 インストーラーを作るには、Inno Setupを用意し、ビルド後に **./build-installer.ps1** を実行します。
 
-[配布版に対応するソース v0.12.2](https://github.com/nekomimiyks/mmo-mouse-control/archive/refs/tags/v0.12.2-setup.1.zip) · [ライセンス](LICENSE) · [プライバシーポリシー](PRIVACY.md)
+[配布版に対応するソース v0.12.2](https://github.com/nekomimiyks/mmo-mouse-control/archive/refs/tags/v0.12.2-setup.2.zip) · [ライセンス](LICENSE) · [プライバシーポリシー](PRIVACY.md)

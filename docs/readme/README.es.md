@@ -8,6 +8,8 @@ Herramienta para Windows 10/11 (x64) que permite configurar ratones con varios b
 
 Descarga **MMOMouseControl-Setup-0.12.2-x64.exe** desde [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) y ejecútalo. Si usabas la versión portátil, selecciona su carpeta durante la instalación. Al terminar, elige **Sí** para abrir la aplicación o **No** para salir.
 
+Durante una actualización, el instalador cierra la copia instalada antes de reemplazarla. Si la aplicación espera una confirmación, responde y vuelve a ejecutar el instalador.
+
 ## Novedades en 0.12.2
 
 Instalador de Windows, migración de ajustes de la versión portátil y copia de los ajustes en un solo archivo.
