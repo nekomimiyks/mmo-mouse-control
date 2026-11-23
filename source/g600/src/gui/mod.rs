@@ -4,10 +4,12 @@ pub mod fonts;
 #[cfg(test)]
 mod verification;
 mod inputlog;
-mod i18n;
+pub mod i18n;
 mod layout;
 mod pointer;
 mod press;
+mod sample;
+pub use sample::sample;
 pub mod single;
 mod sync;
 mod theme;

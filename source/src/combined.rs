@@ -142,6 +142,7 @@ pub struct App {
     close_after_g600: bool,
     confirm_g600_close: bool,
     discard_g600_on_close: bool,
+    backup: crate::settings_backup::Panel,
 }
 
 impl App {
@@ -159,6 +160,7 @@ impl App {
             close_after_g600: false,
             confirm_g600_close: false,
             discard_g600_on_close: false,
+            backup: crate::settings_backup::Panel::default(),
         }
     }
 
@@ -244,6 +246,7 @@ impl eframe::App for App {
             ui.horizontal_wrapped(|ui| {
                 ui.label("マウス");
                 ui.add_enabled_ui(!closing && !self.m908.close_in_progress(), |ui| {
+                    self.backup.button(ui);
                     for (mouse, presence, name) in [
                         (Mouse::M908, self.m908_detection.presence, device::DISPLAY_NAME),
                         (Mouse::G600, self.g600_detection.presence, "G600 / G600r"),
@@ -306,6 +309,9 @@ impl eframe::App for App {
                         }
                     });
                 });
+        }
+        if !closing && !self.confirm_g600_close {
+            self.backup.show(ctx);
         }
         if pending || self.close_after_g600 || self.m908.communication_pending() {
             ctx.request_repaint_after(Duration::from_millis(30));

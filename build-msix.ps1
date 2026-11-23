@@ -1,7 +1,9 @@
 param(
     [string]$MakeAppx = $env:MAKEAPPX,
     [string]$PackageIdentityName = $env:MMO_STORE_PACKAGE_IDENTITY_NAME,
-    [string]$PublisherDisplayName = $env:MMO_STORE_PUBLISHER_DISPLAY_NAME
+    [string]$PublisherDisplayName = $env:MMO_STORE_PUBLISHER_DISPLAY_NAME,
+    [string]$Executable = (Join-Path $PSScriptRoot '実行ファイル/MMOMouseControl.exe'),
+    [string]$OutputDirectory = (Join-Path $PSScriptRoot 'dist')
 )
 
 if ($PackageIdentityName -cnotmatch '^[A-Za-z0-9.-]{3,50}$' -or
@@ -18,12 +20,13 @@ if (-not $MakeAppx) {
 }
 if (-not $MakeAppx) { throw 'Set MAKEAPPX to the Windows SDK makeappx.exe path.' }
 
-$exe = Join-Path $PSScriptRoot '実行ファイル/MMOMouseControl.exe'
+$exe = (Resolve-Path -LiteralPath $Executable).Path
 $manifest = Join-Path $PSScriptRoot 'source/Cargo.toml'
 $version = [regex]::Match((Get-Content -LiteralPath $manifest -Raw), '(?m)^version = "(\d+\.\d+\.\d+)"').Groups[1].Value
 if (-not $version) { throw 'The application version is missing.' }
-$dist = Join-Path $PSScriptRoot 'dist'
+$dist = $OutputDirectory
 New-Item -ItemType Directory -Path $dist -Force | Out-Null
+$dist = (Resolve-Path -LiteralPath $dist).Path
 $stage = Join-Path $dist ('msix-' + [Guid]::NewGuid().ToString('N'))
 $assets = Join-Path $stage 'Assets'
 $output = Join-Path $dist "MMOMouseControl-$version-x64.msix"
