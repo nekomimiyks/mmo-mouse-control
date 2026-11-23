@@ -1,7 +1,9 @@
 #![cfg_attr(target_os = "windows", windows_subsystem = "windows")]
 
 mod combined;
+mod capture;
 mod pointer;
+mod settings_backup;
 mod theme;
 mod ui;
 
@@ -9,6 +11,15 @@ use g600ctl::gui;
 use m908ctl::{device, identification};
 
 fn main() -> eframe::Result {
+    let mut capture_args = std::env::args_os().skip(1);
+    if capture_args.next().as_deref() == Some(std::ffi::OsStr::new("--sample-capture")) {
+        if let (Some(language), Some(screen), Some(output), None) =
+            (capture_args.next(), capture_args.next(), capture_args.next(), capture_args.next())
+        {
+            return capture::run(language.to_string_lossy().into(), screen.to_string_lossy().into(), output.into());
+        }
+        std::process::exit(2);
+    }
     device::initialize_hid();
     let mut args = std::env::args().skip(1);
     if args.next().as_deref() == Some(identification::WORKER_FLAG) {
@@ -28,6 +39,12 @@ fn main() -> eframe::Result {
             None => return Ok(()),
         }
     };
+    if !preview {
+        if let Err(error) = settings_backup::apply_pending() {
+            settings_backup::show_startup_error(&error);
+            return Ok(());
+        }
+    }
     let icon = eframe::icon_data::from_png_bytes(include_bytes!("../assets/icon.png"))
         .expect("the bundled application icon is a valid PNG");
     eframe::run_native(

@@ -4,9 +4,17 @@
 
 Ferramenta para Windows 10/11 (x64) para configurar mouses com vários botões. Ajuste a atribuição de botões, o DPI, a iluminação e os perfis salvos no mouse. Também é possível fazer backup e restaurar as configurações.
 
-## Download
+## Instalação
 
-Conecte um mouse compatível por USB, baixe **MMOMouseControl.exe** no [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) e execute o arquivo.
+Baixe **MMOMouseControl-Setup-0.12.2-x64.exe** em [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) e execute o arquivo. Se usava a versão portátil, selecione a pasta dela durante a instalação. No final, escolha **Sim** para abrir o aplicativo ou **Não** para sair.
+
+## Novidades da versão 0.12.2
+
+Instalador para Windows, migração da versão portátil e backup das configurações em um só arquivo.
+
+## Fazer backup e restaurar configurações
+
+Abra **Backup das configurações do aplicativo → Salvar backup** para exportar rascunhos, atalhos personalizados e idioma em um arquivo `.mmo-settings`. Escolha **Restaurar do backup**, confirme e reabra o aplicativo. Use o backup de cada mouse para os perfis internos.
 
 ## Compatibilidade
 
@@ -23,9 +31,17 @@ Abra **G600 / G600r → Configurações → Idioma**. **Automático / Windows** 
 
 As capturas mostram configurações de exemplo.
 
-| Configurações do G600r | Atribuição de botões do G600r |
-| --- | --- |
-| ![Configurações do G600r](../../screenshots/localized/pt/settings.png) | ![Atribuição de botões do G600r](../../screenshots/localized/pt/buttons.png) |
+### Backup das configurações do aplicativo
+
+![Backup das configurações do aplicativo](../../screenshots/localized/pt/backup.png)
+
+### Configurações do G600r
+
+![Configurações do G600r](../../screenshots/localized/pt/settings.png)
+
+### Atribuição de botões do G600r
+
+![Atribuição de botões do G600r](../../screenshots/localized/pt/buttons.png)
 
 ## Compilar a partir do código-fonte
 

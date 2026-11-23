@@ -10,27 +10,50 @@ Windows 10 / 11（x64）向けの多ボタンマウス設定ツールです。
 - 接続した対応マウスを認識し、同じウィンドウで機種を切り替え
 - マウス設定のバックアップと復元に対応
 
-## ダウンロード
+## インストール
 
-対応マウスをUSBで接続し、[GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest)から **MMOMouseControl.exe** をダウンロードして起動してください。
+1. [最新リリース](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest)から **MMOMouseControl-Setup-0.12.2-x64.exe** をダウンロードして実行します。
+2. 旧ポータブル版から移行する場合は、インストーラーで以前の `MMOMouseControl.exe` があるフォルダーを指定します。
+3. 完了画面の後に表示される確認で、今すぐ起動する場合は「はい」、後で起動する場合は「いいえ」を選びます。後からはスタートメニューで開けます。
+
+## 0.12.2の変更
+
+- Windows用インストーラーと旧ポータブル版からの設定移行に対応しました。
+- 保存済みのアプリ設定を1つのファイルにまとめてバックアップ・復元できます。
+
+## 設定のバックアップと復元
+
+画面上部の **アプリ設定のバックアップ** を開き、**バックアップを保存** を選びます。M908の保存済みの下書き、登録したショートカット、表示言語が `.mmo-settings` ファイルに保存されます。
+
+復元するには **バックアップから復元** でファイルを選び、**次回起動時に復元** を押してアプリを起動し直します。ファイルに含まれる設定が上書きされます。マウス本体のプロファイルは、各機種の画面にある **バックアップ** を使ってください。
 
 ## 表示言語
 
 G600 / G600rの設定画面は、日本語、英語、中国語（簡体字・繁体字）、韓国語、スペイン語、フランス語、ドイツ語、ポルトガル語の9言語に対応しています。
 
-**G600 / G600r → 設定 → 言語**で切り替えます。**自動 / Windows**を選ぶとWindowsの表示言語に合わせ、対応外の言語では英語を表示します。M908 / Pusat V8の設定画面は日本語です。
+**G600 / G600r → 設定 → 言語**で、G600r画面とアプリ設定のバックアップ画面の言語を切り替えます。**自動 / Windows**を選ぶとWindowsの表示言語に合わせ、対応外の言語では英語を表示します。M908 / Pusat V8の機種別設定画面は日本語です。
 
 ## スクリーンショット
 
-| G600rの設定画面 | G600rのボタン割り当て |
-| --- | --- |
-| ![G600rのDPI・LED・プロファイル設定](screenshots/device-settings.jpg) | ![G600rの通常・Gシフトのボタン割り当て](screenshots/button-mapping.jpg) |
+0.12.2のサンプル設定を表示しています。
 
-**M908のキーコンフィグ（サンプルデータでの表示例）**
+### アプリ設定のバックアップ
 
-| ダーク | ライト |
-| --- | --- |
-| ![M908のキーコンフィグ・ダーク](screenshots/m908-keys-dark.png) | ![M908のキーコンフィグ・ライト](screenshots/m908-keys-light.png) |
+![アプリ設定のバックアップと復元](screenshots/localized/ja/backup.png)
+
+### G600rの設定
+
+![G600rのDPI・LED・プロファイル設定](screenshots/localized/ja/settings.png)
+
+### G600rのボタン割り当て
+
+![G600rの通常・Gシフトのボタン割り当て](screenshots/localized/ja/buttons.png)
+
+### M908のキーコンフィグ
+
+![M908のキーコンフィグ・ダーク](screenshots/m908-keys-dark.png)
+
+![M908のキーコンフィグ・ライト](screenshots/m908-keys-light.png)
 
 ## 操作
 
@@ -54,4 +77,6 @@ G600 / G600rの設定画面は、日本語、英語、中国語（簡体字・�
 
 WindowsでRust GNUツールチェーン、MinGWのリソースコンパイラ、Cargo依存関係を準備します。PowerShellで **./build.ps1** を実行すると、テストとビルドが走り、**実行ファイル/MMOMouseControl.exe** が生成されます。
 
-[配布版に対応するソース v0.12.1](https://github.com/nekomimiyks/mmo-mouse-control/archive/refs/tags/v0.12.1.zip) · [ライセンス](LICENSE) · [プライバシーポリシー](PRIVACY.md)
+インストーラーを作るには、Inno Setupを用意し、ビルド後に **./build-installer.ps1** を実行します。
+
+[配布版に対応するソース v0.12.2](https://github.com/nekomimiyks/mmo-mouse-control/archive/refs/tags/v0.12.2.zip) · [ライセンス](LICENSE) · [プライバシーポリシー](PRIVACY.md)

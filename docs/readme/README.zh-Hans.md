@@ -4,9 +4,17 @@
 
 适用于 Windows 10/11（x64）的多键鼠标配置工具。可以设置按键分配、DPI、灯光和板载配置文件，也可以备份和恢复设置。
 
-## 下载
+## 安装
 
-通过 USB 连接受支持的鼠标，从 [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) 下载并运行 **MMOMouseControl.exe**。
+从 [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) 下载并运行 **MMOMouseControl-Setup-0.12.2-x64.exe**。如果使用过便携版，请在安装时选择其文件夹。安装结束后选择 **是** 立即启动，选择 **否** 退出安装。
+
+## 0.12.2 更新内容
+
+新增 Windows 安装程序、便携版设置迁移和应用设置备份。
+
+## 备份和恢复设置
+
+打开 **应用设置备份 → 保存备份**，将草稿、自定义快捷键和显示语言保存到 `.mmo-settings` 文件。通过 **从备份恢复** 选择文件并确认，然后重新启动应用。板载配置请使用对应鼠标的备份功能。
 
 ## 兼容性
 
@@ -23,9 +31,17 @@
 
 截图使用示例设置。
 
-| G600r 设置界面 | G600r 按键分配 |
-| --- | --- |
-| ![G600r 设置界面](../../screenshots/localized/zh-Hans/settings.png) | ![G600r 按键分配](../../screenshots/localized/zh-Hans/buttons.png) |
+### 应用设置备份
+
+![应用设置备份](../../screenshots/localized/zh-Hans/backup.png)
+
+### G600r 设置
+
+![G600r 设置](../../screenshots/localized/zh-Hans/settings.png)
+
+### G600r 按键分配
+
+![G600r 按键分配](../../screenshots/localized/zh-Hans/buttons.png)
 
 ## 从源代码构建
 

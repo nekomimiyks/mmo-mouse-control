@@ -4,9 +4,17 @@
 
 A Windows 10/11 (x64) utility for configuring multi-button mice. Set button assignments, DPI, lighting, and onboard profiles, and back up or restore settings.
 
-## Download
+## Installation
 
-Connect a supported mouse by USB, download **MMOMouseControl.exe** from [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest), and run it.
+Download **MMOMouseControl-Setup-0.12.2-x64.exe** from [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) and run it. If you used the portable version, select its folder during setup. At the end, choose **Yes** to start now or **No** to close setup.
+
+## What’s new in 0.12.2
+
+Windows installer, portable settings migration, and a single backup file for app settings.
+
+## Back up and restore settings
+
+Open **App settings backup → Save backup** to export saved drafts, custom shortcuts, and display language to a `.mmo-settings` file. To restore, select the file with **Restore from backup**, confirm, then reopen the app. Use each mouse’s own backup controls for onboard profiles.
 
 ## Compatibility
 
@@ -23,9 +31,17 @@ Open **G600 / G600r → Settings → Language** to choose a language. **Automati
 
 Screenshots show sample settings.
 
-| G600r device settings | G600r button assignments |
-| --- | --- |
-| ![G600r device settings](../../screenshots/localized/en/settings.png) | ![G600r button assignments](../../screenshots/localized/en/buttons.png) |
+### App settings backup
+
+![App settings backup](../../screenshots/localized/en/backup.png)
+
+### G600r settings
+
+![G600r settings](../../screenshots/localized/en/settings.png)
+
+### G600r button assignments
+
+![G600r button assignments](../../screenshots/localized/en/buttons.png)
 
 ## Build from source
 

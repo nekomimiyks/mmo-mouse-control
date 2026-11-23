@@ -4,9 +4,17 @@
 
 適用於 Windows 10/11（x64）的多按鍵滑鼠設定工具。可變更按鍵指派、DPI、燈光與內建設定檔，也可備份與還原設定。
 
-## 下載
+## 安裝
 
-透過 USB 連接支援的滑鼠，從 [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) 下載並執行 **MMOMouseControl.exe**。
+從 [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) 下載並執行 **MMOMouseControl-Setup-0.12.2-x64.exe**。如果曾使用可攜版，請在安裝時選取其資料夾。安裝完成後選擇 **是** 立即啟動，選擇 **否** 結束安裝。
+
+## 0.12.2 更新內容
+
+新增 Windows 安裝程式、可攜版設定移轉，以及應用程式設定備份。
+
+## 備份和還原設定
+
+開啟 **應用程式設定備份 → 儲存備份**，將草稿、自訂快速鍵和顯示語言儲存到 `.mmo-settings` 檔案。透過 **從備份還原** 選取檔案並確認，之後重新啟動應用程式。內建設定檔請使用各滑鼠的備份功能。
 
 ## 相容性
 
@@ -23,9 +31,17 @@
 
 螢幕擷取畫面使用範例設定。
 
-| G600r 設定畫面 | G600r 按鍵指派 |
-| --- | --- |
-| ![G600r 設定畫面](../../screenshots/localized/zh-Hant/settings.png) | ![G600r 按鍵指派](../../screenshots/localized/zh-Hant/buttons.png) |
+### 應用程式設定備份
+
+![應用程式設定備份](../../screenshots/localized/zh-Hant/backup.png)
+
+### G600r 設定
+
+![G600r 設定](../../screenshots/localized/zh-Hant/settings.png)
+
+### G600r 按鍵指派
+
+![G600r 按鍵指派](../../screenshots/localized/zh-Hant/buttons.png)
 
 ## 從原始碼建置
 

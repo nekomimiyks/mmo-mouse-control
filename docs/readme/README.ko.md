@@ -4,9 +4,17 @@
 
 Windows 10/11(x64)용 다중 버튼 마우스 설정 도구입니다. 버튼 할당, DPI, 조명, 온보드 프로필을 설정하고 설정을 백업하거나 복원할 수 있습니다.
 
-## 다운로드
+## 설치
 
-지원되는 마우스를 USB로 연결하고 [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest)에서 **MMOMouseControl.exe**를 내려받아 실행하세요.
+[GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest)에서 **MMOMouseControl-Setup-0.12.2-x64.exe**를 다운로드하고 실행하세요. 휴대용 버전을 사용했다면 설치 중에 해당 폴더를 선택하세요. 설치 후 **예**를 선택하면 실행되고 **아니요**를 선택하면 종료됩니다.
+
+## 0.12.2 변경 사항
+
+Windows 설치 프로그램과 휴대용 버전 설정 이전, 앱 설정 백업을 추가했습니다.
+
+## 설정 백업 및 복원
+
+**앱 설정 백업 → 백업 저장**에서 초안, 사용자 지정 단축키, 표시 언어를 `.mmo-settings` 파일로 저장하세요. **백업에서 복원**으로 파일을 선택해 확인한 후 앱을 다시 실행하세요. 내장 프로필은 각 마우스의 백업 기능을 사용하세요.
 
 ## 호환 모델
 
@@ -23,9 +31,17 @@ Windows 10/11(x64)용 다중 버튼 마우스 설정 도구입니다. 버튼 할
 
 스크린샷은 예시 설정을 보여 줍니다.
 
-| G600r 설정 화면 | G600r 버튼 할당 |
-| --- | --- |
-| ![G600r 설정 화면](../../screenshots/localized/ko/settings.png) | ![G600r 버튼 할당](../../screenshots/localized/ko/buttons.png) |
+### 앱 설정 백업
+
+![앱 설정 백업](../../screenshots/localized/ko/backup.png)
+
+### G600r 설정
+
+![G600r 설정](../../screenshots/localized/ko/settings.png)
+
+### G600r 버튼 할당
+
+![G600r 버튼 할당](../../screenshots/localized/ko/buttons.png)
 
 ## 소스에서 빌드
 

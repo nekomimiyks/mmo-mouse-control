@@ -4,9 +4,17 @@
 
 Herramienta para Windows 10/11 (x64) que permite configurar ratones con varios botones. Cambia las asignaciones de botones, los DPI, la iluminación y los perfiles del ratón. También permite guardar y restaurar la configuración.
 
-## Descarga
+## Instalación
 
-Conecta un ratón compatible por USB, descarga **MMOMouseControl.exe** desde [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) y ejecútalo.
+Descarga **MMOMouseControl-Setup-0.12.2-x64.exe** desde [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) y ejecútalo. Si usabas la versión portátil, selecciona su carpeta durante la instalación. Al terminar, elige **Sí** para abrir la aplicación o **No** para salir.
+
+## Novedades en 0.12.2
+
+Instalador de Windows, migración de ajustes de la versión portátil y copia de los ajustes en un solo archivo.
+
+## Copia de seguridad y restauración
+
+Abre **Copia de seguridad de la aplicación → Guardar copia** para guardar borradores, atajos personalizados e idioma en un archivo `.mmo-settings`. Para restaurar, elige **Restaurar desde una copia**, confirma y vuelve a abrir la aplicación. Para los perfiles internos, usa la copia de cada ratón.
 
 ## Compatibilidad
 
@@ -23,9 +31,17 @@ Abre **G600 / G600r → Configuración → Idioma**. **Automático / Windows** u
 
 Las capturas muestran ajustes de ejemplo.
 
-| Configuración del G600r | Asignación de botones del G600r |
-| --- | --- |
-| ![Configuración del G600r](../../screenshots/localized/es/settings.png) | ![Asignación de botones del G600r](../../screenshots/localized/es/buttons.png) |
+### Copia de seguridad de la aplicación
+
+![Copia de seguridad de la aplicación](../../screenshots/localized/es/backup.png)
+
+### Configuración del G600r
+
+![Configuración del G600r](../../screenshots/localized/es/settings.png)
+
+### Asignación de botones del G600r
+
+![Asignación de botones del G600r](../../screenshots/localized/es/buttons.png)
 
 ## Compilar desde el código fuente
 

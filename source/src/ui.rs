@@ -364,14 +364,18 @@ fn slider_field(
 }
 const SIDE: [[usize; 3]; 4] = [[6, 7, 8], [9, 10, 11], [12, 13, 14], [15, 16, 17]];
 
-fn settings_directory() -> std::path::PathBuf {
+pub(crate) fn settings_directory() -> std::path::PathBuf {
+    let exe_dir = std::env::current_exe()
+        .ok()
+        .and_then(|path| path.parent().map(std::path::Path::to_path_buf))
+        .unwrap_or_else(|| std::path::PathBuf::from("."));
     #[cfg(windows)]
     {
         use windows_sys::Win32::{Foundation::ERROR_INSUFFICIENT_BUFFER, Storage::Packaging::Appx::GetCurrentPackageFullName};
         let mut length = 0;
         // Query the length only. An unpackaged process has no package identity.
         let result = unsafe { GetCurrentPackageFullName(&mut length, std::ptr::null_mut()) };
-        if result == ERROR_INSUFFICIENT_BUFFER {
+        if result == ERROR_INSUFFICIENT_BUFFER || exe_dir.join(".mmo-installed").is_file() {
             if let Some(local) = std::env::var_os("LOCALAPPDATA") {
                 let path = std::path::PathBuf::from(local).join("MMOMouseControl");
                 let _ = std::fs::create_dir_all(&path);
@@ -379,10 +383,7 @@ fn settings_directory() -> std::path::PathBuf {
             }
         }
     }
-    std::env::current_exe()
-        .ok()
-        .and_then(|path| path.parent().map(std::path::Path::to_path_buf))
-        .unwrap_or_else(|| std::path::PathBuf::from("."))
+    exe_dir
 }
 
 impl App {

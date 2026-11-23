@@ -4,9 +4,17 @@
 
 Utilitaire pour Windows 10/11 (x64) permettant de configurer les souris à plusieurs boutons. Réglez les affectations de boutons, les DPI, l’éclairage et les profils enregistrés dans la souris. Vous pouvez aussi sauvegarder et restaurer les réglages.
 
-## Téléchargement
+## Installation
 
-Branchez une souris compatible en USB, téléchargez **MMOMouseControl.exe** depuis [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) et lancez-le.
+Téléchargez **MMOMouseControl-Setup-0.12.2-x64.exe** depuis [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) et exécutez-le. Si vous utilisiez la version portable, sélectionnez son dossier pendant l’installation. À la fin, choisissez **Oui** pour ouvrir l’application ou **Non** pour quitter.
+
+## Nouveautés de la version 0.12.2
+
+Programme d’installation Windows, migration des réglages de la version portable et sauvegarde des réglages dans un seul fichier.
+
+## Sauvegarder et restaurer les réglages
+
+Ouvrez **Sauvegarde des réglages de l’application → Enregistrer la sauvegarde** pour exporter les brouillons, les raccourcis personnalisés et la langue dans un fichier `.mmo-settings`. Choisissez **Restaurer une sauvegarde**, confirmez, puis relancez l’application. Pour les profils intégrés, utilisez la sauvegarde propre à chaque souris.
 
 ## Compatibilité
 
@@ -23,9 +31,17 @@ Ouvrez **G600 / G600r → Paramètres → Langue**. **Automatique / Windows** ut
 
 Les captures illustrent des réglages d’exemple.
 
-| Réglages de la G600r | Affectation des boutons de la G600r |
-| --- | --- |
-| ![Réglages de la G600r](../../screenshots/localized/fr/settings.png) | ![Affectation des boutons de la G600r](../../screenshots/localized/fr/buttons.png) |
+### Sauvegarde des réglages de l’application
+
+![Sauvegarde des réglages de l’application](../../screenshots/localized/fr/backup.png)
+
+### Réglages de la G600r
+
+![Réglages de la G600r](../../screenshots/localized/fr/settings.png)
+
+### Affectation des boutons de la G600r
+
+![Affectation des boutons de la G600r](../../screenshots/localized/fr/buttons.png)
 
 ## Compiler depuis les sources
 

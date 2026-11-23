@@ -4,9 +4,17 @@
 
 Ein Tool für Windows 10/11 (x64) zur Konfiguration von Mäusen mit mehreren Tasten. Passe Tastenbelegung, DPI, Beleuchtung und auf der Maus gespeicherte Profile an. Einstellungen lassen sich sichern und wiederherstellen.
 
-## Download
+## Installation
 
-Schließe eine unterstützte Maus per USB an. Lade **MMOMouseControl.exe** von [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) herunter und starte die Datei.
+Lade **MMOMouseControl-Setup-0.12.2-x64.exe** über [GitHub Releases](https://github.com/nekomimiyks/mmo-mouse-control/releases/latest) herunter und führe die Datei aus. Falls du die portable Version genutzt hast, wähle ihren Ordner im Setup. Wähle am Ende **Ja** zum Starten oder **Nein** zum Beenden.
+
+## Neu in 0.12.2
+
+Windows-Installationsprogramm, Übernahme portabler Einstellungen und eine Sicherungsdatei für App-Einstellungen.
+
+## Einstellungen sichern und wiederherstellen
+
+Wähle **App-Einstellungen sichern → Sicherung speichern**, um Entwürfe, eigene Tastenkürzel und die Anzeigesprache als `.mmo-settings` zu speichern. Wähle **Aus Sicherung wiederherstellen**, bestätige und starte die App neu. Nutze für interne Profile die Sicherungsfunktion der jeweiligen Maus.
 
 ## Kompatibilität
 
@@ -23,9 +31,17 @@ Japanisch, Englisch, vereinfachtes Chinesisch, traditionelles Chinesisch, Korean
 
 Die Screenshots zeigen Beispieleinstellungen.
 
-| G600r-Geräteeinstellungen | G600r-Tastenbelegung |
-| --- | --- |
-| ![G600r-Geräteeinstellungen](../../screenshots/localized/de/settings.png) | ![G600r-Tastenbelegung](../../screenshots/localized/de/buttons.png) |
+### App-Einstellungen sichern
+
+![App-Einstellungen sichern](../../screenshots/localized/de/backup.png)
+
+### G600r-Einstellungen
+
+![G600r-Einstellungen](../../screenshots/localized/de/settings.png)
+
+### G600r-Tastenbelegung
+
+![G600r-Tastenbelegung](../../screenshots/localized/de/buttons.png)
 
 ## Aus dem Quellcode bauen
 
