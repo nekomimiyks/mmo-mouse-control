@@ -2,7 +2,7 @@ use super::*;
 use g600ctl::protocol::{Active, ProfileEdit, PROFILE_LEN, REPORT_PROFILES};
 
 /// Render sample profiles for documentation without opening or writing to USB devices.
-pub fn sample(ctx: &egui::Context, language: &str, buttons: bool) -> App {
+pub fn sample(ctx: &egui::Context, language: &str, screen: &str) -> App {
     fonts::install(ctx);
     theme::apply(ctx);
     i18n::activate(language);
@@ -19,13 +19,14 @@ pub fn sample(ctx: &egui::Context, language: &str, buttons: bool) -> App {
         "pt" => "Exemplo",
         _ => "Sample",
     };
+    let backup = screen == "backup";
     let mut app = App {
         language: language.into(), settings_open: false, commands, responses,
         settings: None, edits: vec![], device_identity: None, connected: true, busy: false, tab: 1,
-        tab_initialized: true, path: String::new(), source: source.into(), message: String::new(),
-        button_editor: None, screen: if buttons { Screen::Keys } else { Screen::Main },
+        tab_initialized: true, last_backup_path: backup.then(|| r"C:\Backups\MMOMouseControl-G600-Backup.mmo-backup".into()), source: source.into(), message: String::new(),
+        button_editor: None, screen: if screen == "buttons" { Screen::Keys } else { Screen::Main },
         keys: edit::keys(), custom: Vec::new(), custom_path: None, custom_message: String::new(),
-        backup_path: None, confirm: None,
+        backup_path: None, confirm: None, backup_confirmation: None,
         pointer: Some(pointer::PointerSettings { speed: 9, acceleration: false, wheel_lines: 3, wheel_chars: 3, wheel_page: false }),
         pointer_message: String::new(), button_presses: inputlog::Monitor::default(), held: winkeys::Held::default(),
         last_sent: String::new(), in_flight: None, unverified_write: None, last_edit: None,
@@ -52,5 +53,11 @@ pub fn sample(ctx: &egui::Context, language: &str, buttons: bool) -> App {
         Profile::parse(&raw).unwrap()
     }).collect();
     app.replace(DisplaySettings { active: Active { profile: 1, dpi_slot: 0 }, profiles });
+    if backup {
+        let identity = DeviceIdentity { path: std::ffi::CString::new("sample").unwrap(), serial: None };
+        app.device_identity = Some(identity.clone());
+        app.backup_path = app.last_backup_path.clone();
+        app.backup_confirmation = Some((Some(identity), true));
+    }
     app
 }

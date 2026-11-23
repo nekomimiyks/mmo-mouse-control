@@ -769,3 +769,24 @@ fn fast_restore_checks_unchanged_fields_and_retains_journal_on_conflict() {
     assert!(d.join(JOURNAL).exists());
     clean(&d);
 }
+
+#[test]
+fn restore_preflights_all_profiles_and_writes_verified_settings() {
+    let d = dir();
+    let mut io = Mock::new(d.clone());
+    let baseline = io.state.clone();
+    let mut profiles = baseline.profiles().unwrap();
+    profiles[0].color = [32, 64, 128];
+    profiles[4].dpi[1] = 1600;
+    let baselines = std::array::from_fn(|_| Some(baseline.clone()));
+    let mut invalid = profiles.clone();
+    invalid[4].buttons[7] = "invalid action name".into();
+    assert!(restore_controls_transport(&mut io, &baselines, &invalid, &d).is_err());
+    assert_eq!(io.writes, 0);
+    let restored = restore_controls_transport(&mut io, &baselines, &profiles, &d).unwrap();
+    assert_eq!(restored.snapshot.profiles().unwrap(), profiles);
+    assert!(restored.backup.unwrap().is_file());
+    assert_eq!(restored.snapshot.active(), baseline.active());
+    assert!(io.ended);
+    clean(&d);
+}

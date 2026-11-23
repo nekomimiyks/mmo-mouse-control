@@ -6,6 +6,7 @@ use crate::{
     theme::{self, Palette, SystemTheme},
 };
 use eframe::egui::{self, RichText, Stroke, Vec2};
+use g600ctl::{gui::{file_dialog, i18n::tr}, mouse_backup::Mouse};
 use m908ctl::{
     device::{self, Device},
     identification::{self, Client, State},
@@ -119,6 +120,7 @@ enum Reply {
     Read(Result<Snapshot, String>),
     Applied(Option<usize>, bool, Result<device::Applied, String>),
     Backup(Result<(Snapshot, PathBuf), String>),
+    Restored(Result<device::Applied, String>),
 }
 struct Editor {
     slot: usize,
@@ -162,7 +164,7 @@ pub struct App {
     initial_loaded: bool,
     message: String,
     draft: PathBuf,
-    path: String,
+    last_backup_path: Option<PathBuf>,
     pal: Palette,
     last_theme: SystemTheme,
     theme_check: Instant,
@@ -191,7 +193,8 @@ pub struct App {
     marker_frame: bool,
     main_pending: [Option<Instant>; 5],
     key_pending: [bool; 5],
-    pending_backup: Option<bool>,
+    pending_backup: Option<PathBuf>,
+    backup_confirmation: Option<(Option<std::ffi::CString>, bool)>,
     editor_bottom: f32,
 }
 fn retain_shortcut_names(actual: &mut [Profile; 5], previous: &[Profile; 5]) {
@@ -457,7 +460,7 @@ impl App {
             reload_confirm: None,
             initial_loaded: false,
             message,
-            path: draft.display().to_string(),
+            last_backup_path: None,
             draft,
             pal,
             last_theme: sys,
@@ -488,6 +491,7 @@ impl App {
             main_pending: [None; 5],
             key_pending: [false; 5],
             pending_backup: None,
+            backup_confirmation: None,
             editor_bottom: 0.0,
         };
         if show_editor {
@@ -755,6 +759,7 @@ impl App {
         self.main_pending = [None; 5];
         self.key_pending = [false; 5];
         self.pending_backup = None;
+        if let Some((path, _)) = self.backup_confirmation.as_mut() { *path = None; }
     }
 
     fn select_device(&mut self, index: usize) {
@@ -881,12 +886,12 @@ impl App {
             ));
         });
     }
-    fn save_backup(&mut self, full: bool) {
+    fn save_backup(&mut self, path: PathBuf) {
         if self.identification.is_some() || self.recovery_failed {
             return;
         }
         if self.key_pending.iter().any(|v| *v) || self.main_pending.iter().any(Option::is_some) {
-            self.pending_backup = Some(full);
+            self.pending_backup = Some(path);
             self.message = "変更を自動反映してから、最新の実機設定を保存します…".into();
             return;
         }
@@ -896,25 +901,18 @@ impl App {
             .filter(|d| d.is_config())
             .cloned()
         else {
-            self.save();
+            self.message = "対応するマウスが見つかりません。バックアップは保存されていません。".into();
             return;
         };
-        let directory = self.draft.with_file_name("backups");
         let (tx, rx) = mpsc::channel();
         self.job = Some(rx);
-        self.message = if full {
-            "マクロを含む完全バックアップを読み取り中…"
-        } else {
-            "通常設定を読み取り、保存中…"
-        }
-        .into();
+        self.message = "マクロを含む完全バックアップを読み取り中…".into();
+        let settings = self.draft.parent().map(std::path::Path::to_path_buf);
         std::thread::spawn(move || {
-            let result = (if full {
-                device::read(&d)
-            } else {
-                device::read_controls(&d)
-            })
-            .and_then(|s| device::backup(&directory, &s, "manual").map(|path| (s, path)));
+            let result = device::read(&d).or_else(|_| device::read_controls(&d)).and_then(|snapshot| {
+                Mouse::M908.save(&path, &snapshot.to_text(), settings.as_deref())?;
+                Ok((snapshot, path))
+            });
             let _ = tx.send(Reply::Backup(result));
         });
     }
@@ -984,12 +982,20 @@ impl App {
                         self.message = e;
                     }
                 },
-                Ok(Reply::Applied(scope, automatic, Ok(applied))) => {
+                Ok(reply @ (Reply::Applied(_, _, Ok(_)) | Reply::Restored(Ok(_)))) => {
+                    let (scope, automatic, restored, applied) = match reply {
+                        Reply::Applied(scope, automatic, Ok(applied)) => (scope, automatic, false, applied),
+                        Reply::Restored(Ok(applied)) => (None, false, true, applied),
+                        _ => unreachable!(),
+                    };
+                    if restored {
+                        self.backup_view = false;
+                    }
                     if let Ok(mut actual) = applied.snapshot.profiles() {
                         retain_shortcut_names(&mut actual, &self.profiles);
                         let edited = std::array::from_fn(|p| {
                             self.baselines[p].as_ref().is_some_and(|s| {
-                                m908ctl::settings::plan(s, p, &self.profiles[p])
+                                !restored && m908ctl::settings::plan(s, p, &self.profiles[p])
                                     .map_or(true, |plan| !plan.packets.is_empty())
                             })
                         });
@@ -1013,7 +1019,6 @@ impl App {
                         format!("反映しました・読み戻し一致: {}", applied.changes.join("、"))
                     };
                     if let Some(path) = applied.backup {
-                        self.path = path.display().to_string();
                         self.message
                             .push_str(&format!(" / バックアップ: {}", path.display()));
                     }
@@ -1021,7 +1026,7 @@ impl App {
                     self.live = Some(applied.snapshot);
                 }
                 Ok(Reply::Backup(Ok((snapshot, path)))) => {
-                    self.path = path.display().to_string();
+                    self.last_backup_path = Some(path.clone());
                     self.message = format!(
                         "実機の{}を保存しました: {}",
                         if snapshot.has_macros {
@@ -1033,7 +1038,7 @@ impl App {
                     );
                     self.raw = Some(snapshot.to_text());
                 }
-                Ok(Reply::Read(Err(e))) | Ok(Reply::Applied(_, _, Err(e))) => {
+                Ok(Reply::Read(Err(e))) | Ok(Reply::Applied(_, _, Err(e))) | Ok(Reply::Restored(Err(e))) => {
                     self.main_pending = [None; 5];
                     self.key_pending = [false; 5];
                     self.pending_backup = None;
@@ -1346,33 +1351,150 @@ impl App {
         }
         self.backup_panel(ui);
     }
+    fn backup_picker_directory(&self) -> Option<&std::path::Path> {
+        self.last_backup_path.as_deref().and_then(std::path::Path::parent)
+            .filter(|path| path.is_absolute() && path.is_dir())
+            .or_else(|| self.draft.parent())
+    }
+
+    fn choose_backup_destination(&mut self) {
+        let filter = format!("{} (*.mmo-backup)", tr("マウスのバックアップ"));
+        let path = match file_dialog::choose(
+            &[(filter.as_str(), "*.mmo-backup")],
+            Some(("MMOMouseControl-M908-Backup.mmo-backup", "mmo-backup")),
+            self.backup_picker_directory(),
+        ) {
+            Ok(Some(path)) => path,
+            Ok(None) => return,
+            Err(error) => { self.message = tr(format!("保存先を選べません: {error}")); return; }
+        };
+        if !path.extension().and_then(|value| value.to_str()).is_some_and(|value| value.eq_ignore_ascii_case("mmo-backup")) {
+            self.message = tr("拡張子 .mmo-backup のファイルを指定してください。");
+            return;
+        }
+        if self.live.is_some() {
+            self.save_backup(path);
+        } else {
+            let result = model::encode(&self.profiles).and_then(|data| {
+                Mouse::M908.save(&path, &data, self.draft.parent())
+            });
+            match result {
+                Ok(()) => {
+                    self.last_backup_path = Some(path.clone());
+                    self.message = tr(format!("バックアップを保存しました: {}", path.display()));
+                }
+                Err(error) => self.message = tr(format!("保存できません: {error}")),
+            }
+        }
+    }
+
+    fn choose_backup_to_open(&mut self) {
+        let backup = format!("{} (*.mmo-backup)", tr("マウスのバックアップ"));
+        let all = tr("すべてのファイル");
+        let filters = [
+            (backup.as_str(), "*.mmo-backup;*.mmo-draft;*.m908;*.draft;*.mmo-settings"),
+            (all.as_str(), "*.*"),
+        ];
+        let path = match file_dialog::choose(&filters, None, self.backup_picker_directory()) {
+            Ok(Some(path)) => path,
+            Ok(None) => return,
+            Err(error) => { self.message = tr(format!("ファイルを選べません: {error}")); return; }
+        };
+        let result = Mouse::M908.load(&path).and_then(|archive| {
+            let profiles = archive.payload.as_deref().map(|data| {
+                if data.starts_with("M908-BACKUP-1") || data.starts_with("M908-SETTINGS-1") {
+                    Snapshot::from_text(data).and_then(|snapshot| snapshot.profiles())
+                } else {
+                    model::decode(data)
+                }
+            }).transpose()?;
+            Ok((profiles, archive.stage_settings()?))
+        });
+        match result {
+            Ok((profiles, staged)) => {
+                self.last_backup_path = Some(path.clone());
+                if let Some(profiles) = profiles {
+                    self.profiles = profiles;
+                    self.main_pending = [None; 5];
+                    self.key_pending = [false; 5];
+                    self.pending_backup = None;
+                    self.backup_view = true;
+                    self.editor = None;
+                    let device_path = self.backup_write_device().map(|device| device.path.clone());
+                    self.backup_confirmation = Some((device_path, staged));
+                }
+                self.message = tr(if staged { "アプリ設定は次回起動時に復元されます。" }
+                    else { "バックアップを読み込みました。" });
+            }
+            Err(error) => self.message = tr(format!("ファイルを開けません: {error}")),
+        }
+    }
+
+    fn backup_write_device(&self) -> Option<&Device> {
+        if self.live.is_none() || self.job.is_some() || self.identification.is_some()
+            || self.recovery_failed || self.baselines.iter().any(Option::is_none)
+        {
+            return None;
+        }
+        self.devices.get(self.selected_device).filter(|device| device.is_config())
+    }
+
+    fn confirm_backup_write(&mut self, ctx: &egui::Context) {
+        let Some((path, staged)) = &self.backup_confirmation else { return; };
+        let device = self.backup_write_device().filter(|device| path.as_ref() == Some(&device.path));
+        let choice = file_dialog::confirm_write(
+            ctx, "m908-backup-write", device.is_some(), *staged,
+            "5つのプロファイルの通常設定をマウスに書き込みます。",
+        );
+        let Some(write) = choice else { return; };
+        let device = device.cloned();
+        self.backup_confirmation = None;
+        if let Some(device) = device.filter(|_| write) {
+            let baselines = self.baselines.clone();
+            let profiles = self.profiles.clone();
+            let directory = self.draft.with_file_name("backups");
+            let (tx, rx) = mpsc::channel();
+            self.job = Some(rx);
+            self.message = "書き込み中…（通常設定の競合確認・バックアップ・読み戻し確認）".into();
+            let ctx_request_repaint = ctx.clone();
+            std::thread::spawn(move || {
+                let result = device::restore_controls(&device, &baselines, &profiles, &directory);
+                let _ = tx.send(Reply::Restored(result));
+                ctx_request_repaint.request_repaint();
+            });
+        }
+    }
+
     fn backup_panel(&mut self, ui: &mut egui::Ui) {
         let pal = self.pal;
         let ready = self.live.is_some()
-            && self
-                .devices
-                .get(self.selected_device)
-                .is_some_and(Device::is_config)
+            && self.devices.get(self.selected_device).is_some_and(Device::is_config)
             && !self.preview();
-        pal.card().show(ui,|ui|{ui.set_width(ui.available_width());heading(ui,pal,"バックアップ",if self.live.is_some(){"実機の設定を保存 / 開いた内容は「マウスへ書き込む」で反映"}else{"PC上の下書きの保存・読み込み"});
-            ui.horizontal(|ui|{
-                if ui.add_enabled(!self.preview(),egui::Button::new("保存")).on_hover_text("通常設定を読み直して高速保存します。マクロと未反映の編集は含みません。").clicked(){if self.live.is_some(){self.save_backup(false);}else{self.save();}}
-                if ui.add_enabled(!self.preview(),egui::Button::new("開く")).clicked(){
-                    match std::fs::read_to_string(self.path.trim().trim_matches('"')).map_err(|e|e.to_string()).and_then(|s|if s.starts_with("M908-BACKUP-1")||s.starts_with("M908-SETTINGS-1"){Snapshot::from_text(&s).and_then(|s|s.profiles())}else{model::decode(&s)}){
-                        Ok(profiles)=>{self.profiles=profiles;self.main_pending=[None;5];self.key_pending=[false;5];self.pending_backup=None;self.backup_view=true;self.editor=None;self.message="ファイルを表示しています。「マウスへ書き込む」で表示中のプロファイルを反映できます。".into();},Err(e)=>self.message=format!("ファイルを開けません: {e}")
-                    }
+        pal.card().show(ui, |ui| {
+            ui.set_width(ui.available_width());
+            heading(ui, pal, &tr("バックアップ"), "");
+            ui.horizontal(|ui| {
+                if ui.add_enabled(!self.preview() && !self.recovery_failed, egui::Button::new(tr("保存先を選択"))).clicked() {
+                    self.choose_backup_destination();
                 }
-                ui.label(note("パス",pal));ui.add(egui::TextEdit::singleline(&mut self.path).desired_width((ui.available_width()-5.0).max(120.0)));
-            });
-            ui.horizontal_wrapped(|ui|{
-                if ui.add_enabled(ready,egui::Button::new("完全バックアップ")).on_hover_text("マクロ領域を含む全データを読み直して保存します。").clicked(){self.save_backup(true);}
-                if ui.add_enabled(ready,egui::Button::new("このプロファイルを使用")).clicked(){self.send_apply(true);}
-                if ui.add_enabled(!self.preview(),egui::Button::new("起動時の編集状態に戻す")).on_hover_text("画面を起動後最初に読み取った内容へ戻します。本体には自動では書き込みません。").clicked(){self.confirm_reset=true;}
-                if ui.add_enabled(ready,pal.primary("マウスへ書き込む")).on_hover_text("表示中のプロファイルだけをバックアップ後に反映し、読み戻して確認します。").clicked(){self.send_apply(false);}
-                if self.unapplied(){ui.label(note("● 未反映の編集あり",pal));}
+                if ui.add_enabled(!self.preview(), egui::Button::new(tr("設定を読み込む"))).clicked() {
+                    self.choose_backup_to_open();
+                }
+                file_dialog::show_backup_path(ui, self.last_backup_path.as_deref());
             });
         });
+        ui.horizontal_wrapped(|ui| {
+            if ui.add_enabled(ready, egui::Button::new("このプロファイルを使用")).clicked() { self.send_apply(true); }
+            if ui.add_enabled(!self.preview(), egui::Button::new("起動時の編集状態に戻す"))
+                .on_hover_text("画面を起動後最初に読み取った内容へ戻します。本体には自動では書き込みません。")
+                .clicked() { self.confirm_reset = true; }
+            if ui.add_enabled(ready, pal.primary("マウスへ書き込む"))
+                .on_hover_text("表示中のプロファイルだけをバックアップ後に反映し、読み戻して確認します。")
+                .clicked() { self.send_apply(false); }
+            if self.unapplied() { ui.label(note("● 未反映の編集あり", pal)); }
+        });
     }
+
     fn open_editor(&mut self, slot: usize) {
         let original = self.profiles[self.profile].buttons[slot].clone();
         let (modifiers, key) = editor::key_parts(&original);
@@ -1721,8 +1843,8 @@ impl App {
             } else if self.key_pending.iter().all(|v| !*v)
                 && self.main_pending.iter().all(Option::is_none)
             {
-                if let Some(full) = self.pending_backup.take() {
-                    self.save_backup(full);
+                if let Some(path) = self.pending_backup.take() {
+                    self.save_backup(path);
                 }
             }
         }
@@ -1765,6 +1887,7 @@ impl App {
         if handle_close && ctx.input(|i| i.viewport().close_requested()) && !self.exit_allowed {
             self.reload_confirm = None;
             self.confirm_reset = false;
+            self.backup_confirmation = None;
             if self.identification.is_some() {
                 ctx.send_viewport_cmd(egui::ViewportCommand::CancelClose);
                 self.close_after_restore = true;
@@ -1845,6 +1968,7 @@ impl App {
                     });
                 });
         }
+        self.confirm_backup_write(ctx);
         if self.confirm_reset {
             egui::Window::new("起動時の編集状態に戻す")
                 .collapsible(false)

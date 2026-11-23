@@ -8,15 +8,17 @@ description = "Open-source control tool for the Logicool/Logitech G600 / G600r M
 license = "MIT"
 
 [dependencies]
+crc32fast = "1.5"
 hidapi = { version = "2", default-features = false, features = ["windows-native", "linux-static-hidraw"] }
 eframe = { version = "0.31", optional = true, default-features = false, features = ["default_fonts", "glow"] }
 
 [target.'cfg(windows)'.dependencies]
-windows-sys = { version = "0.61", optional = true, features = ["Win32_Devices_DeviceAndDriverInstallation", "Win32_Devices_Properties"] }
+windows = { version = "0.58", optional = true, features = ["Win32_System_Com", "Win32_UI_Shell_Common"] }
+windows-sys = { version = "0.61", optional = true, features = ["Win32_Devices_DeviceAndDriverInstallation", "Win32_Devices_Properties", "Win32_UI_Input_KeyboardAndMouse"] }
 
 [features]
 default = []
-gui = ["dep:eframe", "dep:windows-sys"]
+gui = ["dep:eframe", "dep:windows", "dep:windows-sys"]
 
 [[bin]]
 name = "g600ctl"

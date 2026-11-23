@@ -23,10 +23,10 @@ fn fixture() -> (App, std::sync::mpsc::Receiver<Command>) {
     let mut app = App {
         language: "ja".into(), settings_open: false, commands, responses,
         settings: None, edits: vec![], device_identity: Some(identity("A")), connected: true, busy: false, tab: 0,
-        tab_initialized: true, path: String::new(), source: "実機".into(), message: String::new(),
+        tab_initialized: true, last_backup_path: None, source: "実機".into(), message: String::new(),
         button_editor: None, screen: Screen::Main, keys: edit::keys(),
         custom: vec![("My shortcut".into(), Action::Key { modifiers: 1, usage: 6 })],
-        custom_path: None, custom_message: String::new(), backup_path: None, confirm: None,
+        custom_path: None, custom_message: String::new(), backup_path: None, confirm: None, backup_confirmation: None,
         pointer: Some(pointer::PointerSettings { speed: 10, acceleration: true, wheel_lines: 3, wheel_chars: 3, wheel_page: false }),
         pointer_message: String::new(), button_presses: inputlog::Monitor::default(), held: winkeys::Held::default(),
         last_sent: String::new(), in_flight: None, unverified_write: None,
@@ -217,7 +217,7 @@ fn disconnected_screen_still_offers_to_open_a_backup() {
     for shape in output.shapes {
         collect_text(&shape.shape, &mut visible);
     }
-    assert!(visible.iter().any(|label| label == "開く"));
+    assert!(visible.iter().any(|label| label == "設定を読み込む"));
     assert!(commands.try_recv().is_err());
 }
 
@@ -281,7 +281,7 @@ fn reconnect_recognizes_a_successful_write_after_readback_was_interrupted() {
 }
 
 #[test]
-fn main_screen_aligns_pointer_controls_and_backup_path() {
+fn main_screen_aligns_pointer_controls_and_backup_actions() {
     let _locale = LOCALE_LOCK.lock().unwrap();
     i18n::activate("ja");
     let ctx = egui::Context::default();
@@ -290,7 +290,7 @@ fn main_screen_aligns_pointer_controls_and_backup_path() {
     let (mut app, commands) = fixture();
     app.pointer.as_mut().unwrap().wheel_lines = 9;
     app.pointer.as_mut().unwrap().wheel_chars = 7;
-    app.path = "example-backup.txt".into();
+    app.last_backup_path = Some("C:/Backups/G600.mmo-backup".into());
 
     for width in [600.0, 870.0, 1010.0] {
         let output = ctx.run(
@@ -320,7 +320,9 @@ fn main_screen_aligns_pointer_controls_and_backup_path() {
         same_row("カーソルの速さ", "加速");
         same_row("スクロール行数", "1画面ずつ");
         same_row("横スクロール（チルト）", "文字");
-        same_row("保存", "example-backup.txt");
+        same_row("保存先を選択", "設定を読み込む");
+        same_row("設定を読み込む", "パス");
+        same_row("パス", "C:/Backups/G600.mmo-backup");
         let vertical = position("スクロール行数");
         let horizontal = position("横スクロール（チルト）");
         if width > 720.0 {
@@ -512,7 +514,7 @@ fn reloading_from_the_same_live_handle_keeps_the_first_backup_without_a_serial()
 #[test]
 fn confirm_close_and_keep_other_backup_edits_after_writing_one_profile() {
     let (mut app, _) = fixture();
-    app.handle(Response::Open(Ok(("loaded.txt".into(), fixture().0.settings.unwrap()))));
+    app.handle(Response::Open(Ok(("loaded.txt".into(), Some(fixture().0.settings.unwrap()), false))));
     app.edits[0][1] = 22;
     app.edits[1][1] = 35;
     assert!(app.has_unsaved_changes());
@@ -521,7 +523,7 @@ fn confirm_close_and_keep_other_backup_edits_after_writing_one_profile() {
     let mut settings = fixture().0.settings.unwrap();
     settings.profiles[0] = Profile::parse(&app.edits[0]).unwrap();
     app.handle(Response::Write(WriteKind::BackupProfile(0), Ok(("before-write.txt".into(), settings))));
-    assert_eq!(app.backup_path.as_deref(), Some("loaded.txt"));
+    assert_eq!(app.backup_path.as_deref(), Some(std::path::Path::new("loaded.txt")));
     assert_eq!(app.edits[1][1], 35);
     assert_eq!(app.dirty(), vec![false, true, false]);
     assert!(app.has_unsaved_changes());
@@ -540,7 +542,7 @@ fn backup_led_edits_do_not_change_remembered_live_colors() {
     let (mut app, _) = fixture();
     app.current_led_memory().normal[0] = Some([255, 0, 0]);
     app.current_led_memory().shifted[0] = Some([0, 255, 0]);
-    app.handle(Response::Open(Ok(("loaded.txt".into(), fixture().0.settings.unwrap()))));
+    app.handle(Response::Open(Ok(("loaded.txt".into(), Some(fixture().0.settings.unwrap()), false))));
     assert_eq!(app.current_led_memory().normal[0], None);
     app.current_led_memory().normal[0] = Some([0, 0, 255]);
     app.current_led_memory().shifted[0] = Some([0, 0, 255]);
@@ -560,4 +562,60 @@ fn first_profile_switch_backup_remains_the_startup_restore_point() {
 
     app.handle(Response::Use(Err(("読み戻し失敗".into(), Some("later.txt".into())))));
     assert_eq!(app.session_backup.as_deref(), Some("before-first-switch.txt"));
+}
+
+#[test]
+fn loaded_backup_waits_for_explicit_confirmation() {
+    let (mut app, commands) = fixture();
+    let open = || Response::Open(Ok(("loaded.mmo-backup".into(), fixture().0.settings, false)));
+    app.handle(open());
+    assert!(app.backup_write_ready());
+    assert!(commands.try_recv().is_err());
+
+    app.answer_backup_confirmation(false);
+    assert!(commands.try_recv().is_err());
+    assert!(app.backup_path.is_some());
+    assert_eq!(app.last_backup_path.as_deref(), Some(std::path::Path::new("loaded.mmo-backup")));
+
+    app.handle(open());
+    app.device_identity = Some(identity("B"));
+    app.answer_backup_confirmation(true);
+    assert!(commands.try_recv().is_err());
+
+    app.handle(open());
+    app.answer_backup_confirmation(true);
+    let Command::RestoreBackup(settings) = commands.try_recv().unwrap() else { panic!("expected restore"); };
+    assert_eq!(settings.profiles.len(), 3);
+}
+
+#[test]
+fn backup_dialog_buttons_choose_write_or_preview_and_disable_unavailable_write() {
+    let _locale = LOCALE_LOCK.lock().unwrap();
+    i18n::activate("ja");
+    for (ready, label, expected) in [(true, "はい", Some(true)), (true, "いいえ", Some(false)), (false, "はい", None)] {
+        let ctx = egui::Context::default();
+        fonts::install(&ctx);
+        let mut choice = None;
+        let mut frame = |events| ctx.run(egui::RawInput {
+            screen_rect: Some(egui::Rect::from_min_size(egui::Pos2::ZERO, egui::vec2(850.0, 700.0))),
+            events,
+            ..Default::default()
+        }, |ctx| {
+            choice = choice.or(file_dialog::confirm_write(ctx, "backup-test", ready, false,
+                "3つのプロファイルをマウスに書き込みます。"));
+        });
+        frame(vec![]);
+        let layout = frame(vec![]);
+        let pos = layout.shapes.iter().find_map(|shape| {
+            let egui::Shape::Text(text) = &shape.shape else { return None; };
+            (text.galley.job.text == label).then(|| text.pos + text.galley.size() * 0.5)
+        }).unwrap();
+        frame(vec![egui::Event::PointerMoved(pos)]);
+        for pressed in [true, false] {
+            frame(vec![egui::Event::PointerButton {
+                pos, button: egui::PointerButton::Primary, pressed, modifiers: egui::Modifiers::NONE,
+            }]);
+        }
+        assert_eq!(choice, expected, "{label}/{ready}");
+    }
 }

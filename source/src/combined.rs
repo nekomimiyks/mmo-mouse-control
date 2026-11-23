@@ -16,8 +16,8 @@ impl eframe::App for Preview {
 #[derive(Clone, Copy, Default, Debug, PartialEq, Eq)]
 enum Mouse {
     #[default]
-    M908,
     G600,
+    M908,
 }
 
 impl Mouse {
@@ -142,11 +142,11 @@ pub struct App {
     close_after_g600: bool,
     confirm_g600_close: bool,
     discard_g600_on_close: bool,
-    backup: crate::settings_backup::Panel,
 }
 
 impl App {
-    pub fn new(ctx: &egui::Context, m908: ui::App, g600: gui::App) -> Self {
+    pub fn new(ctx: &egui::Context, m908: ui::App, mut g600: gui::App) -> Self {
+        g600.activate(ctx);
         Self {
             m908,
             g600,
@@ -160,7 +160,6 @@ impl App {
             close_after_g600: false,
             confirm_g600_close: false,
             discard_g600_on_close: false,
-            backup: crate::settings_backup::Panel::default(),
         }
     }
 
@@ -246,10 +245,9 @@ impl eframe::App for App {
             ui.horizontal_wrapped(|ui| {
                 ui.label("マウス");
                 ui.add_enabled_ui(!closing && !self.m908.close_in_progress(), |ui| {
-                    self.backup.button(ui);
                     for (mouse, presence, name) in [
-                        (Mouse::M908, self.m908_detection.presence, device::DISPLAY_NAME),
                         (Mouse::G600, self.g600_detection.presence, "G600 / G600r"),
+                        (Mouse::M908, self.m908_detection.presence, device::DISPLAY_NAME),
                     ] {
                         if let Some(label) = presence.button_label(name) {
                             if ui.add(egui::Button::new(label).selected(mouse == next)).clicked() {
@@ -309,9 +307,6 @@ impl eframe::App for App {
                         }
                     });
                 });
-        }
-        if !closing && !self.confirm_g600_close {
-            self.backup.show(ctx);
         }
         if pending || self.close_after_g600 || self.m908.communication_pending() {
             ctx.request_repaint_after(Duration::from_millis(30));
@@ -379,6 +374,16 @@ mod tests {
         g600.observe(true);
         assert_eq!(g600.button_label("G600").as_deref(), Some("G600"));
         assert_eq!(Presence::default().button_label("G600"), None);
+    }
+
+    #[test]
+    fn startup_prefers_g600_with_m908_as_fallback() {
+        use super::Mouse;
+
+        let initial = Mouse::default();
+        assert_eq!(initial, G600);
+        assert_eq!(initial.on_connection_change(&mut (false, false), (true, true)), G600);
+        assert_eq!(initial.on_connection_change(&mut (false, false), (true, false)), M908);
     }
 
     #[test]

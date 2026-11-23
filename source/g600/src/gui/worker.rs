@@ -1,4 +1,4 @@
-use std::{ffi::CString, sync::mpsc::{self, Receiver, Sender}};
+use std::{ffi::CString, path::PathBuf, sync::mpsc::{self, Receiver, Sender}};
 use eframe::egui;
 use g600ctl::{backup, device, operations, protocol::{Active, Profile, PRODUCT_G600}};
 use super::inputlog::{self, InputDevice};
@@ -47,11 +47,12 @@ pub enum Command {
     Rebind,
     Connect(Option<DeviceIdentity>),
     RefreshInputs(u64),
-    Save,
-    Open(String),
+    Save(PathBuf),
+    Open(PathBuf),
     Apply { profile: u8, data: Vec<u8> },
     Use { profile: u8, backup: bool },
-    Restore { path: String, from_session: bool },
+    RestoreSession(PathBuf),
+    RestoreBackup(DisplaySettings),
     /// 即時反映: backup が true なら書き込み前に自動バックアップを取る（起動後の最初の 1 回）
     AutoApply { profile: u8, expected: Vec<u8>, data: Vec<u8>, backup: bool },
 }
@@ -66,8 +67,8 @@ pub enum Response {
     Reload(Result<DeviceSettings, String>),
     Connected(Result<DeviceSettings, String>),
     Inputs(u64, Vec<InputDevice>),
-    Save(Result<String, String>),
-    Open(Result<(String, DisplaySettings), String>),
+    Save(Result<PathBuf, String>),
+    Open(Result<(PathBuf, Option<DisplaySettings>, bool), String>),
     Write(WriteKind, Result<(String, DisplaySettings), (String, Option<String>)>),
     Use(Result<(Option<String>, DisplaySettings), (String, Option<String>)>),
     /// 即時反映の結果: (プロファイル, 書いた内容, 結果)。成功時は (取ったバックアップのパス, 読み直した設定)
@@ -122,9 +123,14 @@ pub fn start(ctx: egui::Context) -> (Sender<Command>, Receiver<Response>) {
                     operations::verify_readback(&settings, [], Some(profile)).map_err(|e| (e, saved.clone()))?;
                     Ok((saved, DisplaySettings { active: settings.active, profiles: settings.profiles }))
                 })()),
-                Command::Restore { path, from_session } => Response::Write(
-                    if from_session { WriteKind::SessionRestore } else { WriteKind::BackupFile }, (|| {
-                    let (active, profiles) = backup::read_backup_profiles(&path).map_err(|e| (e, None))?;
+                Command::RestoreSession(_) | Command::RestoreBackup(_) => Response::Write(
+                    if matches!(&command, Command::RestoreSession(_)) { WriteKind::SessionRestore }
+                    else { WriteKind::BackupFile }, (|| {
+                    let (active, profiles) = match command {
+                        Command::RestoreSession(path) => backup::read_backup_profiles(&path).map_err(|e| (e, None))?,
+                        Command::RestoreBackup(settings) => (settings.active, settings.profiles),
+                        _ => unreachable!(),
+                    };
                     let selected: Vec<_> = profiles.into_iter().enumerate()
                         .map(|(i, p)| (i as u8, p.raw)).collect();
                     let dev = bound_handle(bound.as_ref()).map_err(|e| (e, None))?;
@@ -161,17 +167,19 @@ pub fn start(ctx: egui::Context) -> (Sender<Command>, Receiver<Response>) {
                     }).unwrap_or_default();
                     Response::Inputs(generation, devices)
                 }
-                Command::Save => Response::Save((|| {
+                Command::Save(path) => Response::Save((|| {
                     let settings = device::read_settings(bound_handle(bound.as_ref())?)?;
-                    let dir = g600ctl::storage::backup_dir()?;
-                    std::fs::create_dir_all(&dir).map_err(|e| format!("バックアップフォルダを作れません: {e}"))?;
-                    let path = backup::new_path(&dir, "manual");
-                    backup::save_settings(&settings, &path)?;
-                    Ok(path.display().to_string())
+                    g600ctl::mouse_backup::Mouse::G600.save(&path, &backup::encode_settings(&settings), None)?;
+                    Ok(path)
                 })()),
                 Command::Open(path) => Response::Open((|| {
-                    let (active, profiles) = backup::read_backup_profiles(&path)?;
-                    Ok((path, DisplaySettings { active, profiles }))
+                    let archive = g600ctl::mouse_backup::Mouse::G600.load(&path)?;
+                    let settings = archive.payload.as_deref().map(|text| {
+                        let (active, profiles) = backup::parse_backup_profiles(text)?;
+                        Ok::<_, String>(DisplaySettings { active, profiles })
+                    }).transpose()?;
+                    let staged = archive.stage_settings()?;
+                    Ok((path, settings, staged))
                 })()),
             };
             if outgoing.send(response).is_err() { break; }

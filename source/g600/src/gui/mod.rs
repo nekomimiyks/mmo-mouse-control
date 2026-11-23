@@ -1,5 +1,6 @@
 mod buttons;
 mod edit;
+pub mod file_dialog;
 pub mod fonts;
 #[cfg(test)]
 mod verification;
@@ -77,12 +78,13 @@ struct LedMemory {
 pub struct App {
     language: String, settings_open: bool,
     commands: Sender<Command>, responses: Receiver<Response>, settings: Option<DisplaySettings>,
-    edits: Vec<Vec<u8>>, device_identity: Option<DeviceIdentity>, connected: bool, busy: bool, tab: usize, tab_initialized: bool, path: String,
+    edits: Vec<Vec<u8>>, device_identity: Option<DeviceIdentity>, connected: bool, busy: bool, tab: usize, tab_initialized: bool, last_backup_path: Option<std::path::PathBuf>,
     source: String, message: String, button_editor: Option<ButtonEditor>, screen: Screen,
     keys: Vec<(u8, String)>, custom: Vec<(String, Action)>, custom_path: Option<std::path::PathBuf>, custom_message: String,
     /// 開いて表示中のバックアップファイル（表示中は自動では書き込まない）
-    backup_path: Option<String>,
+    backup_path: Option<std::path::PathBuf>,
     confirm: Option<(String, Vec<String>, Command)>,
+    backup_confirmation: Option<(Option<DeviceIdentity>, bool)>,
     /// Windows のポインター設定（画面の値 = Windows に反映済みの値）
     pointer: Option<pointer::PointerSettings>, pointer_message: String,
     /// 押されている物理ボタン（FF80 の入力レポートから。bit n = ボタン n+1）、PC に届いている入力、表示用の最後の入力
@@ -118,9 +120,9 @@ impl App {
         };
         let custom_message = migration.err().unwrap_or(custom_message);
         let mut app = Self { language, settings_open: false, commands, responses, settings: None, edits: Vec::new(), device_identity: None, connected: false,
-            busy: false, tab: 0, tab_initialized: false, path: String::new(), source: String::new(), message: String::new(),
+            busy: false, tab: 0, tab_initialized: false, last_backup_path: None, source: String::new(), message: String::new(),
             button_editor: None, screen: Screen::Main, keys: edit::keys(), custom, custom_path, custom_message, backup_path: None,
-            confirm: None, pointer: None, pointer_message: String::new(),
+            confirm: None, backup_confirmation: None, pointer: None, pointer_message: String::new(),
             button_presses, held: winkeys::Held::default(), last_sent: String::new(),
             in_flight: None, unverified_write: None, last_edit: None, edit_snapshot: Vec::new(), last_done: [None; 3],
             auto_enabled: true, session_backup: None, sync_status: String::new(), led_memory: LedMemory::default(), backup_led_memory: LedMemory::default() };
@@ -144,6 +146,7 @@ impl App {
         self.connected = false;
         self.button_presses.bind(None);
         self.confirm = None;
+        if let Some((identity, _)) = self.backup_confirmation.as_mut() { *identity = None; }
         self.last_done = [None; 3];
         self.sync_status.clear();
         self.auto_enabled = !preserve_edits;
@@ -199,6 +202,7 @@ impl App {
 
     pub fn prepare_close(&mut self) {
         self.confirm = None;
+        self.backup_confirmation = None;
         if let Some(editor) = &mut self.button_editor { editor.capture = false; }
     }
 
@@ -233,12 +237,62 @@ impl App {
         self.confirm = Some(("接続中の実機を読み込みますか？".into(), summary, Command::Rebind));
     }
 
+    fn choose_backup_file(&self, save: bool) -> Result<Option<std::path::PathBuf>, String> {
+        let extension = "mmo-backup";
+        let backup = tr("マウスのバックアップ");
+        let all = tr("すべてのファイル");
+        let save_filters = [(backup.as_str(), "*.mmo-backup")];
+        let open_filters = [(backup.as_str(), "*.mmo-backup;*.txt;*.mmo-settings"), (all.as_str(), "*.*")];
+        let initial_directory = self.last_backup_path.as_deref().and_then(std::path::Path::parent)
+            .filter(|path| path.is_absolute() && path.is_dir());
+        let path = file_dialog::choose(
+            if save { &save_filters[..] } else { &open_filters[..] },
+            save.then_some(("MMOMouseControl-G600-Backup.mmo-backup", extension)),
+            initial_directory,
+        )?;
+        if save && path.as_ref().is_some_and(|path| {
+            !path.extension().and_then(|value| value.to_str()).is_some_and(|value| value.eq_ignore_ascii_case(extension))
+        }) {
+            return Err(tr("拡張子 .mmo-backup のファイルを指定してください。"));
+        }
+        Ok(path)
+    }
+
+    fn request_backup_save(&mut self) {
+        match self.choose_backup_file(true) {
+            Ok(Some(path)) => self.send(Command::Save(path)),
+            Ok(None) => {}
+            Err(error) => self.message = tr(format!("保存先を選べません: {error}")),
+        }
+    }
+
     fn request_backup_open(&mut self) {
-        let command = Command::Open(self.path.trim().trim_matches('"').to_string());
+        let command = match self.choose_backup_file(false) {
+            Ok(Some(path)) => Command::Open(path),
+            Ok(None) => return,
+            Err(error) => { self.message = tr(format!("ファイルを選べません: {error}")); return; }
+        };
         if self.has_unsaved_changes() {
             self.confirm = Some(("未反映の編集を破棄してバックアップを開きますか？".into(), vec![], command));
         } else {
             self.send(command);
+        }
+    }
+
+    fn backup_write_ready(&self) -> bool {
+        self.backup_confirmation.as_ref().is_some_and(|(identity, _)| {
+            identity.is_some() && identity == &self.device_identity
+        }) && self.connected && !self.busy && self.in_flight.is_none() && self.backup_path.is_some()
+    }
+
+    fn answer_backup_confirmation(&mut self, write: bool) {
+        let ready = self.backup_write_ready();
+        self.backup_confirmation = None;
+        if let Some(settings) = self.settings.as_ref().filter(|_| write && ready) {
+            self.send(Command::RestoreBackup(DisplaySettings {
+                active: settings.active,
+                profiles: settings.profiles.clone(),
+            }));
         }
     }
 
@@ -262,7 +316,7 @@ impl App {
     }
     /// 時間のかかる操作（UI を止める）を送る
     fn send(&mut self, command: Command) {
-        let writing = matches!(&command, Command::Apply { .. } | Command::Restore { .. } | Command::Use { .. });
+        let writing = matches!(&command, Command::Apply { .. } | Command::RestoreSession(_) | Command::RestoreBackup(_) | Command::Use { .. });
         match self.commands.send(command) {
             Ok(()) => { self.busy = true; self.message = if writing { "書き込み中…（約2秒）" } else { "処理中..." }.into(); }
             Err(e) => self.message = format!("作業スレッドに送信できません: {e}"),
@@ -437,9 +491,23 @@ impl App {
                 self.auto_enabled = false;
                 self.message = format!("読み込み失敗: {e}");
             }
-            Response::Save(Ok(path)) => self.message = format!("バックアップを保存しました: {path}"),
+            Response::Save(Ok(path)) => {
+                self.last_backup_path = Some(path.clone());
+                self.message = format!("バックアップを保存しました: {}", path.display());
+            }
             Response::Save(Err(e)) => self.message = format!("バックアップの保存に失敗: {e}"),
-            Response::Open(Ok((path, s))) => { self.source = format!("バックアップ: {path}"); self.backup_path = Some(path); self.backup_led_memory = LedMemory::default(); self.replace(s); self.message = "バックアップを読み込みました（表示だけ。自動では書き込みません）。".into(); }
+            Response::Open(Ok((path, settings, staged))) => {
+                self.last_backup_path = Some(path.clone());
+                if let Some(settings) = settings {
+                    self.source = format!("バックアップ: {}", path.display());
+                    self.backup_path = Some(path);
+                    self.backup_led_memory = LedMemory::default();
+                    self.replace(settings);
+                    self.backup_confirmation = Some((self.device_identity.clone().filter(|_| self.connected), staged));
+                }
+                self.message = if staged { "アプリ設定は次回起動時に復元されます。" }
+                    else { "バックアップを読み込みました。" }.into();
+            }
             Response::Open(Err(e)) => self.message = format!("バックアップの読み込みに失敗: {e}"),
             Response::Write(kind, Ok((path, s))) => {
                 if self.session_backup.is_none() { self.session_backup = Some(path.clone()); }
@@ -580,7 +648,7 @@ impl App {
         self.detect_presses(ctx);
         self.flush_pending(ctx);
         let syncing = self.syncing();
-        let locked = self.busy || self.confirm.is_some();
+        let locked = self.busy || self.confirm.is_some() || self.backup_confirmation.is_some();
         let content = egui::CentralPanel::default().frame(egui::Frame::new().fill(theme::BG).inner_margin(egui::Margin::same(theme::MARGIN))).show(ctx, |ui| {
             ui.spacing_mut().item_spacing.y = theme::s(10.0);
             if locked { ui.disable(); }
@@ -599,6 +667,14 @@ impl App {
             });
             if accept { let (_, _, command) = self.confirm.take().unwrap(); self.send(command); }
             else if cancel { self.confirm = None; }
+        }
+        if let Some((_, staged)) = &self.backup_confirmation {
+            if let Some(write) = file_dialog::confirm_write(
+                ctx, "g600-backup-write", self.backup_write_ready(), *staged,
+                "3つのプロファイルをマウスに書き込みます。",
+            ) {
+                self.answer_backup_confirmation(write);
+            }
         }
         // ウィンドウの大きさを中身に合わせる（スクロールバーを出さない）
         let desired_width = theme::s(if self.screen == Screen::Main { MAIN_WIDTH } else { KEYS_WIDTH });

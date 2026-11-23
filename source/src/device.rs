@@ -852,6 +852,60 @@ pub fn apply_controls(
     let _lock = DeviceLock::acquire()?;
     apply_controls_transport(&mut open(device)?, base, profile, target, directory)
 }
+pub fn restore_controls(
+    device: &Device,
+    baselines: &[Option<Snapshot>; 5],
+    profiles: &[Profile; 5],
+    directory: &Path,
+) -> Result<Applied, String> {
+    let _lock = DeviceLock::acquire()?;
+    restore_controls_transport(&mut open(device)?, baselines, profiles, directory)
+}
+
+pub(crate) fn restore_controls_transport(
+    io: &mut impl Transport,
+    baselines: &[Option<Snapshot>; 5],
+    profiles: &[Profile; 5],
+    directory: &Path,
+) -> Result<Applied, String> {
+    let current = read_controls_transport(io)?;
+    let mut expected = current.clone();
+    let mut plans = Vec::new();
+    let mut changes = Vec::new();
+    for (slot, target) in profiles.iter().enumerate() {
+        if !baselines[slot].as_ref().is_some_and(|base| base.same_profile(&current, slot)) {
+            return Err("実機の設定が変更されています。再読み込みしてから復元してください。".into());
+        }
+        let plan = settings::plan(&expected, slot, target)?;
+        expected = plan.expected;
+        if !plan.packets.is_empty() {
+            plans.push(plan.packets);
+            changes.push(format!("プロファイル{}", slot + 1));
+        }
+    }
+    if plans.is_empty() {
+        return Ok(Applied { snapshot: current, backup: None, changes });
+    }
+    let path = backup(directory, &current, "before-restore")?;
+    let result = (|| {
+        for packets in plans {
+            for packet in compact_writes(packets) {
+                if let Err(error) = io.send(&packet) {
+                    let _ = io.send(&READ_3[100]);
+                    return Err(error);
+                }
+            }
+        }
+        let actual = read_controls_transport(io)?;
+        if !(0..5).all(|slot| expected.same_profile(&actual, slot)) {
+            return Err("変更した設定の読み戻しが一致しません".into());
+        }
+        Ok(actual)
+    })();
+    result.map(|snapshot| Applied { snapshot, backup: Some(path.clone()), changes })
+        .map_err(|error| format!("{error}\n変更前の通常設定バックアップ: {}\n再読み込みで状態を確認してください。", path.display()))
+}
+
 pub fn multi_key_save_self_test(device: &Device, directory: &Path) -> Result<String, String> {
     let _lock = DeviceLock::acquire()?;
     let mut io = open(device)?;

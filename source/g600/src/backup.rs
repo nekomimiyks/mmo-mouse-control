@@ -5,12 +5,16 @@ use std::time::{SystemTime, UNIX_EPOCH};
 use crate::protocol::*;
 
 pub fn save_settings(settings: &crate::device::ReadSettings, path: &std::path::Path) -> Result<(), String> {
+    crate::storage::write_atomic(path, encode_settings(settings).as_bytes()).map_err(|e| format!("{} に保存できません: {e}", path.display()))
+}
+
+pub fn encode_settings(settings: &crate::device::ReadSettings) -> String {
     let mut out = String::from("# g600ctl backup v1\n");
     out += &format!("{}\n", hex(&settings.active_raw));
     for profile in &settings.profiles {
         out += &format!("{}\n", hex(&profile.raw));
     }
-    crate::storage::write_atomic(path, out.as_bytes()).map_err(|e| format!("{} に保存できません: {e}", path.display()))
+    out
 }
 
 pub fn read_test_profile(path: &str) -> Result<Vec<u8>, String> {
@@ -33,8 +37,12 @@ pub fn read_backup(path: &str) -> Result<(Active, Vec<Vec<u8>>), String> {
     Ok((active, profiles.into_iter().map(|p| p.raw).collect()))
 }
 
-pub fn read_backup_profiles(path: &str) -> Result<(Active, Vec<Profile>), String> {
-    let text = std::fs::read_to_string(path).map_err(|e| format!("{path} を読めません: {e}"))?;
+pub fn read_backup_profiles(path: impl AsRef<Path>) -> Result<(Active, Vec<Profile>), String> {
+    let archive = crate::mouse_backup::Mouse::G600.load(path.as_ref())?;
+    parse_backup_profiles(archive.payload.as_deref().ok_or("バックアップにマウスの設定がありません")?)
+}
+
+pub fn parse_backup_profiles(text: &str) -> Result<(Active, Vec<Profile>), String> {
     let mut lines = text.lines().map(str::trim).filter(|l| !l.is_empty() && !l.starts_with('#'));
     let active = Active::parse(&parse_hex_line(lines.next().ok_or("バックアップが空です")?)?)?;
     let mut profiles = Vec::new();
@@ -105,5 +113,32 @@ mod tests {
         let paths: std::collections::HashSet<_> =
             (0..128).map(|_| new_path(Path::new("backups"), "auto")).collect();
         assert_eq!(paths.len(), 128);
+    }
+
+    #[test]
+    fn manual_backup_roundtrips_at_the_selected_path_and_with_legacy_extension() {
+        let directory = std::env::temp_dir().join(format!("mmo-backup-picker-{}", std::process::id()));
+        std::fs::create_dir(&directory).unwrap();
+        let current = directory.join("設定のコピー.mmo-backup");
+        let legacy = directory.join("設定のコピー.txt");
+        let active_raw = vec![REPORT_ACTIVE, 0x14, 0, 0];
+        let profiles = REPORT_PROFILES.iter().map(|&id| {
+            let mut raw = vec![0; PROFILE_LEN];
+            raw[0] = id;
+            Profile::parse(&raw).unwrap()
+        }).collect();
+        let settings = crate::device::ReadSettings {
+            active: Active::parse(&active_raw).unwrap(),
+            active_raw,
+            profiles,
+        };
+        save_settings(&settings, &current).unwrap();
+        std::fs::copy(&current, &legacy).unwrap();
+        for path in [&current, &legacy] {
+            let (active, profiles) = read_backup_profiles(path).unwrap();
+            assert_eq!(active, settings.active);
+            assert!(profiles.iter().zip(&settings.profiles).all(|(loaded, saved)| loaded.raw == saved.raw));
+        }
+        std::fs::remove_dir_all(directory).unwrap();
     }
 }

@@ -300,53 +300,50 @@ impl App {
         self.message_lines(ui);
     }
 
-    /// パネル「バックアップ」: 保存・開く・パス ／ このプロファイルを使用・起動時の状態に戻す … 右端に状態
     fn backup_panel(&mut self, ui: &mut egui::Ui, syncing: bool) {
         theme::panel().show(ui, |ui| {
             ui.set_width(ui.available_width());
             theme::header(ui, "バックアップ", None);
             ui.horizontal(|ui| {
-                if ui.add_enabled(self.connected, button("保存")).on_hover_text(tr("今のマウスの設定を backups フォルダに保存します")).clicked() { self.send(Command::Save); }
-                if ui.add_enabled(self.in_flight.is_none(), button("開く")).on_hover_text(tr("パス欄のバックアップファイルを開いて表示します")).clicked() {
+                if ui.add_enabled(self.connected && !syncing, button("保存先を選択")).clicked() {
+                    self.request_backup_save();
+                }
+                if ui.add_enabled(self.in_flight.is_none(), button("設定を読み込む")).clicked() {
                     self.request_backup_open();
                 }
-                ui.label(theme::note("パス"));
-                ui.add_sized(
-                    [ui.available_width(), ui.spacing().interact_size.y],
-                    egui::TextEdit::singleline(&mut self.path).hint_text(tr("バックアップファイルのパス")),
-                );
+                file_dialog::show_backup_path(ui, self.last_backup_path.as_deref());
             });
-            ui.horizontal_wrapped(|ui| {
-                if self.settings.is_some() && self.backup_path.is_none() {
-                    if ui.add_enabled(self.connected && !syncing, button("このプロファイルを使用")).clicked() {
-                        self.confirm = Some((format!("プロファイル{}に切り替えますか？", self.tab + 1), vec![], Command::Use { profile: self.tab as u8, backup: self.session_backup.is_none() }));
-                    }
+        });
+        ui.horizontal_wrapped(|ui| {
+            if self.settings.is_some() && self.backup_path.is_none() {
+                if ui.add_enabled(self.connected && !syncing, button("このプロファイルを使用")).clicked() {
+                    self.confirm = Some((format!("プロファイル{}に切り替えますか？", self.tab + 1), vec![], Command::Use { profile: self.tab as u8, backup: self.session_backup.is_none() }));
                 }
-                if let (Some(path), Some(settings)) = (self.backup_path.clone(), &self.settings) {
-                    if ui.add_enabled(self.connected, button("このプロファイルをマウスへ書き込む")).clicked() {
-                        let after = Profile::parse(&self.edits[self.tab]).unwrap();
-                        let mut summary = vec![format!("バックアップ「{path}」のプロファイル{}（画面で変えた内容を含む）をマウスへ書き込みます。", self.tab + 1)];
-                        summary.extend(diff_summary(&settings.profiles[self.tab], &after));
-                        self.confirm = Some((format!("プロファイル{}をマウスへ書き込みますか？", self.tab + 1), summary, Command::Apply { profile: self.tab as u8, data: self.edits[self.tab].clone() }));
-                    }
-                    if ui.add_enabled(self.connected, button("3つともマウスへ書き込む")).clicked() {
-                        self.confirm = Some(("バックアップの3つのプロファイルをマウスへ書き込みますか？".into(), vec!["バックアップファイルの内容をそのまま書き込みます（画面で変えた内容は含みません）。".into()], Command::Restore { path: path.clone(), from_session: false }));
-                    }
-                    if ui.add_enabled(self.connected, button("実機の表示に戻る")).clicked() { self.request_reload(); }
+            }
+            if let (Some(path), Some(settings)) = (self.backup_path.clone(), &self.settings) {
+                if ui.add_enabled(self.connected, button("このプロファイルをマウスへ書き込む")).clicked() {
+                    let after = Profile::parse(&self.edits[self.tab]).unwrap();
+                    let mut summary = vec![format!("バックアップ「{}」のプロファイル{}（画面で変えた内容を含む）をマウスへ書き込みます。", path.display(), self.tab + 1)];
+                    summary.extend(diff_summary(&settings.profiles[self.tab], &after));
+                    self.confirm = Some((format!("プロファイル{}をマウスへ書き込みますか？", self.tab + 1), summary, Command::Apply { profile: self.tab as u8, data: self.edits[self.tab].clone() }));
                 }
-                let restore = self.session_backup.clone();
-                if ui.add_enabled(self.connected && restore.is_some() && self.in_flight.is_none(), button("起動時の状態に戻す"))
-                    .on_disabled_hover_text(tr("このソフトでマウスに書き込むと使えるようになります")).clicked() {
-                    if let Some(path) = restore {
-                        let mut summary = vec![format!("このソフトで最初に書き込む前に取ったバックアップ（{path}）から、3つのプロファイルを書き戻します。")];
-                        if self.unsaved_device_edits() { summary.push("実機に反映していない編集を破棄します。".into()); }
-                        self.confirm = Some(("起動時の状態に戻しますか？".into(), summary, Command::Restore { path, from_session: true }));
-                    }
+                if ui.add_enabled(self.connected, button("3つともマウスへ書き込む")).clicked() {
+                    self.backup_confirmation = Some((self.device_identity.clone(), false));
                 }
-                if !self.auto_enabled && ui.add_enabled(self.connected, button("自動反映を再開")).clicked() { self.resume_auto_apply(); }
-                ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                    if let Some(text) = self.status_text() { ui.add(egui::Label::new(text).truncate()); }
-                });
+                if ui.add_enabled(self.connected, button("実機の表示に戻る")).clicked() { self.request_reload(); }
+            }
+            let restore = self.session_backup.clone();
+            if ui.add_enabled(self.connected && restore.is_some() && self.in_flight.is_none(), button("起動時の状態に戻す"))
+                .on_disabled_hover_text(tr("このソフトでマウスに書き込むと使えるようになります")).clicked() {
+                if let Some(path) = restore {
+                    let mut summary = vec![format!("このソフトで最初に書き込む前に取ったバックアップ（{path}）から、3つのプロファイルを書き戻します。")];
+                    if self.unsaved_device_edits() { summary.push("実機に反映していない編集を破棄します。".into()); }
+                    self.confirm = Some(("起動時の状態に戻しますか？".into(), summary, Command::RestoreSession(path.into())));
+                }
+            }
+            if !self.auto_enabled && ui.add_enabled(self.connected, button("自動反映を再開")).clicked() { self.resume_auto_apply(); }
+            ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                if let Some(text) = self.status_text() { ui.add(egui::Label::new(text).truncate()); }
             });
         });
     }

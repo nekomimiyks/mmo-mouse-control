@@ -1,4 +1,5 @@
 pub mod backup;
+pub mod mouse_backup;
 pub mod device;
 pub mod protocol;
 pub mod operations;

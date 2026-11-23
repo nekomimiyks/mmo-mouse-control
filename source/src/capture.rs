@@ -1,6 +1,5 @@
-use crate::settings_backup;
 use eframe::egui::{self, Event, ViewportCommand};
-use g600ctl::gui;
+use g600ctl::gui::{self, i18n::tr};
 use std::{path::PathBuf, time::{Duration, Instant}};
 
 pub fn run(language: String, screen: String, output: PathBuf) -> eframe::Result {
@@ -11,8 +10,7 @@ pub fn run(language: String, screen: String, output: PathBuf) -> eframe::Result 
             ..Default::default()
         },
         Box::new(move |cc| Ok(Box::new(Capture {
-            app: gui::sample(&cc.egui_ctx, &language, screen == "buttons"),
-            panel: settings_backup::Panel::sample(screen == "backup"),
+            app: gui::sample(&cc.egui_ctx, &language, &screen),
             output,
             start: Instant::now(),
             requested: false,
@@ -22,7 +20,6 @@ pub fn run(language: String, screen: String, output: PathBuf) -> eframe::Result 
 
 struct Capture {
     app: gui::App,
-    panel: settings_backup::Panel,
     output: PathBuf,
     start: Instant,
     requested: bool,
@@ -32,12 +29,12 @@ impl eframe::App for Capture {
     fn update(&mut self, ctx: &egui::Context, _: &mut eframe::Frame) {
         let header = egui::TopBottomPanel::top("mouse-device-selector").show(ctx, |ui| {
             ui.horizontal_wrapped(|ui| {
-                self.panel.button(ui);
+                ui.label(tr("マウス"));
                 ui.add(egui::Button::new("G600 / G600r").selected(true));
+                let _ = ui.button(m908ctl::device::DISPLAY_NAME);
             });
         }).response.rect.height();
         self.app.draw(ctx, header);
-        self.panel.show(ctx);
         if !self.requested && self.start.elapsed() >= Duration::from_millis(650) {
             ctx.send_viewport_cmd(ViewportCommand::Screenshot(egui::UserData::default()));
             self.requested = true;

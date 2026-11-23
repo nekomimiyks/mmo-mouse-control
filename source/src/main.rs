@@ -64,12 +64,11 @@ fn main() -> eframe::Result {
             } else {
                 gui::fonts::install(ctx);
             }
-            let mut m908 = ui::App::new(ctx, args);
+            let m908 = ui::App::new(ctx, args);
             if preview {
                 return Ok(Box::new(combined::Preview(m908)));
             }
             let g600 = gui::App::new(ctx);
-            m908.activate(ctx);
             Ok(Box::new(combined::App::new(ctx, m908, g600)))
         }),
     )
